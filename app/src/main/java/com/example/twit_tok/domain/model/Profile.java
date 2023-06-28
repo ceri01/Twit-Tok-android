@@ -11,7 +11,7 @@ import java.util.Objects;
 public class Profile {
     private final String name;
     private final String picture;
-    private final String uid;
+    private final int uid;
     private final int pversion;
 
     public Profile(String name, String picture, String uid, int pversion) {
@@ -38,7 +38,8 @@ public class Profile {
             this.picture = picture;
         }
         this.pversion = pversion;
-        this.uid = uid;
+        if (uid.isBlank())throw new IllegalArgumentException("Uid can't be blank");
+        this.uid = Integer.parseInt(uid);
     }
 
     public String getName() {
@@ -49,7 +50,7 @@ public class Profile {
         return picture;
     }
 
-    public String getUid() {
+    public int getUid() {
         return uid;
     }
 
