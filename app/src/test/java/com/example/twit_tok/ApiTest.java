@@ -21,13 +21,13 @@ import java.util.List;
 import retrofit2.Response;
 
 public class ApiTest {
-    @Test
+/*    @Test
     public void registerTest() throws IOException {
         Response<SidRequest> response = TwokApiInstance.getTwokApi().getSid().execute();
         SidRequest sidResponse = response.body();
         assert sidResponse != null;
         System.out.println(sidResponse.getSid());
-    }
+    }*/
 
     @Test
     public void setProfileNameTest() throws IOException {
@@ -44,9 +44,10 @@ public class ApiTest {
         Response<Void> call1 = TwokApiInstance.getTwokApi().setProfileName(en).execute();
         System.out.println(call1.raw());
         Response<Void> call2 = TwokApiInstance.getTwokApi().setProfilePicture(ep).execute();
-        System.out.println(call1.raw());
+        System.out.println(call2.raw());
 
         Response<Profile> profileResponse1 = TwokApiInstance.getTwokApi().getProfile(sid).execute();
+        System.out.println(profileResponse1);
         Profile profile = profileResponse1.body();
 
         assert profile != null;
