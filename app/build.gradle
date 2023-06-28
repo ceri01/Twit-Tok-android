@@ -13,7 +13,11 @@ android {
         targetSdk 33
         versionCode 1
         versionName "1.0"
-
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -46,6 +50,7 @@ dependencies {
     implementation "androidx.room:room-runtime:2.5.2"
     implementation "androidx.room:room-guava:2.5.2"
     implementation 'com.google.guava:guava:29.0-android'
+    annotationProcessor "androidx.room:room-compiler:2.5.2"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
