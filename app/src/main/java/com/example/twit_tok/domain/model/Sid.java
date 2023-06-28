@@ -6,7 +6,7 @@ public class Sid {
     private final String sid;
 
     public Sid(String sid) {
-        Objects.requireNonNull(sid, "Sid can't be null");
+        Objects.requireNonNull(sid, "Sid cannot be null");
         this.sid = sid;
     }
 
