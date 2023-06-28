@@ -11,35 +11,31 @@ import java.util.Base64;
 import java.util.Objects;
 
 public class Picture {
-    private final String uid;
-    private final String picture;
-    private int pversion;
+    private final int uid;
+    private final Bitmap picture;
+    private final int pversion;
 
-    public Picture(@NotNull String uid, @NotNull String picture, int pversion) {
+    public Picture(int uid, @NotNull String picture, int pversion) {
         Objects.requireNonNull(picture, "picture can't be null");
-        Objects.requireNonNull(uid, "uid can't be null");
 
         // from string to byte[]
         byte[] picInByte = picture.getBytes(StandardCharsets.UTF_8);
 
         if (picInByte.length == 0 || picInByte.length > 137000) {
-            Bitmap bm = BitmapFactory.decodeFile("mipmap-xxhdpi/ic_default_picture_round.png");
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
-            byte[] b = baos.toByteArray();
-            this.picture = Base64.getEncoder().encodeToString(b);
+            this.picture = BitmapFactory.decodeFile("mipmap-xxhdpi/ic_default_picture_round.png");
         } else {
-            this.picture = picture;
+            byte[] b = Base64.getDecoder().decode(picture);
+            this.picture = BitmapFactory.decodeByteArray(b, 0, b.length);
         }
         this.pversion = pversion;
         this.uid = uid;
     }
 
-    public String getUid() {
+    public int getUid() {
         return uid;
     }
 
-    public String getPicture() {
+    public Bitmap getPicture() {
         return picture;
     }
 
