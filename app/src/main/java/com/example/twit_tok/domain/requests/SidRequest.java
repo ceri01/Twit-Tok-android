@@ -15,7 +15,7 @@ public class SidRequest {
         this.sid = sid;
     }
 
-    public @NotNull String getSid() {
+    public String getSid() {
         return sid;
     }
 }

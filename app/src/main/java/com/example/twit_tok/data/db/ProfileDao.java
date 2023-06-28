@@ -13,8 +13,8 @@ public interface ProfileDao {
     Profile getProfile();
 
     @Query("UPDATE ProfileEntity SET picture=:picture WHERE uid=:uid")
-    Profile updateProfilePicture(Bitmap picture, int uid);
+    void updateProfilePicture(Bitmap picture, int uid);
 
     @Query("UPDATE ProfileEntity SET name=:name WHERE uid=:uid")
-    Profile updateProfileName(String name, int uid);
+    void updateProfileName(String name, int uid);
 }

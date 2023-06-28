@@ -2,13 +2,16 @@ package com.example.twit_tok.domain.model.entity;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity()
+import org.jetbrains.annotations.NotNull;
+
+@Entity(indices = @Index(value = {"uid"}, unique = true))
 public class SidEntity {
     @PrimaryKey
-    public String sid;
+    public @NotNull String sid;
 
     @ColumnInfo(name = "uid")
-    public String uid;
+    public int uid;
 }

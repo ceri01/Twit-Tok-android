@@ -23,10 +23,7 @@ public interface PicturesDao {
     ListenableFuture<List<Picture>> getPictures();
 
     @Query("SELECT * FROM PictureEntity WHERE uid == :uid")
-    ListenableFuture<Picture> getPicture(int uid);
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(Picture picture);
+    ListenableFuture<Picture> getPictures(int uid);
 
     @Query("INSERT INTO PictureEntity VALUES(:uid, :picture, :pversion)")
     ListenableFuture<Void> addUserPicture(int uid, Bitmap picture, int pversion);

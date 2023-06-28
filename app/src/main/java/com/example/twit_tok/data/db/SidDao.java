@@ -1,13 +1,15 @@
 package com.example.twit_tok.data.db;
 
+import androidx.room.Dao;
 import androidx.room.Query;
+import androidx.room.RewriteQueriesToDropUnusedColumns;
 
-import com.example.twit_tok.domain.model.Profile;
+import com.example.twit_tok.domain.Sid;
+import com.google.common.util.concurrent.ListenableFuture;
 
+@Dao
 public interface SidDao {
     @Query("SELECT * FROM SidEntity")
-    Profile getSid();
-
-    @Query("INSERT INTO SidEntity VALUES(:sid, :uid)")
-    void insertSid(String sid, int uid);
+    @RewriteQueriesToDropUnusedColumns
+    ListenableFuture<Sid> getSid();
 }
