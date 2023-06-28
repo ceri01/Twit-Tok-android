@@ -39,8 +39,7 @@ public class ApiTest {
         ep.setSid("Rxvl9SVDA3ADaoKIVV3X");
         ep.setPicture("ciaoo");
 
-        SidRequest sid = new SidRequest();
-        sid.setSid("Rxvl9SVDA3ADaoKIVV3X");
+        SidRequest sid = new SidRequest("Rxvl9SVDA3ADaoKIVV3X");
 
         Response<Void> call1 = TwokApiInstance.getTwokApi().setProfileName(en).execute();
         System.out.println(call1.raw());
@@ -81,8 +80,7 @@ public class ApiTest {
         BasicDataRequest wor = new BasicDataRequest();
         wor.setSid("Rxvl9SVDA3ADaoKIVV3X");
         wor.setUid("517548");
-        SidRequest s = new SidRequest();
-        s.setSid("Rxvl9SVDA3ADaoKIVV3X");
+        SidRequest s = new SidRequest("Rxvl9SVDA3ADaoKIVV3X");
 
         Response<Twok> call1 = TwokApiInstance.getTwokApi().getTwokWithUid(wr).execute();
         Twok t1 = call1.body();
@@ -119,8 +117,7 @@ public class ApiTest {
 
     @Test
     public void getFollowed() throws IOException {
-        SidRequest s = new SidRequest();
-        s.setSid("Rxvl9SVDA3ADaoKIVV3X");
+        SidRequest s = new SidRequest("Rxvl9SVDA3ADaoKIVV3X");
         Response<List<User>> call1 = TwokApiInstance.getTwokApi().getFollowed(s).execute();
         List<User> l = call1.body();
         assert l != null;
