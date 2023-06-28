@@ -7,38 +7,38 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
-public class UserTwoks {
-    private final List<Twok> twoks;
+public class Users implements Iterable<User> {
+    private final List<User> user;
 
-    public WallTwoks() {
-        this.twoks = new LinkedList<>();
+    public Users() {
+        this.user = new LinkedList<>();
     }
 
-    public void insert(Twok t) {
+    public void insert(User t) {
         Objects.requireNonNull(t, "twok cannot be null");
-        this.twoks.add(t);
+        this.user.add(t);
     }
 
     public int getlength() {
-        return this.twoks.size();
+        return this.user.size();
     }
 
     public void reset() {
-        this.twoks.clear();
+        this.user.clear();
     }
 
     @NonNull
     @Override
-    public Iterator<Twok> iterator() {
-        return new Iterator<Twok>() {
-            final Iterator<Twok> i = twoks.iterator();
+    public Iterator<User> iterator() {
+        return new Iterator<User>() {
+            final Iterator<User> i = user.iterator();
             @Override
             public boolean hasNext() {
                 return i.hasNext();
             }
 
             @Override
-            public Twok next() {
+            public User next() {
                 return i.next();
             }
         };

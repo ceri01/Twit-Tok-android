@@ -4,7 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Query;
 import androidx.room.RewriteQueriesToDropUnusedColumns;
 
-import com.example.twit_tok.domain.Sid;
+import com.example.twit_tok.domain.model.Sid;
 import com.google.common.util.concurrent.ListenableFuture;
 
 @Dao

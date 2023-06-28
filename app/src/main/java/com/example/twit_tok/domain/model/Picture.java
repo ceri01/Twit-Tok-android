@@ -18,7 +18,7 @@ public class Picture {
     private final int pversion;
 
     public Picture(int uid, String picture, int pversion) {
-        Objects.requireNonNull(picture, "picture can't be null");
+        Objects.requireNonNull(picture, "picture cannot be null");
 
         byte[] arr = Converters.fromBase64ToByte(picture);
         if (arr.length == 0 || arr.length > 137000) {

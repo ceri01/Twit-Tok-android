@@ -10,7 +10,7 @@ public class SidRequest {
     private final String sid;
 
     public SidRequest(String sid) {
-        Objects.requireNonNull(sid, "sid can't be null");
+        Objects.requireNonNull(sid, "sid cannot be null");
         if (sid.isBlank()) throw new IllegalArgumentException("Invalid sid");
         this.sid = sid;
     }

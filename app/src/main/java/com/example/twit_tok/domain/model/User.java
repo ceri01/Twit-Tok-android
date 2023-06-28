@@ -13,8 +13,8 @@ public class User {
     private final int pversion;
 
     public User(int uid, String name, String picture, int pversion) {
-        Objects.requireNonNull(name, "Name can't be null");
-        Objects.requireNonNull(picture, "picture can't be null");
+        Objects.requireNonNull(name, "Name cannot be null");
+        Objects.requireNonNull(picture, "picture cannot be null");
         System.out.println(picture);
 
         if (name.isBlank()) {

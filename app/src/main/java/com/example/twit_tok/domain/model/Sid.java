@@ -1,4 +1,4 @@
-package com.example.twit_tok.domain;
+package com.example.twit_tok.domain.model;
 
 import java.util.Objects;
 

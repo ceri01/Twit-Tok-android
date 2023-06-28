@@ -7,10 +7,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
-public class WallTwoks implements Iterable<Twok> {
+public class Twoks implements Iterable<Twok> {
     private final List<Twok> twoks;
 
-    public WallTwoks() {
+    public Twoks() {
         this.twoks = new LinkedList<>();
     }
 

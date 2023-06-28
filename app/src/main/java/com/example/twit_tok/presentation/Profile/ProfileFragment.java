@@ -9,15 +9,12 @@ import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.twit_tok.data.db.TwokDatabase;
 import com.example.twit_tok.databinding.FragmentProfileBinding;
-import com.example.twit_tok.domain.Sid;
+import com.example.twit_tok.domain.model.Sid;
 import com.google.common.util.concurrent.ListenableFuture;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class ProfileFragment extends Fragment {

@@ -1,60 +1,48 @@
 package com.example.twit_tok.domain.model;
 
+import androidx.annotation.NonNull;
+
+import com.example.twit_tok.utils.Colors;
+import com.example.twit_tok.utils.TwoksConditions;
+
 import java.util.Objects;
 
 public class Twok {
-    private String text;
-    private String uid;
+    private final String text;
+    private final int uid;
     private String bgcol;
     private String fontcol;
-    private int fontsize;
-    private int fonttype;
-    private int halign;
-    private int valign;
-    private double lat;
-    private double lon;
+    private int fontsize = 1;
+    private int fonttype = 1;
+    private int halign = 1;
+    private int valign = 1;
+    private Double lat;
+    private Double lon;
 
-    public void setUid(String uid) {
+    public Twok(String text, int uid, String bgcol, String fontcol, int fontsize, int fonttype, int halign, int valign) {
+        Objects.requireNonNull(text, "text cannot be null");
+        Objects.requireNonNull(fontcol, "fontcol cannot be null");
+        Objects.requireNonNull(bgcol, "bgcol cannot be null");
+        if (Colors.isValid(bgcol)) this.bgcol = bgcol;
+        if (Colors.isValid(bgcol)) this.fontcol = fontcol;
+        if (TwoksConditions.isValidParameter(fontsize)) this.fontsize = fontsize;
+        if (TwoksConditions.isValidParameter(fonttype)) this.fonttype = fonttype;
+        if (TwoksConditions.isValidParameter(valign)) this.valign = valign;
+        if (TwoksConditions.isValidParameter(halign)) this.halign = halign;
+
+        this.text = text;
         this.uid = uid;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public Twok(String text, int uid, String bgcol, String fontcol, int fontsize, int fonttype, int halign, int valign, Double lat, Double lon) {
+        this(text, uid, bgcol, fontcol, fontsize, fonttype, halign, valign);
+        if (!Objects.isNull(lat) && !Objects.isNull(lon) && TwoksConditions.isValidCoord(lat, lon)) {
+            this.lat = lat;
+            this.lon = lon;
+        }
     }
 
-    public void setBgcol(String bgcol) {
-        this.bgcol = bgcol;
-    }
-
-    public void setFontcol(String fontcol) {
-        this.fontcol = fontcol;
-    }
-
-    public void setFontsize(int fontsize) {
-        this.fontsize = fontsize;
-    }
-
-    public void setFonttype(int fonttype) {
-        this.fonttype = fonttype;
-    }
-
-    public void setHalign(int halign) {
-        this.halign = halign;
-    }
-
-    public void setValign(int valign) {
-        this.valign = valign;
-    }
-
-    public void setLat(double lat) {
-        this.lat = lat;
-    }
-
-    public void setLon(double lon) {
-        this.lon = lon;
-    }
-
-    public String getUid() {
+    public int getUid() {
         return uid;
     }
 
@@ -94,19 +82,36 @@ public class Twok {
         return lon;
     }
 
+    @NonNull
     @Override
     public String toString() {
-        return "Twok{" +
-                "text='" + text + '\'' +
-                ", uid='" + uid + '\'' +
-                ", bgcol='" + bgcol + '\'' +
-                ", fontcol='" + fontcol + '\'' +
-                ", fontsize=" + fontsize +
-                ", fonttype=" + fonttype +
-                ", halign=" + halign +
-                ", valign=" + valign +
-                ", lat=" + lat +
-                ", lon=" + lon +
-                '}';
+        return new StringBuilder()
+                .append("Twok{")
+                .append("text='")
+                .append(text)
+                .append('\'')
+                .append(", uid='")
+                .append(uid)
+                .append('\'')
+                .append(", bgcol='")
+                .append(bgcol)
+                .append('\'')
+                .append(", fontcol='")
+                .append(fontcol)
+                .append('\'')
+                .append(", fontsize=")
+                .append(fontsize)
+                .append(", fonttype=")
+                .append(fonttype)
+                .append(", halign=")
+                .append(halign)
+                .append(", valign=")
+                .append(valign)
+                .append(", lat=")
+                .append(lat)
+                .append(", lon=")
+                .append(lon)
+                .append('}')
+                .toString();
     }
 }
