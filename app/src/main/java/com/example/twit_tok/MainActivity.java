@@ -2,28 +2,15 @@ package com.example.twit_tok;
 
 import android.os.Bundle;
 
-import com.example.twit_tok.data.api.TwokApiInstance;
-import com.example.twit_tok.data.db.TwokDatabase;
-import com.example.twit_tok.domain.model.Profile;
-import com.example.twit_tok.domain.requests.SidRequest;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.room.Room;
-import androidx.room.RoomDatabase;
-import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.twit_tok.databinding.ActivityMainBinding;
-
-import java.util.Objects;
-
-import retrofit2.Call;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 

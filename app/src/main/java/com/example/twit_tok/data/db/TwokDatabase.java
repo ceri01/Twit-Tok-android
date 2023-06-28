@@ -11,7 +11,7 @@ import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.twit_tok.data.api.TwokApiInstance;
-import com.example.twit_tok.domain.model.Profile;
+import com.example.twit_tok.domain.model.User;
 import com.example.twit_tok.domain.model.entity.PictureEntity;
 import com.example.twit_tok.domain.model.entity.ProfileEntity;
 import com.example.twit_tok.domain.model.entity.SidEntity;
@@ -50,10 +50,10 @@ public abstract class TwokDatabase extends RoomDatabase {
                         init.enqueue(new retrofit2.Callback<SidRequest>() {
                             @Override
                             public void onResponse(@NonNull Call<SidRequest> call, @NonNull Response<SidRequest> sidResponse) {
-                                Call<Profile> profile = TwokApiInstance.getTwokApi().getProfile(sidResponse.body());
-                                profile.enqueue(new retrofit2.Callback<Profile>() {
+                                Call<User> profile = TwokApiInstance.getTwokApi().getProfile(sidResponse.body());
+                                profile.enqueue(new retrofit2.Callback<User>() {
                                     @Override
-                                    public void onResponse(@NonNull Call<Profile> call, @NonNull Response<Profile> response) {
+                                    public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
                                         if (!Objects.isNull(response.body())) {
                                             int uid = response.body().getUid();
                                             String sid = sidResponse.body().getSid();
@@ -81,7 +81,7 @@ public abstract class TwokDatabase extends RoomDatabase {
                                     }
 
                                     @Override
-                                    public void onFailure(@NonNull Call<Profile> call, @NonNull Throwable t) {
+                                    public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
                                         Log.d("ERROR1", t.toString());
                                         t.printStackTrace();
                                     }

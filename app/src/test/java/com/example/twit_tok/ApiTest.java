@@ -6,9 +6,8 @@ import static org.junit.Assert.*;
 
 import com.example.twit_tok.data.api.TwokApiInstance;
 import com.example.twit_tok.domain.model.IsFollowed;
-import com.example.twit_tok.domain.model.Profile;
-import com.example.twit_tok.domain.model.Twok;
 import com.example.twit_tok.domain.model.User;
+import com.example.twit_tok.domain.model.Twok;
 import com.example.twit_tok.domain.requests.AddTwokRequest;
 import com.example.twit_tok.domain.requests.BasicDebugRequest;
 import com.example.twit_tok.domain.requests.BasicDataRequest;
@@ -46,13 +45,13 @@ public class ApiTest {
         Response<Void> call2 = TwokApiInstance.getTwokApi().setProfilePicture(ep).execute();
         System.out.println(call2.raw());
 
-        Response<Profile> profileResponse1 = TwokApiInstance.getTwokApi().getProfile(sid).execute();
+        Response<User> profileResponse1 = TwokApiInstance.getTwokApi().getProfile(sid).execute();
         System.out.println(profileResponse1);
-        Profile profile = profileResponse1.body();
+        User user = profileResponse1.body();
 
-        assert profile != null;
-        System.out.println(profile.getName() + " " + profile.getPicture() + " " + profile.getUid() + " "+ profile.getPversion());
-        assertNotEquals("unnamed", profile.getName());
+        assert user != null;
+        System.out.println(user.getName() + " " + user.getPicture() + " " + user.getUid() + " "+ user.getPversion());
+        assertNotEquals("unnamed", user.getName());
     }
 
     @Test
