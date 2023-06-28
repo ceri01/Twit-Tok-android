@@ -95,3 +95,4 @@ lint/tmp/
 !/.idea/
 !/.idea/
 /.idea/
+/app/schemas/
