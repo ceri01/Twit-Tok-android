@@ -12,9 +12,9 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.twit_tok.data.api.TwokApiInstance;
 import com.example.twit_tok.domain.model.User;
-import com.example.twit_tok.domain.model.entity.PictureEntity;
-import com.example.twit_tok.domain.model.entity.ProfileEntity;
-import com.example.twit_tok.domain.model.entity.SidEntity;
+import com.example.twit_tok.domain.entity.PictureEntity;
+import com.example.twit_tok.domain.entity.ProfileEntity;
+import com.example.twit_tok.domain.entity.SidEntity;
 import com.example.twit_tok.domain.requests.SidRequest;
 import com.example.twit_tok.utils.Converters;
 

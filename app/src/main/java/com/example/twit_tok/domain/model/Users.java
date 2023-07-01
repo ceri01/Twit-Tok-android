@@ -7,9 +7,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.inject.Inject;
+
+import dagger.Module;
+
 public class Users implements Iterable<User> {
     private final List<User> user;
 
+    @Inject
     public Users() {
         this.user = new LinkedList<>();
     }

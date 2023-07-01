@@ -2,6 +2,7 @@ package com.example.twit_tok.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 
 import androidx.room.TypeConverter;
 
@@ -38,5 +39,10 @@ public class Converters {
 
     public static String fromBitmapToBase64(Bitmap image) {
         return Base64.getEncoder().encodeToString(fromBitmapToByte(image));
+    }
+
+    public static Bitmap fromBase64ToBitmap(String picture) {
+        byte[] byteImage = Converters.fromBase64ToByte(picture);
+        return BitmapFactory.decodeByteArray(byteImage, 0, byteImage.length);
     }
 }

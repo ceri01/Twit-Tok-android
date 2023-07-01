@@ -1,4 +1,4 @@
-package com.example.twit_tok.domain.model.entity;
+package com.example.twit_tok.domain.entity;
 
 import android.graphics.Bitmap;
 
