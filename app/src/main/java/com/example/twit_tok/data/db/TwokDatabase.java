@@ -55,7 +55,7 @@ public abstract class TwokDatabase extends RoomDatabase {
                                     @Override
                                     public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
                                         if (!Objects.isNull(response.body())) {
-                                            int uid = response.body().getUid();
+                                            int uid = response.body().uid();
                                             String sid = sidResponse.body().getSid();
 
                                             String profileTrigger = "CREATE TRIGGER IF NOT EXISTS unique_profile " +

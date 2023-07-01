@@ -50,8 +50,8 @@ public class ApiTest {
         User user = profileResponse1.body();
 
         assert user != null;
-        System.out.println(user.getName() + " " + user.getPicture() + " " + user.getUid() + " "+ user.getPversion());
-        assertNotEquals("unnamed", user.getName());
+        System.out.println(user.name() + " " + user.picture() + " " + user.uid() + " "+ user.pversion());
+        assertNotEquals("unnamed", user.name());
     }
 
     @Test
@@ -123,7 +123,7 @@ public class ApiTest {
         assert l != null;
         System.out.println(l.size());
         for (User u : l) {
-            System.out.println(u.getName());
+            System.out.println(u.name());
         }
         System.out.println(l);
     }

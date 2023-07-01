@@ -2,32 +2,23 @@ package com.example.twit_tok.presentation.Profile;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.twit_tok.R;
-import com.example.twit_tok.data.db.TwokDatabase;
-import com.example.twit_tok.databinding.FragmentHomeBinding;
 import com.example.twit_tok.databinding.FragmentProfileBinding;
-import com.example.twit_tok.domain.model.Sid;
 import com.example.twit_tok.domain.model.User;
-import com.example.twit_tok.utils.Colors;
 import com.example.twit_tok.utils.Converters;
-import com.google.common.util.concurrent.ListenableFuture;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Objects;
-import java.util.concurrent.ExecutionException;
 
 import javax.inject.Inject;
 
@@ -67,7 +58,7 @@ public class ProfileFragment extends Fragment {
         View root = binding.getRoot();
 
         final ImageView iv = binding.imageView;
-        String as = profileViewModel.getUsers().iterator().next().getPicture();
+        String as = profileViewModel.getUsers().iterator().next().picture();
         System.out.println(as);
         if(Objects.isNull(as)) {
             iv.setImageResource(R.mipmap.ic_default_picture_round);
