@@ -25,27 +25,21 @@ import javax.inject.Inject;
 
 
 public class ProfileViewModel extends ViewModel {
-    private final MutableLiveData<String> mText;
     private Users users;
+    private User profile;
 
     @Inject
     public ProfileViewModel(Users users) {
         Objects.requireNonNull(users, "Given model is null");
         this.users = users;
-        mText = new MutableLiveData<>();
-        mText.setValue("This is notifications fragment");
     }
 
-    public LiveData<String> getText() {
-        return mText;
-    }
-
-    public void addUser(int uid, String name, String picture, int pversion) {
+    public void addUser(int uid, String name, String picture, int pversion, boolean isFollowed) {
         byte[] arr = Converters.fromBase64ToByte(picture);
         if (!PictureConditions.isValidFormat(picture)) {
-            users.insert(new User(uid, name, null, pversion));
+            users.insert(new User(uid, name, null, pversion, isFollowed));
         } else {
-            users.insert(new User(uid, name, picture, pversion));
+            users.insert(new User(uid, name, picture, pversion, isFollowed));
         }
     }
 
