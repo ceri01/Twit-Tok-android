@@ -3,8 +3,10 @@ package com.example.twit_tok.domain.model;
 import androidx.annotation.NonNull;
 import androidx.compose.ui.graphics.drawscope.Stroke;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +21,7 @@ public class Users implements Iterable<User> {
 
     @Inject
     public Users() {
-        this.user = new HashMap<>();
+        this.user = new LinkedHashMap<>();
     }
 
     public void insert(User t) {
@@ -29,6 +31,11 @@ public class Users implements Iterable<User> {
 
     public int getlength() {
         return this.user.size();
+    }
+
+    public User getByPosition(int position) {
+        List<User> tmp = new ArrayList<User>(this.user.values());
+        return tmp.get(position);
     }
 
     public void reset() {
