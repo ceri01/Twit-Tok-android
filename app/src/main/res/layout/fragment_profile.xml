@@ -4,17 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="0dp"
     tools:context=".presentation.Profile.ProfileFragment"
     android:orientation="vertical">
 
     <include
         layout="@layout/profile"
         android:layout_width="match_parent"
-        android:layout_height="150dp" />
+        android:layout_height="130dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/followed_list"
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"
@@ -24,6 +24,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
-
-
 </LinearLayout>
