@@ -2,23 +2,38 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginHorizontal="10dp"
+    android:gravity="center"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="101dp"
-        android:layout_height="match_parent"
+        android:id="@+id/userPicture"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="20dp"
         tools:srcCompat="@drawable/edit_picture"
         android:contentDescription="@string/picture"
         app:tint="@color/gray" />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="307dp"
-        android:layout_height="wrap_content"
+        android:id="@+id/userName"
+        android:layout_width="163dp"
+        android:layout_height="24dp"
         android:text=""
         android:textSize="60sp" />
+
+    <Button
+        android:id="@+id/followUnfollow"
+        android:layout_width="42dp"
+        android:layout_marginStart="40dp"
+        android:layout_height="42dp"
+        android:drawableBottom="@drawable/unfollow"
+        android:drawablePadding="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.956"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.126" />
 
 </LinearLayout>
