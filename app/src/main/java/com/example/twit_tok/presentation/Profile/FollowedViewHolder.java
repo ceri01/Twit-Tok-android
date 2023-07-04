@@ -16,10 +16,9 @@ import org.jetbrains.annotations.NotNull;
 
 
 public class FollowedViewHolder extends RecyclerView.ViewHolder {
-    private TextView name;
-    private ImageView picture;
-    private Button followUnfollow;
-    private boolean firstUse = true; //  da togliere
+    private final TextView name;
+    private final ImageView picture;
+    private final Button followUnfollow;
 
     public FollowedViewHolder(@NotNull View itemView) {
         super(itemView);
@@ -29,12 +28,6 @@ public class FollowedViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void updateContent(User user) {
-        if (firstUse) {
-            Log.v("VIEWHOLDER", user.name());
-            firstUse = false;
-        } else {
-            Log.v("VIEWHOLDER", "Vecchio " + this.name.getText() + " nuovo " + user.name());
-        }
         this.name.setText(user.name());
         this.picture.setImageBitmap(Converters.fromBase64ToBitmap(user.picture()));
     }

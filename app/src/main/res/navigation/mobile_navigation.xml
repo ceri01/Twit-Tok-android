@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.twit_tok.presentation.wall.GeneralWallFragment"
+        android:name="com.example.twit_tok.presentation.wall.WallFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_generalwall" />
+        tools:layout="@layout/fragment_wall" />
 
     <fragment
         android:id="@+id/navigation_profile"

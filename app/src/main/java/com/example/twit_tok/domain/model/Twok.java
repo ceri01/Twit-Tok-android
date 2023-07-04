@@ -1,5 +1,7 @@
 package com.example.twit_tok.domain.model;
 
+import android.graphics.Bitmap;
+
 import androidx.annotation.NonNull;
 
 import com.example.twit_tok.utils.Colors;
@@ -18,8 +20,11 @@ public class Twok {
     private int valign = 1;
     private Double lat;
     private Double lon;
+    private String userName;
+    private Bitmap userPicture;
 
-    public Twok(String text, int uid, String bgcol, String fontcol, int fontsize, int fonttype, int halign, int valign) {
+
+    public Twok(String text, int uid, String bgcol, String fontcol, int fontsize, int fonttype, int halign, int valign, String userName, Bitmap userPicture) {
         Objects.requireNonNull(text, "text cannot be null");
         Objects.requireNonNull(fontcol, "fontcol cannot be null");
         Objects.requireNonNull(bgcol, "bgcol cannot be null");
@@ -29,13 +34,14 @@ public class Twok {
         if (TwoksUtils.isValidParameter(fonttype)) this.fonttype = fonttype;
         if (TwoksUtils.isValidParameter(valign)) this.valign = valign;
         if (TwoksUtils.isValidParameter(halign)) this.halign = halign;
-
+        this.userPicture = userPicture;
+        this.userName = userName;
         this.text = text;
         this.uid = uid;
     }
 
-    public Twok(String text, int uid, String bgcol, String fontcol, int fontsize, int fonttype, int halign, int valign, Double lat, Double lon) {
-        this(text, uid, bgcol, fontcol, fontsize, fonttype, halign, valign);
+    public Twok(String text, int uid, String bgcol, String fontcol, int fontsize, int fonttype, int halign, int valign, String userName, Bitmap userPicture, Double lat, Double lon) {
+        this(text, uid, bgcol, fontcol, fontsize, fonttype, halign, valign, userName, userPicture);
         if (!Objects.isNull(lat) && !Objects.isNull(lon) && TwoksUtils.isValidCoord(lat, lon)) {
             this.lat = lat;
             this.lon = lon;
@@ -80,6 +86,14 @@ public class Twok {
 
     public double getLon() {
         return lon;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public Bitmap getUserPicture() {
+        return userPicture;
     }
 
     @NonNull

@@ -14,6 +14,10 @@ public class Twoks implements Iterable<Twok> {
         this.twoks = new LinkedList<>();
     }
 
+    public Twok getByPosition(int position) {
+        return this.twoks.get(position);
+    }
+
     public void insert(Twok t) {
         Objects.requireNonNull(t, "twok cannot be null");
         this.twoks.add(t);

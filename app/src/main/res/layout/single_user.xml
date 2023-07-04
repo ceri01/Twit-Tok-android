@@ -19,16 +19,18 @@
         android:id="@+id/userName"
         android:layout_width="163dp"
         android:layout_height="24dp"
+        android:maxLength="19"
         android:text=""
         android:textSize="13sp" />
 
     <Button
         android:id="@+id/followUnfollow"
-        android:layout_width="42dp"
+        android:layout_width="48dp"
         android:layout_marginStart="40dp"
-        android:layout_height="42dp"
+        android:layout_height="48dp"
         android:backgroundTint="@color/purple_700"
         android:drawableBottom="@drawable/unfollow"
+        android:text="@string/map"
         android:drawablePadding="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
