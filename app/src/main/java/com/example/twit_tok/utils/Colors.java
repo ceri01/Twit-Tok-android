@@ -13,6 +13,6 @@ public class Colors {
     }
 
     public static Color getColorFromHex(String color) {
-        return Color.valueOf(Color.parseColor(color));
+        return Color.valueOf(Color.parseColor("#" + color));
     }
 }

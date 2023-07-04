@@ -1,6 +1,7 @@
 package com.example.twit_tok.presentation.wall;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ public class WallAdapter extends RecyclerView.Adapter<WallViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull WallViewHolder holder, int position) {
+        Log.d("ERR", ""+position);
         Twok twokToShow = twoks.getByPosition(position);
         holder.updateContent(twokToShow);
     }

@@ -1,24 +1,24 @@
 package com.example.twit_tok.presentation.wall;
 
-import android.graphics.Color;
+import android.graphics.Typeface;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.twit_tok.App;
 import com.example.twit_tok.R;
+import com.example.twit_tok.common.Constants;
 import com.example.twit_tok.domain.model.Twok;
 import com.example.twit_tok.utils.Colors;
 
-import java.util.jar.Attributes;
+import java.util.Objects;
 
 public class WallViewHolder extends RecyclerView.ViewHolder {
-    private TextView text;
+    private final TextView text;
     private final TextView userName;
     private final ImageView userPicture;
 
@@ -30,20 +30,18 @@ public class WallViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void updateContent(Twok twokToShow) {
-
-/*
-        ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(text.getWidth(), text.getHeight());
-
-        text.setLayoutParams();
-
-
-        text.setBackgroundColor(Colors.getColorFromHex(twokToShow.getBgcol()).toArgb());
-        text.setTextColor(Colors.getColorFromHex(twokToShow.getFontcol()).toArgb());
-*/
-
-
-        text.setText(twokToShow.getText());
         userPicture.setImageBitmap(twokToShow.getUserPicture());
-        userName.setText(twokToShow.getText());
+        userName.setText(twokToShow.getUserName());
+
+        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams((RelativeLayout.LayoutParams) text.getLayoutParams());
+        Objects.requireNonNull(Constants.HALIGN.get(twokToShow.getHalign())).apply(lp);
+        Objects.requireNonNull(Constants.VALIGN.get(twokToShow.getValign())).apply(lp);
+        text.setLayoutParams(lp);
+
+        itemView.setBackgroundColor(Colors.getColorFromHex(twokToShow.getBgcol()).toArgb());
+        text.setTextColor(Colors.getColorFromHex(twokToShow.getFontcol()).toArgb());
+        text.setText(twokToShow.getText());
+        text.setTextSize(Constants.TEXTSIZES.getOrDefault(twokToShow.getFontsize(), 30));
+        text.setTypeface(Constants.FONTTYPE.getOrDefault(twokToShow.getFonttype(), Typeface.DEFAULT));
     }
 }
