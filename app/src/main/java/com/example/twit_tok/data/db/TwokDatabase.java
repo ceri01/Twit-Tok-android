@@ -11,10 +11,10 @@ import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.twit_tok.data.api.TwokApiInstance;
-import com.example.twit_tok.domain.model.User;
 import com.example.twit_tok.domain.entity.PictureEntity;
 import com.example.twit_tok.domain.entity.ProfileEntity;
 import com.example.twit_tok.domain.entity.SidEntity;
+import com.example.twit_tok.domain.requests.ProfileRequest;
 import com.example.twit_tok.domain.requests.SidRequest;
 import com.example.twit_tok.utils.Converters;
 
@@ -50,12 +50,12 @@ public abstract class TwokDatabase extends RoomDatabase {
                         init.enqueue(new retrofit2.Callback<SidRequest>() {
                             @Override
                             public void onResponse(@NonNull Call<SidRequest> call, @NonNull Response<SidRequest> sidResponse) {
-                                Call<User> profile = TwokApiInstance.getTwokApi().getProfile(sidResponse.body());
-                                profile.enqueue(new retrofit2.Callback<User>() {
+                                Call<ProfileRequest> profile = TwokApiInstance.getTwokApi().getProfile(sidResponse.body());
+                                profile.enqueue(new retrofit2.Callback<ProfileRequest>() {
                                     @Override
-                                    public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
+                                    public void onResponse(@NonNull Call<ProfileRequest> call, @NonNull Response<ProfileRequest> response) {
                                         if (!Objects.isNull(response.body())) {
-                                            int uid = response.body().uid();
+                                            ProfileRequest profileResponse = response.body();
                                             String sid = sidResponse.body().getSid();
 
                                             String profileTrigger = "CREATE TRIGGER IF NOT EXISTS unique_profile " +
@@ -63,7 +63,7 @@ public abstract class TwokDatabase extends RoomDatabase {
                                                     "BEGIN " +
                                                     "SELECT RAISE(ABORT, \"User already exists\") " +
                                                     "FROM ProfileEntity " +
-                                                    "WHERE uid != " + uid +
+                                                    "WHERE uid != " + profileResponse.uid() +
                                                     "; END;";
 
                                             String sidTrigger = "CREATE TRIGGER IF NOT EXISTS unique_sid " +
@@ -73,15 +73,17 @@ public abstract class TwokDatabase extends RoomDatabase {
                                                     "FROM SidEntity " +
                                                     "WHERE sid != '" + sid +
                                                     "'; END;";
-                                            String insertSid = "INSERT INTO SidEntity(sid, uid) VALUES('" + sid + "', " + uid + " );";
+                                            String insertSid = "INSERT INTO SidEntity(sid, uid) VALUES('" + sid + "', " + profileResponse.uid() + " );";
+                                            String insertProfile = "INSERT INTO ProfileEntity(uid, name, picture, pversion) VALUES("+ profileResponse.uid() + ", '" + profileResponse.name() + "', '"+ profileResponse.picture() +"', " + profileResponse.pversion() + ");";
                                             db.execSQL(profileTrigger);
                                             db.execSQL(sidTrigger);
                                             db.execSQL(insertSid);
+                                            db.execSQL(insertProfile);
                                         }
                                     }
 
                                     @Override
-                                    public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
+                                    public void onFailure(@NonNull Call<ProfileRequest> call, @NonNull Throwable t) {
                                         Log.d("ERROR1", t.toString());
                                         t.printStackTrace();
                                     }

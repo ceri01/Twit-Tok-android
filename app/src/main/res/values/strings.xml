@@ -5,4 +5,8 @@
     <string name="title_profile">Profile</string>
     <string name="picture">picture</string>
     <string name="name">Name</string>
+    <string name="inserisci_il_tuo_nome">Inserisci il tuo nome</string>
+    <string name="confirm">Conferma</string>
+    <string name="cancel">Cancella</string>
+    <string name="scegli">Scegli</string>
 </resources>

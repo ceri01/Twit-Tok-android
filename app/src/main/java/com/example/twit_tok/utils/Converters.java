@@ -2,6 +2,7 @@ package com.example.twit_tok.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
 import androidx.room.TypeConverter;
@@ -29,12 +30,7 @@ public class Converters {
     }
 
     public static byte[] fromBase64ToByte(String str) {
-        Pattern pattern = Pattern.compile("^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$");
-        Matcher matcher = pattern.matcher(str);
-        if (matcher.matches()) {
-            return Base64.getDecoder().decode(str);
-        }
-        return new byte[0]; // TODO: vedi cosa mettere
+        return Base64.getDecoder().decode(str);
     }
 
     public static String fromBitmapToBase64(Bitmap image) {
@@ -44,5 +40,14 @@ public class Converters {
     public static Bitmap fromBase64ToBitmap(String picture) {
         byte[] byteImage = Converters.fromBase64ToByte(picture);
         return BitmapFactory.decodeByteArray(byteImage, 0, byteImage.length);
+    }
+
+    public static Bitmap fromDrawableToBitmap(Drawable drawable) {
+        if (drawable instanceof BitmapDrawable bitmapDrawable) {
+            if(bitmapDrawable.getBitmap() != null) {
+                return bitmapDrawable.getBitmap();
+            }
+        }
+        return null;
     }
 }

@@ -7,15 +7,17 @@ import androidx.room.Query;
 
 import com.example.twit_tok.domain.model.Profile;
 import com.example.twit_tok.domain.model.User;
+import com.example.twit_tok.domain.requests.ProfileRequest;
+import com.google.common.util.concurrent.ListenableFuture;
 
 @Dao
 public interface ProfileDao {
     @Query("SELECT * FROM ProfileEntity")
-    Profile getProfile();
+    ProfileRequest getProfile();
 
     @Query("UPDATE ProfileEntity SET picture=:picture WHERE uid=:uid")
-    void updateProfilePicture(Bitmap picture, int uid);
+    ListenableFuture<Void> updateProfilePicture(Bitmap picture, int uid);
 
     @Query("UPDATE ProfileEntity SET name=:name WHERE uid=:uid")
-    void updateProfileName(String name, int uid);
+    ListenableFuture<Void> updateProfileName(String name, int uid);
 }

@@ -3,7 +3,7 @@ package com.example.twit_tok.domain.model;
 import androidx.annotation.NonNull;
 
 import com.example.twit_tok.utils.Colors;
-import com.example.twit_tok.utils.TwoksConditions;
+import com.example.twit_tok.utils.TwoksUtils;
 
 import java.util.Objects;
 
@@ -25,10 +25,10 @@ public class Twok {
         Objects.requireNonNull(bgcol, "bgcol cannot be null");
         if (Colors.isValid(bgcol)) this.bgcol = bgcol;
         if (Colors.isValid(bgcol)) this.fontcol = fontcol;
-        if (TwoksConditions.isValidParameter(fontsize)) this.fontsize = fontsize;
-        if (TwoksConditions.isValidParameter(fonttype)) this.fonttype = fonttype;
-        if (TwoksConditions.isValidParameter(valign)) this.valign = valign;
-        if (TwoksConditions.isValidParameter(halign)) this.halign = halign;
+        if (TwoksUtils.isValidParameter(fontsize)) this.fontsize = fontsize;
+        if (TwoksUtils.isValidParameter(fonttype)) this.fonttype = fonttype;
+        if (TwoksUtils.isValidParameter(valign)) this.valign = valign;
+        if (TwoksUtils.isValidParameter(halign)) this.halign = halign;
 
         this.text = text;
         this.uid = uid;
@@ -36,7 +36,7 @@ public class Twok {
 
     public Twok(String text, int uid, String bgcol, String fontcol, int fontsize, int fonttype, int halign, int valign, Double lat, Double lon) {
         this(text, uid, bgcol, fontcol, fontsize, fonttype, halign, valign);
-        if (!Objects.isNull(lat) && !Objects.isNull(lon) && TwoksConditions.isValidCoord(lat, lon)) {
+        if (!Objects.isNull(lat) && !Objects.isNull(lon) && TwoksUtils.isValidCoord(lat, lon)) {
             this.lat = lat;
             this.lon = lon;
         }

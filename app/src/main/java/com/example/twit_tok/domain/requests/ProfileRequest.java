@@ -1,30 +1,19 @@
-package com.example.twit_tok.domain.model;
+package com.example.twit_tok.domain.requests;
 
 import androidx.annotation.NonNull;
 import androidx.room.Ignore;
-
-import com.example.twit_tok.domain.requests.ProfileRequest;
 
 import java.util.Objects;
 
 import javax.inject.Inject;
 
-public class Profile {
+public class ProfileRequest {
     private int uid;
     private String name;
     private String picture;
     private int pversion;
 
-    @Inject
-    public Profile() {
-        this.uid = 1;
-        this.name = "Unnamed";
-        this.picture = null;
-        this.pversion = 0;
-    }
-
-    @Ignore
-    public Profile(int uid, String name, String picture, int pversion) {
+    public ProfileRequest(int uid, String name, String picture, int pversion) {
         Objects.requireNonNull(name, "Name cannot be null");
         if (name.isBlank()) {
             this.name = "unnamed";
@@ -36,21 +25,11 @@ public class Profile {
         this.uid = uid;
     }
 
-    @Ignore
-    public Profile(Profile profile) {
+    public ProfileRequest(ProfileRequest profile) {
         this.name = profile.name;
         this.picture = profile.picture;
         this.pversion = profile.pversion;
         this.uid = profile.uid;
-    }
-
-    public void changeProfile(ProfileRequest p) {
-        if (!Objects.isNull(p)) {
-            this.uid = p.uid();
-            this.picture = p.picture();
-            this.pversion = p.pversion();
-            this.name = p.name();
-        }
     }
 
     @NonNull
@@ -80,5 +59,19 @@ public class Profile {
         return pversion;
     }
 
+    public void setUid(int uid) {
+        this.uid = uid;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
+    public void setPversion(int pversion) {
+        this.pversion = pversion;
+    }
 }

@@ -1,12 +1,15 @@
 package com.example.twit_tok;
 
 import android.os.Bundle;
+import android.util.Log;
 
+import com.example.twit_tok.presentation.Profile.ChangeTextDialogFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;

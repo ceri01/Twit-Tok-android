@@ -2,6 +2,7 @@ package com.example.twit_tok.di;
 
 import android.app.Application;
 
+import com.example.twit_tok.domain.model.Profile;
 import com.example.twit_tok.domain.model.Users;
 
 import javax.inject.Singleton;
@@ -18,5 +19,11 @@ public class AppModule {
     @Singleton
     public Users provideUsers() {
         return new Users();
+    }
+
+    @Provides
+    @Singleton
+    public Profile provideProfile() {
+        return new Profile();
     }
 }

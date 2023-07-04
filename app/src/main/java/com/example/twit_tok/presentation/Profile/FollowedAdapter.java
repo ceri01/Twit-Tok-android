@@ -16,8 +16,8 @@ import com.example.twit_tok.domain.model.Users;
 import javax.inject.Inject;
 
 public class FollowedAdapter extends RecyclerView.Adapter<FollowedViewHolder> {
-    private LayoutInflater inflater;
-    private Users users;
+    private final LayoutInflater inflater;
+    private final Users users;
 
     @Inject
     public FollowedAdapter(Users users) {

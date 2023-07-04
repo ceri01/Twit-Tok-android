@@ -5,6 +5,7 @@ import com.example.twit_tok.domain.model.User;
 import com.example.twit_tok.domain.model.Twok;
 import com.example.twit_tok.domain.requests.BasicDebugRequest;
 import com.example.twit_tok.domain.requests.BasicDataRequest;
+import com.example.twit_tok.domain.requests.ProfileRequest;
 import com.example.twit_tok.domain.requests.UpdateProfileNameRequest;
 import com.example.twit_tok.domain.requests.SidRequest;
 import com.example.twit_tok.domain.requests.UpdateProfilePictureRequest;
@@ -21,7 +22,7 @@ public interface TwokApi {
     Call<SidRequest> getSid();
 
     @POST("getProfile")
-    Call<User> getProfile(@Body SidRequest sid);
+    Call<ProfileRequest> getProfile(@Body SidRequest sid);
 
     @POST("setProfile")
     Call<Void> setProfileName(@Body UpdateProfileNameRequest profile);
