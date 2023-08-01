@@ -32,21 +32,22 @@ public class WallFragment extends Fragment {
         WallViewModel wallViewModel =
                 new ViewModelProvider(this).get(WallViewModel.class);
 
-        twoks.insert(new Twok("a", 0, "000000", "AA00CC", 1, 1, 1, 1, "A", PictureUtils.getDefaultPicture()));
-        twoks.insert(new Twok("b", 1, "FFFFFF", "AA00CC", 2, 2, 1, 2, "B", PictureUtils.getDefaultPicture()));
-        twoks.insert(new Twok("c", 2, "FFFFFF", "AA00CC", 1, 3, 1, 3, "C", PictureUtils.getDefaultPicture()));
-        twoks.insert(new Twok("d", 0, "000000", "AA00CC", 1, 1, 2, 1, "A", PictureUtils.getDefaultPicture()));
-        twoks.insert(new Twok("e", 1, "FFFFFF", "AA00CC", 2, 2, 2, 2, "B", PictureUtils.getDefaultPicture()));
-        twoks.insert(new Twok("f", 2, "FFFFFF", "AA00CC", 1, 3, 2, 3, "C", PictureUtils.getDefaultPicture()));
-        twoks.insert(new Twok("g", 0, "000000", "AA00CC", 1, 1, 3, 1, "A", PictureUtils.getDefaultPicture()));
-        twoks.insert(new Twok("h", 1, "FFFFFF", "AA00CC", 2, 2, 3, 2, "B", PictureUtils.getDefaultPicture()));
-        twoks.insert(new Twok("i", 2, "FFFFFF", "AA00CC", 1, 3, 3, 3, "C", PictureUtils.getDefaultPicture()));
+        twoks.insert(new Twok("a", 0, "000000", "AA00CC", 1, 1, 1, 1, "A", null));
+        twoks.insert(new Twok("b", 1, "FFFFFF", "AA00CC", 2, 2, 1, 2, "B", null));
+        twoks.insert(new Twok("c", 2, "FFFFFF", "AA00CC", 1, 3, 1, 3, "C", null));
+        twoks.insert(new Twok("d", 0, "000000", "AA00CC", 1, 1, 2, 1, "D", null));
+        twoks.insert(new Twok("e", 1, "FFFFFF", "AA00CC", 2, 2, 2, 2, "E", null));
+        twoks.insert(new Twok("f", 2, "FFFFFF", "AA00CC", 1, 3, 2, 3, "F", null));
+        twoks.insert(new Twok("g", 0, "000000", "AA00CC", 1, 1, 3, 1, "G", null));
+        twoks.insert(new Twok("h", 1, "FFFFFF", "AA00CC", 2, 2, 3, 2, "H", null));
+        twoks.insert(new Twok("i", 2, "FFFFFF", "AA00CC", 1, 3, 3, 3, "I", null));
 
         binding = FragmentWallBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         viewPager = root.findViewById(R.id.wall);
         WallAdapter wa = new WallAdapter(this.getContext(), twoks);
+        System.out.println(wa);
 
         viewPager.setAdapter(wa);
 

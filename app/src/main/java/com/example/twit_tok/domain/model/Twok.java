@@ -28,8 +28,8 @@ public class Twok {
         Objects.requireNonNull(text, "text cannot be null");
         Objects.requireNonNull(fontcol, "fontcol cannot be null");
         Objects.requireNonNull(bgcol, "bgcol cannot be null");
-        if (Colors.isValid(bgcol)) this.bgcol = bgcol;
-        if (Colors.isValid(bgcol)) this.fontcol = fontcol;
+        if (Colors.isValid(bgcol)) this.bgcol = "#" + bgcol;
+        if (Colors.isValid(bgcol)) this.fontcol = "#" + fontcol;
         if (TwoksUtils.isValidParameter(fontsize)) this.fontsize = fontsize;
         if (TwoksUtils.isValidParameter(fonttype)) this.fonttype = fonttype;
         if (TwoksUtils.isValidParameter(valign)) this.valign = valign;

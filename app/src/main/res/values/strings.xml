@@ -10,4 +10,5 @@
     <string name="cancel">Cancella</string>
     <string name="scegli">Scegli</string>
     <string name="map">Map</string>
+    <string name="defaultUsername">Username</string>
 </resources>

@@ -11,8 +11,4 @@ public class Colors {
         Matcher matcher = pattern.matcher(color);
         return matcher.matches();
     }
-
-    public static Color getColorFromHex(String color) {
-        return Color.valueOf(Color.parseColor("#" + color));
-    }
 }

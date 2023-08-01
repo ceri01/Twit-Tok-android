@@ -14,7 +14,7 @@
         android:layout_height="113dp"
         android:layout_marginEnd="10dp"
         android:contentDescription="@string/picture"
-        android:src="@mipmap/ic_launcher"
+        android:src="@mipmap/ic_default_picture_round"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

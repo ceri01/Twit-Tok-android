@@ -86,12 +86,9 @@ public class ProfileViewModel extends ViewModel {
                     @Override
                     public void onResponse(@NonNull Call<ProfileRequest> call, @NonNull Response<ProfileRequest> response) {
                         ProfileRequest p = response.body();
-                        Log.d("IMG", p.picture().toString());
                         profile.changeProfile(p);
                         profileNameChanged.setValue(profile.name());
-                        if (Objects.isNull(profile.picture())) {
-                            profilePictureChanged.setValue(PictureUtils.getDefaultPicture());
-                        } else {
+                        if (!Objects.isNull(profile.picture())) {
                             profilePictureChanged.setValue(Converters.fromBase64ToBitmap(profile.picture()));
                         }
                     }
