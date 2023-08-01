@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twit_tok.R;
@@ -20,7 +21,7 @@ public class WallViewHolder extends RecyclerView.ViewHolder {
     private final TextView text;
     private final TextView userName;
 
-    private final RelativeLayout content;
+    private final ConstraintLayout content;
     private final ImageView userPicture;
 
     public WallViewHolder(View view) {
@@ -44,15 +45,9 @@ public class WallViewHolder extends RecyclerView.ViewHolder {
         text.setTextSize(Constants.TEXTSIZES.getOrDefault(twokToShow.getFontsize(), 30));
         text.setTypeface(Constants.FONTTYPE.getOrDefault(twokToShow.getFonttype(), Typeface.DEFAULT));
 
-        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams((RelativeLayout.LayoutParams) text.getLayoutParams());
+        ConstraintLayout.LayoutParams lp = new ConstraintLayout.LayoutParams(text.getLayoutParams());
 
-        lp.removeRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        lp.removeRule(RelativeLayout.ALIGN_PARENT_TOP);
-        lp.removeRule(RelativeLayout.ALIGN_PARENT_LEFT);
-        lp.removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        lp.removeRule(RelativeLayout.CENTER_VERTICAL);
-        lp.removeRule(RelativeLayout.CENTER_HORIZONTAL);
-
+        lp.reset();
         Objects.requireNonNull(Constants.HALIGN.get(twokToShow.getHalign())).apply(lp);
         Objects.requireNonNull(Constants.VALIGN.get(twokToShow.getValign())).apply(lp);
         text.setLayoutParams(lp);

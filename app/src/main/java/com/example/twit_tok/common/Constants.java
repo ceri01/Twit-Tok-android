@@ -7,6 +7,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 
 import com.google.common.collect.ImmutableMap;
 
@@ -29,32 +30,34 @@ public class Constants {
             3, Typeface.SERIF
     );
 
-    public static final Map<Integer, Function<RelativeLayout.LayoutParams, RelativeLayout.LayoutParams>> HALIGN = ImmutableMap.of(
-            1, (Function<RelativeLayout.LayoutParams, RelativeLayout.LayoutParams>) layoutParams -> {
-                layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+    public static final Map<Integer, Function<ConstraintLayout.LayoutParams, ConstraintLayout.LayoutParams>> HALIGN = ImmutableMap.of(
+            1, (Function<ConstraintLayout.LayoutParams, ConstraintLayout.LayoutParams>) layoutParams -> {
+                layoutParams.leftToLeft = ConstraintSet.PARENT_ID;
                 return layoutParams;
             },
-            2, (Function<RelativeLayout.LayoutParams, RelativeLayout.LayoutParams>) layoutParams -> {
-                layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+            2, (Function<ConstraintLayout.LayoutParams, ConstraintLayout.LayoutParams>) layoutParams -> {
+                layoutParams.leftToLeft = ConstraintSet.PARENT_ID;
+                layoutParams.rightToRight = ConstraintSet.PARENT_ID;
                 return layoutParams;
             },
-            3, (Function<RelativeLayout.LayoutParams, RelativeLayout.LayoutParams>) layoutParams -> {
-                layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            3, (Function<ConstraintLayout.LayoutParams, ConstraintLayout.LayoutParams>) layoutParams -> {
+                layoutParams.rightToRight = ConstraintSet.PARENT_ID;
                 return layoutParams;
             }
     );
 
-    public static final Map<Integer, Function<RelativeLayout.LayoutParams, RelativeLayout.LayoutParams>> VALIGN = ImmutableMap.of(
-            1, (Function<RelativeLayout.LayoutParams, RelativeLayout.LayoutParams>) layoutParams -> {
-                layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+    public static final Map<Integer, Function<ConstraintLayout.LayoutParams, ConstraintLayout.LayoutParams>> VALIGN = ImmutableMap.of(
+            1, (Function<ConstraintLayout.LayoutParams, ConstraintLayout.LayoutParams>) layoutParams -> {
+                layoutParams.topToTop = ConstraintSet.PARENT_ID;
                 return layoutParams;
             },
-            2, (Function<RelativeLayout.LayoutParams, RelativeLayout.LayoutParams>) layoutParams -> {
-                layoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
+            2, (Function<ConstraintLayout.LayoutParams, ConstraintLayout.LayoutParams>) layoutParams -> {
+                layoutParams.topToTop = ConstraintSet.PARENT_ID;
+                layoutParams.bottomToBottom = ConstraintSet.PARENT_ID;
                 return layoutParams;
             },
-            3, (Function<RelativeLayout.LayoutParams, RelativeLayout.LayoutParams>) layoutParams -> {
-                layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+            3, (Function<ConstraintLayout.LayoutParams, ConstraintLayout.LayoutParams>) layoutParams -> {
+                layoutParams.bottomToBottom = ConstraintSet.PARENT_ID;
                 return layoutParams;
             }
     );

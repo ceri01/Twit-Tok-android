@@ -1,39 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout3"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/gray"
-    android:paddingTop="3dp"
-    android:paddingHorizontal="3dp"
-    android:layout_height="wrap_content">
+    android:paddingHorizontal="10dp">
 
 
     <ImageView
         android:id="@+id/twok_user_profile"
-        android:layout_height="80dp"
-        android:layout_weight="0.1"
-        android:paddingVertical="3dp"
-        android:layout_width="wrap_content"
-        android:src="@mipmap/ic_default_picture_round"  />
+        android:layout_width="95dp"
+        android:layout_height="105dp"
+        android:layout_marginEnd="46dp"
+        android:src="@mipmap/ic_default_picture_round"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/twok_user_name"
+        app:layout_constraintHorizontal_bias="0.33"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
 
     <TextView
         android:id="@+id/twok_user_name"
-        android:maxLength="19"
-        android:layout_gravity="center"
-        android:layout_marginHorizontal="20dp"
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="@string/defaultUsername" />
+        android:layout_marginStart="-18dp"
+        android:layout_marginEnd="100dp"
+        android:maxLength="19"
+        android:text="@string/defaultUsername"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/twok_map"
+        app:layout_constraintStart_toEndOf="@+id/twok_user_profile"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.523" />
 
+    <Button
+        android:id="@+id/twok_follow"
+        android:layout_width="97dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="44dp"
+        android:text="@string/follow"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/twok_map"
+        app:layout_constraintStart_toEndOf="@+id/twok_user_name"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/twok_map"
-        android:layout_width="60dp"
-        android:textSize="11sp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:layout_weight="0.001"
-        android:text="Map" />
-</LinearLayout>
+        android:layout_width="97dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/map"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/twok_user_name"
+        app:layout_constraintTop_toBottomOf="@+id/twok_follow" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

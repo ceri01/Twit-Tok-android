@@ -12,7 +12,7 @@
         android:autofillHints="name"
         android:gravity="center"
         android:inputType="text"
-        android:text="@string/inserisci_il_tuo_nome"
+        android:text="@string/insert_name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
