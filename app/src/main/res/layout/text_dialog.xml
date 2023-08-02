@@ -12,6 +12,8 @@
         android:autofillHints="name"
         android:gravity="center"
         android:inputType="text"
+        android:maxLines="1"
+        android:maxLength="19"
         android:text="@string/insert_name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
