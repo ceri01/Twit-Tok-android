@@ -12,4 +12,12 @@
     <string name="map">Map</string>
     <string name="defaultUsername">Username</string>
     <string name="follow">Follow</string>
+    <string name="alignHorizontal" />
+    <string name="align_vertical">Align vertical</string>
+    <string name="changeSize">Change size</string>
+    <string name="changeFont">Change font</string>
+    <string name="insertCoordinates">Insert coordinates</string>
+    <string name="insertNewText">Insert new Text</string>
+    <string name="edit_background_color">Edit Background Color</string>
+    <string name="edit_text_color">Edit text color</string>
 </resources>

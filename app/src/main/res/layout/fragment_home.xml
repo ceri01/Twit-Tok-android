@@ -6,17 +6,162 @@
     android:layout_height="match_parent"
     tools:context=".presentation.home.HomeFragment">
 
-    <TextView
-        android:id="@+id/text_home"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
+        android:orientation="horizontal"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/add_twok_colors_buttons"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="25dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/constraintLayout2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/black"
+            app:strokeWidth="1dp">
+
+            <TextView
+                android:id="@+id/add_twok_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/add_twok_cancel_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:backgroundTint="#F44336"
+                app:icon="@drawable/cancel"
+                app:layout_constraintBottom_toTopOf="@+id/add_twok_align_vertical"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                tools:layout_editor_absoluteX="-6dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/add_twok_align_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/align_vertical"
+                app:layout_constraintBottom_toTopOf="@+id/add_twok_align_horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/add_twok_cancel_button"
+                tools:layout_editor_absoluteX="10dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/add_twok_align_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/align_horizontal"
+                app:layout_constraintBottom_toTopOf="@+id/add_twok_change_font_size"
+                app:layout_constraintTop_toBottomOf="@+id/add_twok_align_vertical"
+                tools:layout_editor_absoluteX="10dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/add_twok_change_font_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/font_size"
+                app:layout_constraintBottom_toTopOf="@+id/add_twok_change_font_family"
+                app:layout_constraintTop_toBottomOf="@+id/add_twok_align_horizontal"
+                tools:layout_editor_absoluteX="10dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/add_twok_change_font_family"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/change_font"
+                app:layout_constraintBottom_toTopOf="@+id/add_twok_insert_text"
+                app:layout_constraintTop_toBottomOf="@+id/add_twok_change_font_size"
+                tools:layout_editor_absoluteX="4dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/add_twok_insert_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/add_text"
+                app:layout_constraintBottom_toTopOf="@+id/add_twok_coordinates"
+                app:layout_constraintTop_toBottomOf="@+id/add_twok_change_font_family"
+                tools:layout_editor_absoluteX="-14dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/add_twok_coordinates"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="64dp"
+                app:icon="@drawable/add_coordinates"
+                app:layout_constraintBottom_toTopOf="@+id/add_twok_confirm_buttond"
+                app:layout_constraintTop_toBottomOf="@+id/add_twok_insert_text"
+                tools:layout_editor_absoluteX="4dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/add_twok_confirm_buttond"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:backgroundTint="#4CAF50"
+                app:icon="@drawable/confirm"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/add_twok_coordinates"
+                tools:layout_editor_absoluteX="4dp" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/add_twok_colors_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/add_twok_edit_background_color"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:text="@string/edit_background_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/add_twok_edit_text_color"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/add_twok_edit_text_color"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:text="@string/edit_text_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/add_twok_edit_background_color"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
