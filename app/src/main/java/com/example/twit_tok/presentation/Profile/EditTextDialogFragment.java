@@ -14,13 +14,13 @@ import com.example.twit_tok.R;
 
 import java.util.Objects;
 
-public class ChangeTextDialogFragment extends DialogFragment {
+public class EditTextDialogFragment extends DialogFragment {
 
     NoticeDialogTextListener listener;
 
 
 
-    public ChangeTextDialogFragment(NoticeDialogTextListener listener) {
+    public EditTextDialogFragment(NoticeDialogTextListener listener) {
         this.listener = listener;
     }
 
@@ -37,13 +37,13 @@ public class ChangeTextDialogFragment extends DialogFragment {
                     public void onClick(DialogInterface dialog, int id) {
                         Dialog d = (Dialog) dialog;
                         EditText editText = d.findViewById(R.id.new_text_dialog);
-                        listener.onTextDialogPositiveClick(ChangeTextDialogFragment.this, editText.getText().toString());
+                        listener.onTextDialogPositiveClick(EditTextDialogFragment.this, editText.getText().toString());
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        listener.onTextDialogNegativeClick(ChangeTextDialogFragment.this);
-                        Objects.requireNonNull(ChangeTextDialogFragment.this.getDialog()).cancel();
+                        listener.onTextDialogNegativeClick(EditTextDialogFragment.this);
+                        Objects.requireNonNull(EditTextDialogFragment.this.getDialog()).cancel();
                     }
                 });
         return builder.create();

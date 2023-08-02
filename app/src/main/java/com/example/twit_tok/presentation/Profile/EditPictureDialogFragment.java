@@ -30,7 +30,7 @@ import com.example.twit_tok.R;
 import java.io.IOException;
 import java.util.Objects;
 
-public class ChangePictureDialogFragment extends DialogFragment {
+public class EditPictureDialogFragment extends DialogFragment {
 
     NoticeDialogPictureListener listener;
     private final MutableLiveData<Bitmap> pictureToShow = new MutableLiveData<>();
@@ -54,7 +54,7 @@ public class ChangePictureDialogFragment extends DialogFragment {
             });;
 
 
-    public ChangePictureDialogFragment(NoticeDialogPictureListener listener, Bitmap pictureToShow) {
+    public EditPictureDialogFragment(NoticeDialogPictureListener listener, Bitmap pictureToShow) {
         this.listener = listener;
         this.pictureToShow.setValue(pictureToShow);
     }
@@ -101,18 +101,18 @@ public class ChangePictureDialogFragment extends DialogFragment {
                 .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        pictureToShow.observe(ChangePictureDialogFragment.this, new Observer<Bitmap>() {
+                        pictureToShow.observe(EditPictureDialogFragment.this, new Observer<Bitmap>() {
                             @Override
                             public void onChanged(Bitmap bitmap) {
-                                listener.onPictureDialogPositiveClick(ChangePictureDialogFragment.this, bitmap);
+                                listener.onPictureDialogPositiveClick(EditPictureDialogFragment.this, bitmap);
                             }
                         });
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        listener.onPictureDialogNegativeClick(ChangePictureDialogFragment.this);
-                        Objects.requireNonNull(ChangePictureDialogFragment.this.getDialog()).cancel();
+                        listener.onPictureDialogNegativeClick(EditPictureDialogFragment.this);
+                        Objects.requireNonNull(EditPictureDialogFragment.this.getDialog()).cancel();
                     }
                 });
         return builder.create();
