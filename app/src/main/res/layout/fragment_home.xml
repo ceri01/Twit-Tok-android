@@ -35,6 +35,7 @@
                 android:id="@+id/add_twok_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:padding="15dp"
                 android:text="" />
 
         </com.google.android.material.card.MaterialCardView>
@@ -75,26 +76,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:icon="@drawable/align_horizontal"
-                app:layout_constraintBottom_toTopOf="@+id/add_twok_change_font_size"
+                app:layout_constraintBottom_toTopOf="@+id/add_twok_edit_font_size"
                 app:layout_constraintTop_toBottomOf="@+id/add_twok_align_vertical"
                 tools:layout_editor_absoluteX="10dp" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/add_twok_change_font_size"
+                android:id="@+id/add_twok_edit_font_size"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:icon="@drawable/font_size"
-                app:layout_constraintBottom_toTopOf="@+id/add_twok_change_font_family"
+                app:layout_constraintBottom_toTopOf="@+id/add_twok_edit_font_family"
                 app:layout_constraintTop_toBottomOf="@+id/add_twok_align_horizontal"
                 tools:layout_editor_absoluteX="10dp" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/add_twok_change_font_family"
+                android:id="@+id/add_twok_edit_font_family"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:icon="@drawable/change_font"
                 app:layout_constraintBottom_toTopOf="@+id/add_twok_insert_text"
-                app:layout_constraintTop_toBottomOf="@+id/add_twok_change_font_size"
+                app:layout_constraintTop_toBottomOf="@+id/add_twok_edit_font_size"
                 tools:layout_editor_absoluteX="4dp" />
 
             <com.google.android.material.button.MaterialButton
@@ -103,7 +104,7 @@
                 android:layout_height="wrap_content"
                 app:icon="@drawable/add_text"
                 app:layout_constraintBottom_toTopOf="@+id/add_twok_coordinates"
-                app:layout_constraintTop_toBottomOf="@+id/add_twok_change_font_family"
+                app:layout_constraintTop_toBottomOf="@+id/add_twok_edit_font_family"
                 tools:layout_editor_absoluteX="-14dp" />
 
             <com.google.android.material.button.MaterialButton
