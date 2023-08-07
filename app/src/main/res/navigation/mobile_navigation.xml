@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/navigation_add_twok"
-        android:name="com.example.twit_tok.presentation.home.HomeFragment"
+        android:name="com.example.twit_tok.presentation.NewTwok.NewTwokFragment"
         android:label="@string/title_add_twok"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_new_twok" />
 
     <fragment
         android:id="@+id/navigation_wall"
