@@ -33,7 +33,6 @@ public abstract class TwokDatabase extends RoomDatabase {
     private static volatile TwokDatabase instance;
 
     public static synchronized TwokDatabase getInstance(Context context) {
-        Log.d("KEK", context.toString());
         if (instance == null) {
             instance = create(context);
         }
@@ -84,7 +83,6 @@ public abstract class TwokDatabase extends RoomDatabase {
 
                                     @Override
                                     public void onFailure(@NonNull Call<ProfileRequest> call, @NonNull Throwable t) {
-                                        Log.d("ERROR1", t.toString());
                                         t.printStackTrace();
                                     }
                                 });
@@ -92,7 +90,6 @@ public abstract class TwokDatabase extends RoomDatabase {
 
                             @Override
                             public void onFailure(@NonNull Call<SidRequest> call, @NonNull Throwable t) {
-                                Log.d("ERROR2", t.toString());
                                 t.printStackTrace();
                             }
                         });

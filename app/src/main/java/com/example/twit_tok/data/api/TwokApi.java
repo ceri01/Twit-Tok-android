@@ -2,7 +2,7 @@ package com.example.twit_tok.data.api;
 
 import com.example.twit_tok.domain.model.IsFollowed;
 import com.example.twit_tok.domain.model.User;
-import com.example.twit_tok.domain.model.Twok;
+import com.example.twit_tok.domain.model.RecivedTwok;
 import com.example.twit_tok.domain.requests.BasicDebugRequest;
 import com.example.twit_tok.domain.requests.BasicDataRequest;
 import com.example.twit_tok.domain.requests.ProfileRequest;
@@ -31,13 +31,13 @@ public interface TwokApi {
     Call<Void> setProfilePicture(@Body UpdateProfilePictureRequest profile);
 
     @POST("getTwok")
-    Call<Twok> getTwokWithUid(@Body BasicDebugRequest data);
+    Call<RecivedTwok> getTwokWithUid(@Body BasicDebugRequest data);
 
     @POST("getTwok")
-    Call<Twok> getTwokWithUid(@Body BasicDataRequest data);
+    Call<RecivedTwok> getTwokWithUid(@Body BasicDataRequest data);
 
     @POST("getTwok")
-    Call<Twok> getRandomTwok(@Body SidRequest sid);
+    Call<RecivedTwok> getRandomTwok(@Body SidRequest sid);
 
     @POST("addTwok")
     Call<Void> addTwok(@Body AddTwokRequest twok);
