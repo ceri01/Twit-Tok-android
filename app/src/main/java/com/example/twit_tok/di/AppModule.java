@@ -1,7 +1,6 @@
 package com.example.twit_tok.di;
 
-import android.app.Application;
-
+import com.example.twit_tok.domain.model.NewTwok;
 import com.example.twit_tok.domain.model.Profile;
 import com.example.twit_tok.domain.model.Users;
 
@@ -25,5 +24,11 @@ public class AppModule {
     @Singleton
     public Profile provideProfile() {
         return new Profile();
+    }
+
+    @Provides
+    @Singleton
+    public NewTwok provideNewTwok() {
+        return new NewTwok();
     }
 }
