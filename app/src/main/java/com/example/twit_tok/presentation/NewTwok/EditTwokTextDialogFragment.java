@@ -1,4 +1,4 @@
-package com.example.twit_tok.presentation.home;
+package com.example.twit_tok.presentation.NewTwok;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -12,8 +12,6 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.twit_tok.R;
 import com.example.twit_tok.presentation.NoticeDialogTextListener;
-
-import java.util.Objects;
 
 public class EditTwokTextDialogFragment extends DialogFragment {
     NoticeDialogTextListener listener;

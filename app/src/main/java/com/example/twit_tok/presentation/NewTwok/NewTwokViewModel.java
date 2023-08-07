@@ -1,4 +1,4 @@
-package com.example.twit_tok.presentation.home;
+package com.example.twit_tok.presentation.NewTwok;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
