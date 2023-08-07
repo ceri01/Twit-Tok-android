@@ -9,7 +9,7 @@ import com.example.twit_tok.utils.TwoksUtils;
 
 import java.util.Objects;
 
-public class Twok {
+public class RecivedTwok {
     private final String text;
     private final int uid;
     private String bgcol;
@@ -24,7 +24,7 @@ public class Twok {
     private Bitmap userPicture;
 
 
-    public Twok(String text, int uid, String bgcol, String fontcol, int fontsize, int fonttype, int halign, int valign, String userName, Bitmap userPicture) {
+    public RecivedTwok(String text, int uid, String bgcol, String fontcol, int fontsize, int fonttype, int halign, int valign, String userName, Bitmap userPicture) {
         Objects.requireNonNull(text, "text cannot be null");
         Objects.requireNonNull(fontcol, "fontcol cannot be null");
         Objects.requireNonNull(bgcol, "bgcol cannot be null");
@@ -40,7 +40,7 @@ public class Twok {
         this.uid = uid;
     }
 
-    public Twok(String text, int uid, String bgcol, String fontcol, int fontsize, int fonttype, int halign, int valign, String userName, Bitmap userPicture, Double lat, Double lon) {
+    public RecivedTwok(String text, int uid, String bgcol, String fontcol, int fontsize, int fonttype, int halign, int valign, String userName, Bitmap userPicture, Double lat, Double lon) {
         this(text, uid, bgcol, fontcol, fontsize, fonttype, halign, valign, userName, userPicture);
         if (!Objects.isNull(lat) && !Objects.isNull(lon) && TwoksUtils.isValidCoord(lat, lon)) {
             this.lat = lat;
