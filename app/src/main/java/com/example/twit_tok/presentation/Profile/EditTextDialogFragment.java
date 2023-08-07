@@ -11,6 +11,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.twit_tok.R;
+import com.example.twit_tok.presentation.NoticeDialogTextListener;
 
 import java.util.Objects;
 
@@ -42,8 +43,7 @@ public class EditTextDialogFragment extends DialogFragment {
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        listener.onTextDialogNegativeClick(EditTextDialogFragment.this);
-                        Objects.requireNonNull(EditTextDialogFragment.this.getDialog()).cancel();
+                        dialog.dismiss();
                     }
                 });
         return builder.create();

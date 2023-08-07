@@ -21,6 +21,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.twit_tok.App;
 import com.example.twit_tok.R;
 import com.example.twit_tok.databinding.FragmentProfileBinding;
+import com.example.twit_tok.presentation.NoticeDialogPictureListener;
+import com.example.twit_tok.presentation.NoticeDialogTextListener;
 import com.example.twit_tok.utils.Converters;
 
 import java.util.Objects;
@@ -102,26 +104,20 @@ public class ProfileFragment extends Fragment implements NoticeDialogTextListene
     }
 
     public void showChangeTextDialog() {
-        DialogFragment dialog = new ChangeTextDialogFragment(ProfileFragment.this);
-        dialog.show(getParentFragmentManager(), "ChangeTextDialogFragment");
+        DialogFragment dialog = new EditTextDialogFragment(ProfileFragment.this);
+        dialog.show(getParentFragmentManager(), "EditTextDialogFragment");
     }
 
     public void showChangePictureDialog() {
-        DialogFragment dialog = new ChangePictureDialogFragment(ProfileFragment.this, profileViewModel.getProfilePictureChanged().getValue());
-        dialog.show(getParentFragmentManager(), "ChangePictureDialogFragment");
+        DialogFragment dialog = new EditPictureDialogFragment(ProfileFragment.this, profileViewModel.getProfilePictureChanged().getValue());
+        dialog.show(getParentFragmentManager(), "EditPictureDialogFragment");
     }
 
     @Override
     public void onTextDialogPositiveClick(DialogFragment dialog, String value) {
-        Log.d("AAA", "1");
         this.profileViewModel.setProfileName(value);
         TextView t = binding.getRoot().findViewById(R.id.name);
         t.setText(value);
-    }
-
-    @Override
-    public void onTextDialogNegativeClick(DialogFragment dialog) {
-        Log.d("AAA", "2");
     }
 
     @Override
@@ -134,10 +130,5 @@ public class ProfileFragment extends Fragment implements NoticeDialogTextListene
             i.setImageBitmap(value);
             profileViewModel.setProfilePicture(Converters.fromBitmapToBase64(value));
         }
-    }
-
-    @Override
-    public void onPictureDialogNegativeClick(DialogFragment dialog) {
-
     }
 }

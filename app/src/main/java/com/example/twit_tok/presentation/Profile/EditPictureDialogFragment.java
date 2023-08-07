@@ -26,6 +26,7 @@ import androidx.lifecycle.Observer;
 
 import com.example.twit_tok.App;
 import com.example.twit_tok.R;
+import com.example.twit_tok.presentation.NoticeDialogPictureListener;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -111,8 +112,7 @@ public class EditPictureDialogFragment extends DialogFragment {
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        listener.onPictureDialogNegativeClick(EditPictureDialogFragment.this);
-                        Objects.requireNonNull(EditPictureDialogFragment.this.getDialog()).cancel();
+                        dialog.dismiss();
                     }
                 });
         return builder.create();
