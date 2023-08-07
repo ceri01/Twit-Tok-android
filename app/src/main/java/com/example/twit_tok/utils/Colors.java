@@ -11,4 +11,12 @@ public class Colors {
         Matcher matcher = pattern.matcher(color);
         return matcher.matches();
     }
+
+    public static String fromIntToHexString(int color) {
+        return String.format("%06X", (0xFFFFFF & color));
+    }
+
+    public static int fromHexStringToInt(String color) {
+        return Color.parseColor(color);
+    }
 }

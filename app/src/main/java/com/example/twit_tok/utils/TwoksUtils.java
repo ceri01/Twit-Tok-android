@@ -1,8 +1,10 @@
 package com.example.twit_tok.utils;
 
+import java.util.Objects;
+
 public class TwoksUtils {
-    public static boolean isValidParameter(int value) {
-        return (value > 0 && value < 4);
+    public static boolean isValidParameter(Integer value) {
+        return (!Objects.isNull(value) && value > 0 && value < 4);
     }
 
     public static boolean isValidCoord(double lat, double lon) {
