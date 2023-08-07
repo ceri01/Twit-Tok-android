@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -14,17 +13,14 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.twit_tok.R;
 import com.example.twit_tok.databinding.FragmentWallBinding;
-import com.example.twit_tok.domain.model.Twok;
-import com.example.twit_tok.domain.model.Twoks;
-import com.example.twit_tok.utils.PictureUtils;
-
-import java.util.List;
+import com.example.twit_tok.domain.model.RecivedTwok;
+import com.example.twit_tok.domain.model.RecivedTwoks;
 
 public class WallFragment extends Fragment {
 
     private FragmentWallBinding binding;
     private ViewPager2 viewPager;
-    private Twoks twoks = new Twoks();
+    private RecivedTwoks recivedTwoks = new RecivedTwoks();
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -32,22 +28,21 @@ public class WallFragment extends Fragment {
         WallViewModel wallViewModel =
                 new ViewModelProvider(this).get(WallViewModel.class);
 
-        twoks.insert(new Twok("a", 0, "000000", "AA00CC", 1, 1, 1, 1, "A", null));
-        twoks.insert(new Twok("b", 1, "FFFFFF", "AA00CC", 2, 2, 1, 2, "B", null));
-        twoks.insert(new Twok("c", 2, "FFFFFF", "AA00CC", 1, 3, 1, 3, "C", null));
-        twoks.insert(new Twok("d", 0, "000000", "AA00CC", 1, 1, 2, 1, "D", null));
-        twoks.insert(new Twok("e", 1, "FFFFFF", "AA00CC", 2, 2, 2, 2, "E", null));
-        twoks.insert(new Twok("f", 2, "FFFFFF", "AA00CC", 1, 3, 2, 3, "F", null));
-        twoks.insert(new Twok("g", 0, "000000", "AA00CC", 1, 1, 3, 1, "G", null));
-        twoks.insert(new Twok("h", 1, "FFFFFF", "AA00CC", 2, 2, 3, 2, "H", null));
-        twoks.insert(new Twok("i", 2, "FFFFFF", "AA00CC", 1, 3, 3, 3, "I", null));
+        recivedTwoks.insert(new RecivedTwok("a", 0, "000000", "AA00CC", 1, 1, 1, 1, "A", null));
+        recivedTwoks.insert(new RecivedTwok("b", 1, "AC34DD", "AA00CC", 2, 2, 1, 2, "B", null));
+        recivedTwoks.insert(new RecivedTwok("c", 2, "FFFFFF", "AA00CC", 1, 3, 1, 3, "C", null));
+        recivedTwoks.insert(new RecivedTwok("d", 0, "000000", "AA00CC", 1, 1, 2, 1, "D", null));
+        recivedTwoks.insert(new RecivedTwok("e", 1, "FFFFFF", "AA00CC", 2, 2, 2, 2, "E", null));
+        recivedTwoks.insert(new RecivedTwok("f", 2, "FFFFFF", "AA00CC", 1, 3, 2, 3, "F", null));
+        recivedTwoks.insert(new RecivedTwok("g", 0, "000000", "AA00CC", 1, 1, 3, 1, "G", null));
+        recivedTwoks.insert(new RecivedTwok("h", 1, "FFFFFF", "AA00CC", 2, 2, 3, 2, "H", null));
+        recivedTwoks.insert(new RecivedTwok("i", 2, "FFFFFF", "AA00CC", 1, 3, 3, 3, "I", null));
 
         binding = FragmentWallBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         viewPager = root.findViewById(R.id.wall);
-        WallAdapter wa = new WallAdapter(this.getContext(), twoks);
-        System.out.println(wa);
+        WallAdapter wa = new WallAdapter(this.getContext(), recivedTwoks);
 
         viewPager.setAdapter(wa);
 
@@ -55,13 +50,11 @@ public class WallFragment extends Fragment {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels);
-                Log.d("Main", "onPageScrolled");
             }
 
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-                Log.d("Main", "onPageSelected");
             }
 
         });

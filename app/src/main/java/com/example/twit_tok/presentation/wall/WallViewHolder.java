@@ -4,15 +4,15 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twit_tok.R;
 import com.example.twit_tok.common.Constants;
-import com.example.twit_tok.domain.model.Twok;
+import com.example.twit_tok.domain.model.RecivedTwok;
 import com.example.twit_tok.utils.Colors;
 
 import java.util.Objects;
@@ -30,26 +30,24 @@ public class WallViewHolder extends RecyclerView.ViewHolder {
         this.userName = view.findViewById(R.id.twok_user_name);
         this.userPicture = view.findViewById(R.id.twok_user_profile);
         this.content = view.findViewById(R.id.twok);
-        System.out.println(this.content);
     }
 
-    public void updateContent(Twok twokToShow) {
-        if (!Objects.isNull(twokToShow.getUserPicture())) {
-            userPicture.setImageBitmap(twokToShow.getUserPicture());
+    public void updateContent(@NonNull RecivedTwok recivedTwokToShow) {
+        if (!Objects.isNull(recivedTwokToShow.getUserPicture())) {
+            userPicture.setImageBitmap(recivedTwokToShow.getUserPicture());
         }
-        content.setBackgroundColor(Color.parseColor(twokToShow.getBgcol()));
-        userName.setText(twokToShow.getUserName());
+        content.setBackgroundColor(Colors.fromHexStringToInt(recivedTwokToShow.getBgcol()));
+        userName.setText(recivedTwokToShow.getUserName());
 
-        text.setTextColor(Color.parseColor(twokToShow.getFontcol()));
-        text.setText(twokToShow.getText());
-        text.setTextSize(Constants.TEXTSIZES.getOrDefault(twokToShow.getFontsize(), 30));
-        text.setTypeface(Constants.FONTTYPE.getOrDefault(twokToShow.getFonttype(), Typeface.DEFAULT));
+        text.setTextColor(Colors.fromHexStringToInt(recivedTwokToShow.getFontcol()));
+        text.setText(recivedTwokToShow.getText());
+        text.setTextSize(Constants.FONTSIZE.getOrDefault(recivedTwokToShow.getFontsize(), 30));
+        text.setTypeface(Constants.FONTTYPE.getOrDefault(recivedTwokToShow.getFonttype(), Typeface.DEFAULT));
 
         ConstraintLayout.LayoutParams lp = new ConstraintLayout.LayoutParams(text.getLayoutParams());
 
-        lp.reset();
-        Objects.requireNonNull(Constants.HALIGN.get(twokToShow.getHalign())).apply(lp);
-        Objects.requireNonNull(Constants.VALIGN.get(twokToShow.getValign())).apply(lp);
+        Objects.requireNonNull(Constants.HALIGN.get(recivedTwokToShow.getHalign())).apply(lp);
+        Objects.requireNonNull(Constants.VALIGN.get(recivedTwokToShow.getValign())).apply(lp);
         text.setLayoutParams(lp);
     }
 }
