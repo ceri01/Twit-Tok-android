@@ -20,4 +20,6 @@
     <string name="insertNewText">Insert new Text</string>
     <string name="edit_background_color">Edit Background Color</string>
     <string name="edit_text_color">Edit text color</string>
+    <string name="new_twok">New Twok</string>
+    <string name="insert_new_twok">Insert new Twok</string>
 </resources>
