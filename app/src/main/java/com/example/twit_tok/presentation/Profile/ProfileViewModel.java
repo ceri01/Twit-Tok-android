@@ -1,7 +1,6 @@
 package com.example.twit_tok.presentation.Profile;
 
 import android.graphics.Bitmap;
-import android.graphics.Picture;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -9,8 +8,6 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.twit_tok.App;
-import com.example.twit_tok.R;
-import com.example.twit_tok.common.Constants;
 import com.example.twit_tok.data.api.TwokApiInstance;
 import com.example.twit_tok.data.db.TwokDatabase;
 import com.example.twit_tok.domain.model.Profile;
@@ -21,8 +18,8 @@ import com.example.twit_tok.domain.requests.ProfileRequest;
 import com.example.twit_tok.domain.requests.SidRequest;
 import com.example.twit_tok.domain.requests.UpdateProfileNameRequest;
 import com.example.twit_tok.domain.requests.UpdateProfilePictureRequest;
-import com.example.twit_tok.utils.Converters;
-import com.example.twit_tok.utils.PictureUtils;
+import com.example.twit_tok.common.Converters;
+import com.example.twit_tok.common.PictureUtils;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import java.util.List;

@@ -4,8 +4,8 @@ import android.graphics.Bitmap;
 
 import androidx.annotation.NonNull;
 
-import com.example.twit_tok.utils.Colors;
-import com.example.twit_tok.utils.TwoksUtils;
+import com.example.twit_tok.common.Colors;
+import com.example.twit_tok.common.TwoksUtils;
 
 import java.util.Objects;
 

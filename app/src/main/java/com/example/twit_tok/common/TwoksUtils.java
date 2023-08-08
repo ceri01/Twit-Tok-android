@@ -1,4 +1,4 @@
-package com.example.twit_tok.utils;
+package com.example.twit_tok.common;
 
 import java.util.Objects;
 

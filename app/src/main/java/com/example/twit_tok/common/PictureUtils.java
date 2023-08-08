@@ -1,4 +1,4 @@
-package com.example.twit_tok.utils;
+package com.example.twit_tok.common;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;

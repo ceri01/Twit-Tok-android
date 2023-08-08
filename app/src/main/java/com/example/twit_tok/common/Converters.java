@@ -1,4 +1,4 @@
-package com.example.twit_tok.utils;
+package com.example.twit_tok.common;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,8 +9,6 @@ import androidx.room.TypeConverter;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Base64;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Converters {
     @TypeConverter

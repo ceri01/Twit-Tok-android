@@ -1,7 +1,6 @@
 package com.example.twit_tok.data.db;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
@@ -16,7 +15,7 @@ import com.example.twit_tok.domain.entity.ProfileEntity;
 import com.example.twit_tok.domain.entity.SidEntity;
 import com.example.twit_tok.domain.requests.ProfileRequest;
 import com.example.twit_tok.domain.requests.SidRequest;
-import com.example.twit_tok.utils.Converters;
+import com.example.twit_tok.common.Converters;
 
 import java.util.Objects;
 

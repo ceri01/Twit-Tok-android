@@ -3,7 +3,6 @@ package com.example.twit_tok.presentation.Profile;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +22,7 @@ import com.example.twit_tok.R;
 import com.example.twit_tok.databinding.FragmentProfileBinding;
 import com.example.twit_tok.presentation.NoticeDialogPictureListener;
 import com.example.twit_tok.presentation.NoticeDialogTextListener;
-import com.example.twit_tok.utils.Converters;
+import com.example.twit_tok.common.Converters;
 
 import java.util.Objects;
 

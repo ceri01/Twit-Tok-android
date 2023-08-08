@@ -7,7 +7,6 @@ import android.util.Log;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 
-import com.example.twit_tok.utils.Colors;
 import com.google.common.collect.ImmutableMap;
 
 import java.util.Map;

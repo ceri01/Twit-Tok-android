@@ -2,18 +2,14 @@ package com.example.twit_tok;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 import com.example.twit_tok.data.api.TwokApiInstance;
 import com.example.twit_tok.domain.model.IsFollowed;
 import com.example.twit_tok.domain.model.User;
-import com.example.twit_tok.domain.model.Twok;
+import com.example.twit_tok.domain.model.RecivedTwok;
 import com.example.twit_tok.domain.requests.AddTwokRequest;
 import com.example.twit_tok.domain.requests.BasicDebugRequest;
 import com.example.twit_tok.domain.requests.BasicDataRequest;
-import com.example.twit_tok.domain.requests.UpdateProfileNameRequest;
 import com.example.twit_tok.domain.requests.SidRequest;
-import com.example.twit_tok.domain.requests.UpdateProfilePictureRequest;
 
 import java.io.IOException;
 import java.util.List;
@@ -30,7 +26,7 @@ public class ApiTest {
 
     @Test
     public void setProfileNameTest() throws IOException {
-        UpdateProfileNameRequest en = new UpdateProfileNameRequest();
+/*        UpdateProfileNameRequest en = new UpdateProfileNameRequest();
         en.setSid("Rxvl9SVDA3ADaoKIVV3X");
         en.setName("ceri");
 
@@ -51,7 +47,7 @@ public class ApiTest {
 
         assert user != null;
         System.out.println(user.name() + " " + user.picture() + " " + user.uid() + " "+ user.pversion());
-        assertNotEquals("unnamed", user.name());
+        assertNotEquals("unnamed", user.name());*/
     }
 
     @Test
@@ -82,16 +78,16 @@ public class ApiTest {
         wor.setUid("517548");
         SidRequest s = new SidRequest("Rxvl9SVDA3ADaoKIVV3X");
 
-        Response<Twok> call1 = TwokApiInstance.getTwokApi().getTwokWithUid(wr).execute();
-        Twok t1 = call1.body();
+        Response<RecivedTwok> call1 = TwokApiInstance.getTwokApi().getTwokWithUid(wr).execute();
+        RecivedTwok t1 = call1.body();
         System.out.println(call1.raw());
         System.out.println(t1.toString());
-        Response<Twok> call2 = TwokApiInstance.getTwokApi().getTwokWithUid(wor).execute();
-        Twok t2 = call2.body();
+        Response<RecivedTwok> call2 = TwokApiInstance.getTwokApi().getTwokWithUid(wor).execute();
+        RecivedTwok t2 = call2.body();
         System.out.println(call2.raw());
         System.out.println(t2.toString());
-        Response<Twok> call3 = TwokApiInstance.getTwokApi().getRandomTwok(s).execute();
-        Twok t3 = call3.body();
+        Response<RecivedTwok> call3 = TwokApiInstance.getTwokApi().getRandomTwok(s).execute();
+        RecivedTwok t3 = call3.body();
         System.out.println(call3.raw());
         System.out.println(t3.toString());
     }

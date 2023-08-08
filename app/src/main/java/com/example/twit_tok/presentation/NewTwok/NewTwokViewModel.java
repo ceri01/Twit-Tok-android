@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.twit_tok.domain.model.NewTwok;
-import com.example.twit_tok.utils.Colors;
+import com.example.twit_tok.common.Colors;
 
 import java.util.Objects;
 

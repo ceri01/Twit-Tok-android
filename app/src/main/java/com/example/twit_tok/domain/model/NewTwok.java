@@ -1,7 +1,7 @@
 package com.example.twit_tok.domain.model;
 
 import com.example.twit_tok.common.Constants;
-import com.example.twit_tok.utils.Colors;
+import com.example.twit_tok.common.Colors;
 
 import javax.inject.Inject;
 

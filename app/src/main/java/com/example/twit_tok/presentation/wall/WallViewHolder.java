@@ -1,6 +1,5 @@
 package com.example.twit_tok.presentation.wall;
 
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.twit_tok.R;
 import com.example.twit_tok.common.Constants;
 import com.example.twit_tok.domain.model.RecivedTwok;
-import com.example.twit_tok.utils.Colors;
+import com.example.twit_tok.common.Colors;
 
 import java.util.Objects;
 
