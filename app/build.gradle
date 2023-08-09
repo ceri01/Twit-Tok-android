@@ -79,6 +79,8 @@ dependencies {
 
     // google play services
     implementation 'com.google.android.gms:play-services-location:21.0.1'
+    implementation "androidx.fragment:fragment-ktx:1.6.1"
+
 }
 
 // Allow references to generated code
