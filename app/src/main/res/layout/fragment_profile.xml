@@ -9,7 +9,7 @@
     tools:context=".presentation.Profile.ProfileFragment">
 
     <include
-        android:id="@+id/include"
+        android:id="@+id/profile_header"
         layout="@layout/profile"
         android:layout_width="0dp"
         android:layout_height="112dp"
@@ -29,5 +29,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_header" />
 </androidx.constraintlayout.widget.ConstraintLayout>
