@@ -3,7 +3,7 @@
     <string name="title_add_twok">Add Twok</string>
     <string name="title_wall">Wall</string>
     <string name="title_profile">Profile</string>
-    <string name="picture">picture</string>
+    <string name="picture">Picture</string>
     <string name="name">Name</string>
     <string name="insert_name">Insert your name</string>
     <string name="confirm">Confirm</string>
@@ -22,4 +22,6 @@
     <string name="edit_text_color">Edit text color</string>
     <string name="new_twok">New Twok</string>
     <string name="insert_new_twok">Insert new Twok</string>
+    <string name="permission_error_dialog">You must provide permission to be able to integrate position in new twok.</string>
+    <string name="Close_dialog_ok">OK</string>
 </resources>

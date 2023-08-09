@@ -1,5 +1,6 @@
 package com.example.twit_tok.presentation.NewTwok;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -8,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.DialogFragment;
@@ -16,8 +19,10 @@ import androidx.lifecycle.Observer;
 
 import com.example.twit_tok.R;
 import com.example.twit_tok.common.Constants;
+import com.example.twit_tok.common.LocationUtils;
 import com.example.twit_tok.databinding.FragmentNewTwokBinding;
 import com.example.twit_tok.presentation.NoticeDialogBgColorListener;
+import com.example.twit_tok.presentation.NoticeDialogPermissionListener;
 import com.example.twit_tok.presentation.NoticeDialogTextColorListener;
 import com.example.twit_tok.presentation.NoticeDialogTextListener;
 import com.google.android.material.button.MaterialButton;
@@ -29,12 +34,21 @@ import javax.inject.Inject;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
-public class NewTwokFragment extends Fragment implements NoticeDialogTextListener, NoticeDialogBgColorListener, NoticeDialogTextColorListener {
-
-    private FragmentNewTwokBinding binding;
-    private final NoticeDialogTextListener listener = null;
+public class NewTwokFragment extends Fragment implements NoticeDialogTextListener, NoticeDialogBgColorListener, NoticeDialogTextColorListener, NoticeDialogPermissionListener {
     @Inject
     NewTwokViewModel newTwokViewModel;
+    private FragmentNewTwokBinding binding;
+    private final ActivityResultLauncher<String> requestPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+        if (isGranted) {
+            return;
+        } else {
+            showPermissionErrorDialog();
+        }
+    });
+
+    private void askPermission() {
+        this.requestPermissionLauncher.launch(Manifest.permission.ACCESS_COARSE_LOCATION);
+    }
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -166,7 +180,11 @@ public class NewTwokFragment extends Fragment implements NoticeDialogTextListene
         addPositionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (LocationUtils.hasLocationPermissions(requireContext())) {
+                    showPositionDialog();
+                } else {
+                    askPermission();
+                }
             }
         });
 
@@ -193,6 +211,12 @@ public class NewTwokFragment extends Fragment implements NoticeDialogTextListene
         return root;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+
     private void showEditTwokTextDialog() {
         DialogFragment dialog = new EditTwokTextDialogFragment(NewTwokFragment.this);
         dialog.show(getParentFragmentManager(), "EditTwokTextDialogFragment");
@@ -206,6 +230,13 @@ public class NewTwokFragment extends Fragment implements NoticeDialogTextListene
     private void showEditTextColorDialog() {
         DialogFragment dialog = new EditTextColorDialogFragment(NewTwokFragment.this);
         dialog.show(getParentFragmentManager(), "EditTextColorDialogFragment");
+    }
+
+    private void showPositionDialog() {}
+
+    private void showPermissionErrorDialog() {
+        DialogFragment dialog = new PermissionErrorDialog();
+        dialog.show(getParentFragmentManager(), "PermissionErrorDialog");
     }
 
     @Override
@@ -226,8 +257,7 @@ public class NewTwokFragment extends Fragment implements NoticeDialogTextListene
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
+    public void onPermissionDialogPositiveClick(Dialog dialog) {
+        askPermission();
     }
 }
