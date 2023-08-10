@@ -1,11 +1,9 @@
 package com.example.twit_tok.presentation.NewTwok;
 
 import android.Manifest;
-import android.app.Dialog;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,22 +24,18 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnCanceledListener;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.Objects;
 
-public class LocationDialogFragment extends DialogFragment implements OnMapReadyCallback {
+public class SetLocationDialogFragment extends DialogFragment implements OnMapReadyCallback {
     NoticeDialogLocationListener listener;
     private GoogleMap map;
     private Location currentPosition;
     private FusedLocationProviderClient fusedLocationProviderClient;
 
-    public LocationDialogFragment(NoticeDialogLocationListener listener) {
+    public SetLocationDialogFragment(NoticeDialogLocationListener listener) {
         this.listener = listener;
     }
 
@@ -91,8 +85,8 @@ public class LocationDialogFragment extends DialogFragment implements OnMapReady
             fusedLocationProviderClient.getCurrentLocation(Priority.PRIORITY_LOW_POWER, null).addOnSuccessListener(this.requireActivity(), new OnSuccessListener<Location>() {
                 @Override
                 public void onSuccess(Location location) {
-                    SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.google_map);
-                    mapFragment.getMapAsync(LocationDialogFragment.this);
+                    SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.google_map_set_location);
+                    mapFragment.getMapAsync(SetLocationDialogFragment.this);
                     currentPosition = location;
                 }
             });

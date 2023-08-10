@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,12 +27,6 @@ import com.example.twit_tok.presentation.NoticeDialogLocationListener;
 import com.example.twit_tok.presentation.NoticeDialogPermissionListener;
 import com.example.twit_tok.presentation.NoticeDialogTextColorListener;
 import com.example.twit_tok.presentation.NoticeDialogTextListener;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.Objects;
@@ -241,8 +234,8 @@ public class NewTwokFragment extends Fragment implements NoticeDialogTextListene
     }
 
     private void showPositionDialog() {
-        DialogFragment dialog = new LocationDialogFragment(NewTwokFragment.this);
-        dialog.show(getParentFragmentManager(), "LocationDialogFragment");
+        DialogFragment dialog = new SetLocationDialogFragment(NewTwokFragment.this);
+        dialog.show(getParentFragmentManager(), "SetLocationDialogFragment");
     }
 
     private void showPermissionErrorDialog() {
