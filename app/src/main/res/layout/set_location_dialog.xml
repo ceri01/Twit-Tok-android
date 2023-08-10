@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <fragment
-        android:id="@+id/google_map"
+        android:id="@+id/google_map_set_location"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="390dp"
         android:layout_height="650dp"
@@ -25,7 +25,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/google_map">
+        app:layout_constraintTop_toBottomOf="@+id/google_map_set_location">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/confirm_position"

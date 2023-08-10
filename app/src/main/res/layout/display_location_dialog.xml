@@ -6,9 +6,10 @@
     android:layout_height="match_parent">
 
     <fragment
-        android:id="@+id/google_map_no2"
-        android:layout_width="410dp"
-        android:layout_height="680dp"
+        android:id="@+id/google_map_display_location"
+        android:layout_width="390dp"
+        android:layout_height="650dp"
+        android:padding="24dp"
         app:layout_constraintBottom_toTopOf="@+id/close_display_location"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +29,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/google_map_no2" />
+        app:layout_constraintTop_toBottomOf="@+id/google_map_display_location" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

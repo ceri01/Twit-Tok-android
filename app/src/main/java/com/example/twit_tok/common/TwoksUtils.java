@@ -7,7 +7,7 @@ public class TwoksUtils {
         return (!Objects.isNull(value) && value > 0 && value < 4);
     }
 
-    public static boolean isValidCoord(double lat, double lon) {
-        return ((lat >= -90 && lat <= 90) && (lon >= -180 && lon <= 180));
+    public static boolean isValidCoord(Double lat, Double lon) {
+        return (!Objects.isNull(lat) && !Objects.isNull(lon) && (lat >= -90 && lat <= 90) && (lon >= -180 && lon <= 180));
     }
 }

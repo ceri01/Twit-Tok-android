@@ -11,14 +11,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.twit_tok.R;
 import com.example.twit_tok.domain.model.RecivedTwok;
 import com.example.twit_tok.domain.model.RecivedTwoks;
+import com.example.twit_tok.presentation.EventListener;
 
 public class WallAdapter extends RecyclerView.Adapter<WallViewHolder> {
     private final LayoutInflater inflater;
     private final RecivedTwoks recivedTwoks;
+    private final EventListener listener;
 
-    public WallAdapter(Context context, RecivedTwoks recivedTwoks) {
+    public WallAdapter(Context context, RecivedTwoks recivedTwoks, EventListener listener) {
         inflater = LayoutInflater.from(context);
         this.recivedTwoks = recivedTwoks;
+        this.listener = listener;
     }
 
     @NonNull
@@ -31,7 +34,7 @@ public class WallAdapter extends RecyclerView.Adapter<WallViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull WallViewHolder holder, int position) {
         RecivedTwok recivedTwokToShow = recivedTwoks.getByPosition(position);
-        holder.updateContent(recivedTwokToShow);
+        holder.updateContent(recivedTwokToShow, listener);
     }
 
     @Override

@@ -18,8 +18,8 @@ public class RecivedTwok {
     private int fonttype = 1;
     private int halign = 1;
     private int valign = 1;
-    private Double lat;
-    private Double lon;
+    private Double lat = null;
+    private Double lon = null;
     private String userName;
     private Bitmap userPicture;
 
@@ -42,7 +42,7 @@ public class RecivedTwok {
 
     public RecivedTwok(String text, int uid, String bgcol, String fontcol, int fontsize, int fonttype, int halign, int valign, String userName, Bitmap userPicture, Double lat, Double lon) {
         this(text, uid, bgcol, fontcol, fontsize, fonttype, halign, valign, userName, userPicture);
-        if (!Objects.isNull(lat) && !Objects.isNull(lon) && TwoksUtils.isValidCoord(lat, lon)) {
+        if (TwoksUtils.isValidCoord(lat, lon)) {
             this.lat = lat;
             this.lon = lon;
         }
@@ -80,11 +80,17 @@ public class RecivedTwok {
         return valign;
     }
 
-    public double getLat() {
+    public Double getLat() {
+        if (Objects.isNull(lat)) {
+            return null;
+        }
         return lat;
     }
 
-    public double getLon() {
+    public Double getLon() {
+        if (Objects.isNull(lon)) {
+            return null;
+        }
         return lon;
     }
 
