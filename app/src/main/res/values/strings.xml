@@ -24,4 +24,7 @@
     <string name="insert_new_twok">Insert new Twok</string>
     <string name="permission_error_dialog">You must provide permission to be able to integrate position in new twok.</string>
     <string name="Close_dialog_ok">OK</string>
+    <string name="your_current_position">Your current position</string>
+    <string name="current_location">Current location</string>
+    <string name="close_position_dialog">Close</string>
 </resources>

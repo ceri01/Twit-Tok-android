@@ -1,5 +1,7 @@
 package com.example.twit_tok.presentation.NewTwok;
 
+import android.location.Location;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -109,6 +111,13 @@ public class NewTwokViewModel extends ViewModel {
     public void setFontColor(Integer color) {
         this.twok.setFontColor(Colors.fromIntToHexString(color));
         this.fontColor.setValue(color);
+    }
+
+    public void setCoordinates(Location location) {
+        if (!Objects.isNull(location)) {
+            this.twok.setLat(location.getLatitude());
+            this.twok.setLon(location.getLongitude());
+        }
     }
 
     public void resetTwok() {

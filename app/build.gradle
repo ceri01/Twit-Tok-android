@@ -2,6 +2,8 @@ plugins {
     id 'org.jetbrains.kotlin.android' version '1.8.0' apply false
     id 'com.android.application'
     id 'com.google.dagger.hilt.android'
+    // secrets gradle
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
 apply plugin: 'kotlin-android'
@@ -81,6 +83,8 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:21.0.1'
     implementation "androidx.fragment:fragment-ktx:1.6.1"
 
+    // google maps
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
 }
 
 // Allow references to generated code

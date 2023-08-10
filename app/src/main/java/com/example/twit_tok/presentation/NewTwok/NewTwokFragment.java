@@ -3,7 +3,9 @@ package com.example.twit_tok.presentation.NewTwok;
 import android.Manifest;
 import android.app.Dialog;
 import android.content.Context;
+import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +24,16 @@ import com.example.twit_tok.common.Constants;
 import com.example.twit_tok.common.LocationUtils;
 import com.example.twit_tok.databinding.FragmentNewTwokBinding;
 import com.example.twit_tok.presentation.NoticeDialogBgColorListener;
+import com.example.twit_tok.presentation.NoticeDialogLocationListener;
 import com.example.twit_tok.presentation.NoticeDialogPermissionListener;
 import com.example.twit_tok.presentation.NoticeDialogTextColorListener;
 import com.example.twit_tok.presentation.NoticeDialogTextListener;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.Objects;
@@ -34,7 +43,7 @@ import javax.inject.Inject;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
-public class NewTwokFragment extends Fragment implements NoticeDialogTextListener, NoticeDialogBgColorListener, NoticeDialogTextColorListener, NoticeDialogPermissionListener {
+public class NewTwokFragment extends Fragment implements NoticeDialogTextListener, NoticeDialogBgColorListener, NoticeDialogTextColorListener, NoticeDialogPermissionListener, NoticeDialogLocationListener {
     @Inject
     NewTwokViewModel newTwokViewModel;
     private FragmentNewTwokBinding binding;
@@ -75,7 +84,6 @@ public class NewTwokFragment extends Fragment implements NoticeDialogTextListene
         TextView text = root.findViewById(R.id.add_twok_text);
         ConstraintLayout textContainer = root.findViewById(R.id.add_twok_text_container);
         ConstraintLayout.LayoutParams lp = new ConstraintLayout.LayoutParams(text.getLayoutParams());
-
 
         newTwokViewModel.onChangeText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
@@ -232,7 +240,10 @@ public class NewTwokFragment extends Fragment implements NoticeDialogTextListene
         dialog.show(getParentFragmentManager(), "EditTextColorDialogFragment");
     }
 
-    private void showPositionDialog() {}
+    private void showPositionDialog() {
+        DialogFragment dialog = new LocationDialogFragment(NewTwokFragment.this);
+        dialog.show(getParentFragmentManager(), "LocationDialogFragment");
+    }
 
     private void showPermissionErrorDialog() {
         DialogFragment dialog = new PermissionErrorDialog();
@@ -259,5 +270,10 @@ public class NewTwokFragment extends Fragment implements NoticeDialogTextListene
     @Override
     public void onPermissionDialogPositiveClick(Dialog dialog) {
         askPermission();
+    }
+    
+    @Override
+    public void onSetLocationPositiveClick(Location location) {
+        this.newTwokViewModel.setCoordinates(location);
     }
 }
