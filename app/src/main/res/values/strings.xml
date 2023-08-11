@@ -28,4 +28,5 @@
     <string name="current_location">Current location</string>
     <string name="close_position_dialog">Close</string>
     <string name="coordinates_not_available">Coordinates not available</string>
+    <string name="unfollow">Unfollow</string>
 </resources>

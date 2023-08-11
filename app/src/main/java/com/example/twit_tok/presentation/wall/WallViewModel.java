@@ -5,15 +5,11 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class WallViewModel extends ViewModel {
-
-    private final MutableLiveData<String> mText;
-
-    public WallViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
+    public void followUser(int uid) {
+        return;
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public void unfollowUser(int uid) {
+        return;
     }
 }

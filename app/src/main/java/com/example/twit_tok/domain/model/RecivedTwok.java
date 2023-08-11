@@ -20,11 +20,12 @@ public class RecivedTwok {
     private int valign = 1;
     private Double lat = null;
     private Double lon = null;
+    private boolean isFollowed = false;
     private String userName;
     private Bitmap userPicture;
 
 
-    public RecivedTwok(String text, int uid, String bgcol, String fontcol, int fontsize, int fonttype, int halign, int valign, String userName, Bitmap userPicture) {
+    public RecivedTwok(String text, int uid, String bgcol, String fontcol, int fontsize, int fonttype, int halign, int valign, String userName, Bitmap userPicture, boolean isFollowed) {
         Objects.requireNonNull(text, "text cannot be null");
         Objects.requireNonNull(fontcol, "fontcol cannot be null");
         Objects.requireNonNull(bgcol, "bgcol cannot be null");
@@ -38,10 +39,11 @@ public class RecivedTwok {
         this.userName = userName;
         this.text = text;
         this.uid = uid;
+        this.isFollowed = isFollowed;
     }
 
-    public RecivedTwok(String text, int uid, String bgcol, String fontcol, int fontsize, int fonttype, int halign, int valign, String userName, Bitmap userPicture, Double lat, Double lon) {
-        this(text, uid, bgcol, fontcol, fontsize, fonttype, halign, valign, userName, userPicture);
+    public RecivedTwok(String text, int uid, String bgcol, String fontcol, int fontsize, int fonttype, int halign, int valign, String userName, Bitmap userPicture, boolean isFollowed, Double lat, Double lon) {
+        this(text, uid, bgcol, fontcol, fontsize, fonttype, halign, valign, userName, userPicture, isFollowed);
         if (TwoksUtils.isValidCoord(lat, lon)) {
             this.lat = lat;
             this.lon = lon;
@@ -100,6 +102,14 @@ public class RecivedTwok {
 
     public Bitmap getUserPicture() {
         return userPicture;
+    }
+
+    public boolean getIsFollowed() {
+        return isFollowed;
+    }
+
+    public void setFollowed(boolean followed) {
+        isFollowed = followed;
     }
 
     @NonNull

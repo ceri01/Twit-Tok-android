@@ -38,9 +38,9 @@
 
     <Button
         android:id="@+id/twok_follow"
-        android:layout_width="97dp"
+        android:layout_width="110dp"
         android:layout_height="43dp"
-        android:layout_marginStart="44dp"
+        android:layout_marginStart="32dp"
         android:text="@string/follow"
         android:textSize="12dp"
         app:layout_constraintBottom_toTopOf="@+id/twok_map"
@@ -50,9 +50,9 @@
 
     <Button
         android:id="@+id/twok_map"
-        android:layout_width="97dp"
+        android:layout_width="110dp"
         android:layout_height="43dp"
-        android:layout_marginStart="44dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="12dp"
         android:text="@string/map"
         android:textSize="12dp"

@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twit_tok.R;
 import com.example.twit_tok.common.Constants;
-import com.example.twit_tok.common.TwoksUtils;
 import com.example.twit_tok.domain.model.RecivedTwok;
 import com.example.twit_tok.common.Colors;
 import com.example.twit_tok.presentation.EventListener;
@@ -26,7 +25,7 @@ public class WallViewHolder extends RecyclerView.ViewHolder {
     private final ConstraintLayout content;
     private final ImageView userPicture;
     private final MaterialButton mapButton;
-    private final MaterialButton follow;
+    private final MaterialButton followUnfollow;
 
     public WallViewHolder(View view) {
         super(view);
@@ -35,7 +34,7 @@ public class WallViewHolder extends RecyclerView.ViewHolder {
         this.userPicture = view.findViewById(R.id.twok_user_profile);
         this.content = view.findViewById(R.id.twok);
         this.mapButton = view.findViewById(R.id.twok_map);
-        this.follow = view.findViewById(R.id.twok_follow);
+        this.followUnfollow = view.findViewById(R.id.twok_follow);
     }
 
     public void updateContent(@NonNull RecivedTwok recivedTwokToShow, EventListener listener) {
@@ -59,8 +58,20 @@ public class WallViewHolder extends RecyclerView.ViewHolder {
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("TEST", "" + recivedTwokToShow);
                 listener.onMapButtonPressed(recivedTwokToShow.getLat(), recivedTwokToShow.getLon());
+            }
+        });
+
+        followUnfollow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (recivedTwokToShow.getIsFollowed()) {
+                    followUnfollow.setText(R.string.unfollow);
+                } else {
+                    followUnfollow.setText(R.string.follow);
+                }
+                recivedTwokToShow.setFollowed(!recivedTwokToShow.getIsFollowed());
+                listener.onFollowUnfollowButtonPressed(recivedTwokToShow.getIsFollowed(), recivedTwokToShow.getUid());
             }
         });
     }
