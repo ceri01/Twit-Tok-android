@@ -71,8 +71,8 @@ public abstract class TwokDatabase extends RoomDatabase {
                                                     "FROM SidEntity " +
                                                     "WHERE sid != '" + sid +
                                                     "'; END;";
-                                            String insertSid = "INSERT INTO SidEntity(sid, uid) VALUES('" + sid + "', " + profileResponse.uid() + " );";
-                                            String insertProfile = "INSERT INTO ProfileEntity(uid, name, picture, pversion) VALUES("+ profileResponse.uid() + ", '" + profileResponse.name() + "', '"+ profileResponse.picture() +"', " + profileResponse.pversion() + ");";
+                                            String insertSid = "INSERT INTO SidEntity(sid, uid) VALUES('" + sid + "', " + profileResponse.uid() + " );"; // TODO sql injection
+                                            String insertProfile = "INSERT INTO ProfileEntity(uid, name, picture, pversion) VALUES(" + profileResponse.uid() + ", '" + profileResponse.name() + "', '" + profileResponse.picture() + "', " + profileResponse.pversion() + ");";
                                             db.execSQL(profileTrigger);
                                             db.execSQL(sidTrigger);
                                             db.execSQL(insertSid);

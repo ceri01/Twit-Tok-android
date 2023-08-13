@@ -9,11 +9,10 @@ public final class User {
     private final String name;
     private final String picture;
     private final int pversion;
-
     private final boolean isFollowed;
 
     public User(int uid, String name, String picture, int pversion, boolean followed) {
-        Objects.requireNonNull(name, "Name cannot be null");
+        Objects.requireNonNull(name, "Name cannot be null"); // questa roba causa errore probabilmente
         this.isFollowed = followed;
         if (name.isBlank()) {
             this.name = "unnamed";
@@ -23,6 +22,14 @@ public final class User {
         this.picture = picture;
         this.pversion = pversion;
         this.uid = uid;
+    }
+
+    public User(User user) {
+        this.name = user.name;
+        this.isFollowed = user.isFollowed;
+        this.picture = user.picture;
+        this.pversion = user.pversion;
+        this.uid = user.uid;
     }
 
     @NonNull

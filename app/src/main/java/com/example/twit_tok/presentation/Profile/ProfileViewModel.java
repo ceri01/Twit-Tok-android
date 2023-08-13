@@ -96,7 +96,7 @@ public class ProfileViewModel extends ViewModel {
                         // TODO: Gestisci errore in caso faili la richiesta di rete
                     }
                 });
-            } catch (Exception e){
+            } catch (Exception e) {
                 // TODO: gestisci errore in caso non ri riesca a prendere sid da db
             }
         }, App.getInstance().getMainExecutor());
@@ -128,7 +128,7 @@ public class ProfileViewModel extends ViewModel {
                         // TODO: Gestisci errore in caso faili la richiesta di rete
                     }
                 });
-            } catch (Exception e){
+            } catch (Exception e) {
                 // TODO: gestisci errore in caso non ri riesca a prendere sid da db
             }
         }, App.getInstance().getMainExecutor());
@@ -221,10 +221,14 @@ public class ProfileViewModel extends ViewModel {
     }
 
     public Users getUsers() {
-        return users;
+        return new Users(this.users);
     }
 
     public Profile getProfile() {
         return new Profile(this.profile);
+    }
+
+    public void unfollow(int uid) {
+        // togli utente da users e fai richiesta a server
     }
 }

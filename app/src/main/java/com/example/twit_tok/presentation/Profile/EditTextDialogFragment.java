@@ -20,7 +20,6 @@ public class EditTextDialogFragment extends DialogFragment {
     NoticeDialogTextListener listener;
 
 
-
     public EditTextDialogFragment(NoticeDialogTextListener listener) {
         this.listener = listener;
     }

@@ -1,6 +1,6 @@
 package com.example.twit_tok.presentation.wall;
 
-import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,53 +11,59 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.Observer;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.twit_tok.R;
 import com.example.twit_tok.common.TwoksUtils;
 import com.example.twit_tok.databinding.FragmentWallBinding;
-import com.example.twit_tok.domain.model.RecivedTwok;
-import com.example.twit_tok.domain.model.RecivedTwoks;
-import com.example.twit_tok.presentation.EventListener;
-import com.google.android.material.button.MaterialButton;
+import com.example.twit_tok.domain.model.User;
+import com.example.twit_tok.presentation.WallEventListener;
 
-import java.time.Duration;
+import javax.inject.Inject;
 
-public class WallFragment extends Fragment implements EventListener {
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
+public class WallFragment extends Fragment implements WallEventListener {
+    @Inject
+    WallViewModel wallViewModel;
     private FragmentWallBinding binding;
-    private ViewPager2 viewPager;
-    private RecivedTwoks recivedTwoks = new RecivedTwoks();
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        WallViewModel wallViewModel =
-                new ViewModelProvider(this).get(WallViewModel.class);
-
-        recivedTwoks.insert(new RecivedTwok("a", 0, "000000", "AA00CC", 1, 1, 1, 1, "A", null, true, 12.0,45.34));
-        recivedTwoks.insert(new RecivedTwok("b", 1, "AC34DD", "AA00CC", 2, 2, 1, 2, "B", null, false, 145.0,-78.34));
-        recivedTwoks.insert(new RecivedTwok("c", 2, "FFFFFF", "AA00CC", 1, 3, 1, 3, "C", null, true));
-        recivedTwoks.insert(new RecivedTwok("d", 0, "000000", "AA00CC", 1, 1, 2, 1, "D", null, true));
-        recivedTwoks.insert(new RecivedTwok("e", 1, "FFFFFF", "AA00CC", 2, 2, 2, 2, "E", null, true));
-        recivedTwoks.insert(new RecivedTwok("f", 2, "FFFFFF", "AA00CC", 1, 3, 2, 3, "F", null, false, 222.2342,45.34));
-        recivedTwoks.insert(new RecivedTwok("g", 0, "000000", "AA00CC", 1, 1, 3, 1, "G", null, false));
-        recivedTwoks.insert(new RecivedTwok("h", 1, "FFFFFF", "AA00CC", 2, 2, 3, 2, "H", null, false));
-        recivedTwoks.insert(new RecivedTwok("i", 2, "FFFFFF", "AA00CC", 1, 3, 3, 3, "I", null, true));
 
         binding = FragmentWallBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        viewPager = root.findViewById(R.id.wall);
-        WallAdapter wa = new WallAdapter(this.getContext(), recivedTwoks, WallFragment.this);
-
-
+        wallViewModel.getTwoks();
+        ViewPager2 viewPager = root.findViewById(R.id.wall);
+        WallAdapter wa = new WallAdapter(requireContext(), wallViewModel.getBuffer(), WallFragment.this);
         viewPager.setAdapter(wa);
+
+        wallViewModel.isReady().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean isReady) {
+                if (isReady) {
+                    wa.notifyDataSetChanged();
+                }
+            }
+        });
 
         viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+/*                if (wallViewModel.getBufferLength() >= 100) {
+                    wallViewModel.resetBuffer();
+                } else if (position > (wallViewModel.getBufferLength() / 2) + 1) {
+                    wallViewModel.getNewTwoks();
+                }*/
             }
 
             @Override
@@ -69,15 +75,15 @@ public class WallFragment extends Fragment implements EventListener {
         return root;
     }
 
-    private void showDispayLocationDialog(Double latitude, Double longitude) {
-        DialogFragment dialog = new DisplayLocationDialogFragment(latitude, longitude);
-        dialog.show(getParentFragmentManager(), "DisplayLocationDialogFragment.java");
-    }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private void showDispayLocationDialog(Double latitude, Double longitude) {
+        DialogFragment dialog = new DisplayLocationDialogFragment(latitude, longitude);
+        dialog.show(getParentFragmentManager(), "DisplayLocationDialogFragment.java");
     }
 
     @Override
@@ -91,11 +97,12 @@ public class WallFragment extends Fragment implements EventListener {
     }
 
     @Override
-    public void onFollowUnfollowButtonPressed(boolean followUnfollow, int uid) {
-        if (followUnfollow) {
-            // fai chiamata per seguire
-        } else {
-            // fai chiamata per smettere di seguire seguire
-        }
+    public boolean onFollowButtonPressed(User user) {
+        return wallViewModel.followUser(user);
+    }
+
+    @Override
+    public void onUnfollowButtonPressed(int uid) {
+        wallViewModel.unfollowUser(uid);
     }
 }

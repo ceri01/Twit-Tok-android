@@ -35,17 +35,17 @@ public class Constants {
     );
 
     public static final Map<Integer, Function<ConstraintLayout.LayoutParams, ConstraintLayout.LayoutParams>> HALIGN = ImmutableMap.of(
-            1, (Function<ConstraintLayout.LayoutParams, ConstraintLayout.LayoutParams>) layoutParams -> {
+            1, layoutParams -> {
                 layoutParams.rightToRight = -1;
                 layoutParams.leftToLeft = ConstraintSet.PARENT_ID;
                 return layoutParams;
             },
-            2, (Function<ConstraintLayout.LayoutParams, ConstraintLayout.LayoutParams>) layoutParams -> {
+            2, layoutParams -> {
                 layoutParams.leftToLeft = ConstraintSet.PARENT_ID;
                 layoutParams.rightToRight = ConstraintSet.PARENT_ID;
                 return layoutParams;
             },
-            3, (Function<ConstraintLayout.LayoutParams, ConstraintLayout.LayoutParams>) layoutParams -> {
+            3, layoutParams -> {
                 layoutParams.leftToLeft = -1;
                 layoutParams.rightToRight = ConstraintSet.PARENT_ID;
                 return layoutParams;
@@ -53,19 +53,19 @@ public class Constants {
     );
 
     public static final Map<Integer, Function<ConstraintLayout.LayoutParams, ConstraintLayout.LayoutParams>> VALIGN = ImmutableMap.of(
-            1, (Function<ConstraintLayout.LayoutParams, ConstraintLayout.LayoutParams>) layoutParams -> {
+            1, layoutParams -> {
                 layoutParams.bottomToBottom = -1;
                 layoutParams.topToTop = ConstraintSet.PARENT_ID;
                 Log.d("HOMEFRAGMENT", layoutParams.toString());
                 return layoutParams;
             },
-            2, (Function<ConstraintLayout.LayoutParams, ConstraintLayout.LayoutParams>) layoutParams -> {
+            2, layoutParams -> {
                 layoutParams.topToTop = ConstraintSet.PARENT_ID;
                 layoutParams.bottomToBottom = ConstraintSet.PARENT_ID;
                 Log.d("HOMEFRAGMENT", layoutParams.toString());
                 return layoutParams;
             },
-            3, (Function<ConstraintLayout.LayoutParams, ConstraintLayout.LayoutParams>) layoutParams -> {
+            3, layoutParams -> {
                 layoutParams.topToTop = -1;
                 layoutParams.bottomToBottom = ConstraintSet.PARENT_ID;
                 Log.d("HOMEFRAGMENT", layoutParams.toString());
@@ -74,4 +74,5 @@ public class Constants {
     );
 
     public static final Function<ConstraintLayout.LayoutParams, ConstraintLayout.LayoutParams> IDENTITY_FUNCTION = Function.identity();
+    public static final int DEFAULT_AMOUNT_OF_NEW_TWOKS = 8;
 }

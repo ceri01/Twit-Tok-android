@@ -1,7 +1,6 @@
 package com.example.twit_tok.presentation.wall;
 
 import android.graphics.Typeface;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,9 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twit_tok.R;
 import com.example.twit_tok.common.Constants;
+import com.example.twit_tok.common.Converters;
 import com.example.twit_tok.domain.model.RecivedTwok;
 import com.example.twit_tok.common.Colors;
-import com.example.twit_tok.presentation.EventListener;
+import com.example.twit_tok.domain.model.User;
+import com.example.twit_tok.presentation.WallEventListener;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.Objects;
@@ -37,9 +38,14 @@ public class WallViewHolder extends RecyclerView.ViewHolder {
         this.followUnfollow = view.findViewById(R.id.twok_follow);
     }
 
-    public void updateContent(@NonNull RecivedTwok recivedTwokToShow, EventListener listener) {
+    public void updateContent(@NonNull RecivedTwok recivedTwokToShow, WallEventListener listener) {
         if (!Objects.isNull(recivedTwokToShow.getUserPicture())) {
             userPicture.setImageBitmap(recivedTwokToShow.getUserPicture());
+        }
+        if (recivedTwokToShow.getIsFollowed()) {
+            followUnfollow.setText(R.string.unfollow);
+        } else {
+            followUnfollow.setText(R.string.follow);
         }
         content.setBackgroundColor(Colors.fromHexStringToInt(recivedTwokToShow.getBgcol()));
         userName.setText(recivedTwokToShow.getUserName());
@@ -66,12 +72,20 @@ public class WallViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View v) {
                 if (recivedTwokToShow.getIsFollowed()) {
-                    followUnfollow.setText(R.string.unfollow);
-                } else {
                     followUnfollow.setText(R.string.follow);
+                    listener.onUnfollowButtonPressed(recivedTwokToShow.getUid());
+                } else {
+                    if (listener.onFollowButtonPressed(new User(
+                            recivedTwokToShow.getUid(),
+                            recivedTwokToShow.getUserName(),
+                            Converters.fromBitmapToBase64(recivedTwokToShow.getUserPicture()),
+                            recivedTwokToShow.getPversion(),
+                            recivedTwokToShow.getIsFollowed()))) {
+                        followUnfollow.setText(R.string.unfollow);
+                    }
                 }
                 recivedTwokToShow.setFollowed(!recivedTwokToShow.getIsFollowed());
-                listener.onFollowUnfollowButtonPressed(recivedTwokToShow.getIsFollowed(), recivedTwokToShow.getUid());
+                // probabilemnte qui ci sarà da aspettare prima di fare le righe sopra
             }
         });
     }

@@ -37,16 +37,15 @@ import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class NewTwokFragment extends Fragment implements NoticeDialogTextListener, NoticeDialogBgColorListener, NoticeDialogTextColorListener, NoticeDialogPermissionListener, NoticeDialogLocationListener {
-    @Inject
-    NewTwokViewModel newTwokViewModel;
-    private FragmentNewTwokBinding binding;
     private final ActivityResultLauncher<String> requestPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
         if (isGranted) {
-            return;
         } else {
             showPermissionErrorDialog();
         }
     });
+    @Inject
+    NewTwokViewModel newTwokViewModel;
+    private FragmentNewTwokBinding binding;
 
     private void askPermission() {
         this.requestPermissionLauncher.launch(Manifest.permission.ACCESS_COARSE_LOCATION);
@@ -264,7 +263,7 @@ public class NewTwokFragment extends Fragment implements NoticeDialogTextListene
     public void onPermissionDialogPositiveClick(Dialog dialog) {
         askPermission();
     }
-    
+
     @Override
     public void onSetLocationPositiveClick(Location location) {
         this.newTwokViewModel.setCoordinates(location);

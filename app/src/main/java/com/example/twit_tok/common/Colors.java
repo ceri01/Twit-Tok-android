@@ -13,10 +13,12 @@ public class Colors {
     }
 
     public static String fromIntToHexString(int color) {
-        return String.format("%06X", (0xFFFFFF & color));
+        String s =String.format("%06X", (0xFFFFFF & color));
+        System.out.println(s);
+        return s;
     }
 
     public static int fromHexStringToInt(String color) {
-        return Color.parseColor(color);
+        return Color.parseColor("#" + color);
     }
 }

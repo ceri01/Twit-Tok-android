@@ -42,7 +42,7 @@ public class Converters {
 
     public static Bitmap fromDrawableToBitmap(Drawable drawable) {
         if (drawable instanceof BitmapDrawable bitmapDrawable) {
-            if(bitmapDrawable.getBitmap() != null) {
+            if (bitmapDrawable.getBitmap() != null) {
                 return bitmapDrawable.getBitmap();
             }
         }

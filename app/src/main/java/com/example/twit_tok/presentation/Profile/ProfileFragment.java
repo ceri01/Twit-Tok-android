@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.twit_tok.App;
 import com.example.twit_tok.R;
@@ -23,6 +24,7 @@ import com.example.twit_tok.databinding.FragmentProfileBinding;
 import com.example.twit_tok.presentation.NoticeDialogPictureListener;
 import com.example.twit_tok.presentation.NoticeDialogTextListener;
 import com.example.twit_tok.common.Converters;
+import com.example.twit_tok.presentation.ProfileEventListener;
 
 import java.util.Objects;
 
@@ -31,14 +33,12 @@ import javax.inject.Inject;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
-public class ProfileFragment extends Fragment implements NoticeDialogTextListener, NoticeDialogPictureListener {
+public class ProfileFragment extends Fragment implements NoticeDialogTextListener, NoticeDialogPictureListener, ProfileEventListener {
 
-    private FragmentProfileBinding binding;
-    private NoticeDialogTextListener listener = null;
     @Inject
     ProfileViewModel profileViewModel;
-    @Inject
-    FollowedAdapter followedAdapter;
+    private FragmentProfileBinding binding;
+    private final NoticeDialogTextListener listener = null;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -51,6 +51,8 @@ public class ProfileFragment extends Fragment implements NoticeDialogTextListene
 
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        FollowedAdapter fa = new FollowedAdapter(requireContext(), profileViewModel.getUsers());
 
         Button editNameButton = root.findViewById(R.id.edit_name);
         Button editPictureButton = root.findViewById(R.id.edit_picture);
@@ -68,7 +70,7 @@ public class ProfileFragment extends Fragment implements NoticeDialogTextListene
         profileViewModel.getProfilePictureChanged().observe(getViewLifecycleOwner(), new Observer<Bitmap>() {
             @Override
             public void onChanged(Bitmap picture) {
-                if(Objects.isNull(picture)) {
+                if (Objects.isNull(picture)) {
                     pictureView.setImageResource(R.mipmap.ic_default_picture_round);
                 } else {
                     pictureView.setImageBitmap(picture);
@@ -91,8 +93,9 @@ public class ProfileFragment extends Fragment implements NoticeDialogTextListene
         });
 
         RecyclerView rc = binding.followedList.findViewById(R.id.followed_list);
-        rc.setLayoutManager(new LinearLayoutManager(App.getInstance().getApplicationContext(), LinearLayoutManager.VERTICAL, false));
-        rc.setAdapter(followedAdapter);
+        rc.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
+        rc.setAdapter(fa);
+
         return root;
     }
 
@@ -129,5 +132,10 @@ public class ProfileFragment extends Fragment implements NoticeDialogTextListene
             i.setImageBitmap(value);
             profileViewModel.setProfilePicture(Converters.fromBitmapToBase64(value));
         }
+    }
+
+    @Override
+    public void onUnfollowButtonPressed(int uid) {
+        profileViewModel.unfollow(uid);
     }
 }

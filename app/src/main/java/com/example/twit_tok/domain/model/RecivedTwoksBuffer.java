@@ -7,10 +7,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
-public class RecivedTwoks implements Iterable<RecivedTwok> {
+public class RecivedTwoksBuffer implements Iterable<RecivedTwok> {
     private final List<RecivedTwok> recivedTwoks;
 
-    public RecivedTwoks() {
+    public RecivedTwoksBuffer() {
         this.recivedTwoks = new LinkedList<>();
     }
 
@@ -36,6 +36,7 @@ public class RecivedTwoks implements Iterable<RecivedTwok> {
     public Iterator<RecivedTwok> iterator() {
         return new Iterator<RecivedTwok>() {
             final Iterator<RecivedTwok> i = recivedTwoks.iterator();
+
             @Override
             public boolean hasNext() {
                 return i.hasNext();

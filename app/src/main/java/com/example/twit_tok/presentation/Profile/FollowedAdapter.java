@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.twit_tok.App;
 import com.example.twit_tok.R;
 import com.example.twit_tok.domain.model.User;
 import com.example.twit_tok.domain.model.Users;
@@ -20,8 +19,8 @@ public class FollowedAdapter extends RecyclerView.Adapter<FollowedViewHolder> {
     private final Users users;
 
     @Inject
-    public FollowedAdapter(Users users) {
-        this.inflater = LayoutInflater.from(App.getInstance().getApplicationContext());
+    public FollowedAdapter(Context context, Users users) {
+        this.inflater = LayoutInflater.from(context);
         this.users = users;
     }
 

@@ -19,8 +19,8 @@ public class NewTwok {
     @Inject
     public NewTwok() {
         this.text = "Insert new Twok";
-        this.bgcol = "#" + Colors.fromIntToHexString(Constants.DEFAULT_NEW_TWOK_BACKGROUND_COLOR);
-        this.fontcol = "#" + Colors.fromIntToHexString(Constants.DEFAULT_NEW_TWOK_TEXT_COLOR);
+        this.bgcol = Colors.fromIntToHexString(Constants.DEFAULT_NEW_TWOK_BACKGROUND_COLOR);
+        this.fontcol = Colors.fromIntToHexString(Constants.DEFAULT_NEW_TWOK_TEXT_COLOR);
         this.fontsize = 2;
         this.fonttype = 1;
         this.valign = 2;
@@ -103,8 +103,8 @@ public class NewTwok {
 
     public void reset() {
         this.text = "Insert new Twok";
-        this.bgcol = "#" + Colors.fromIntToHexString(Constants.DEFAULT_NEW_TWOK_BACKGROUND_COLOR);
-        this.fontcol = "#" + Colors.fromIntToHexString(Constants.DEFAULT_NEW_TWOK_TEXT_COLOR);
+        this.bgcol = Colors.fromIntToHexString(Constants.DEFAULT_NEW_TWOK_BACKGROUND_COLOR);
+        this.fontcol = Colors.fromIntToHexString(Constants.DEFAULT_NEW_TWOK_TEXT_COLOR);
         this.fontsize = 2;
         this.fonttype = 1;
         this.valign = 2;

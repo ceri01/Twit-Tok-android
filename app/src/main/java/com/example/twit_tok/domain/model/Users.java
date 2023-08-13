@@ -24,9 +24,21 @@ public class Users implements Iterable<User> {
         this.user = new LinkedHashMap<>();
     }
 
+    public Users(Users users) {
+        this.user = new LinkedHashMap<>();
+        for (User u : users) {
+            this.user.put(u.uid(), new User(u));
+        }
+    }
+
     public void insert(User t) {
         Objects.requireNonNull(t, "twok cannot be null");
         this.user.put(t.uid(), t);
+    }
+
+    public void remove(int uid) {
+        User u = this.user.get(uid);
+        this.user.remove(uid, u);
     }
 
     public int getlength() {
@@ -47,6 +59,7 @@ public class Users implements Iterable<User> {
     public Iterator<User> iterator() {
         return new Iterator<User>() {
             final Iterator<User> i = user.values().iterator();
+
             @Override
             public boolean hasNext() {
                 return i.hasNext();

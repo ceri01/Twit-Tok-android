@@ -10,8 +10,12 @@ import com.example.twit_tok.common.TwoksUtils;
 import java.util.Objects;
 
 public class RecivedTwok {
-    private final String text;
     private final int uid;
+    private final String userName;
+    private final Bitmap userPicture;
+    private final int pversion;
+    private final String text;
+    private boolean isFollowed = false;
     private String bgcol;
     private String fontcol;
     private int fontsize = 1;
@@ -20,21 +24,19 @@ public class RecivedTwok {
     private int valign = 1;
     private Double lat = null;
     private Double lon = null;
-    private boolean isFollowed = false;
-    private String userName;
-    private Bitmap userPicture;
 
 
-    public RecivedTwok(String text, int uid, String bgcol, String fontcol, int fontsize, int fonttype, int halign, int valign, String userName, Bitmap userPicture, boolean isFollowed) {
+    public RecivedTwok(int uid, String userName, Bitmap userPicture, int pversion, boolean isFollowed, String text, String bgcol, String fontcol, int fontsize, int fonttype, int halign, int valign) {
         Objects.requireNonNull(text, "text cannot be null");
         Objects.requireNonNull(fontcol, "fontcol cannot be null");
         Objects.requireNonNull(bgcol, "bgcol cannot be null");
-        if (Colors.isValid(bgcol)) this.bgcol = "#" + bgcol;
-        if (Colors.isValid(bgcol)) this.fontcol = "#" + fontcol;
+        if (Colors.isValid(bgcol)) this.bgcol = bgcol;
+        if (Colors.isValid(bgcol)) this.fontcol = fontcol;
         if (TwoksUtils.isValidParameter(fontsize)) this.fontsize = fontsize;
         if (TwoksUtils.isValidParameter(fonttype)) this.fonttype = fonttype;
         if (TwoksUtils.isValidParameter(valign)) this.valign = valign;
         if (TwoksUtils.isValidParameter(halign)) this.halign = halign;
+        this.pversion = pversion;
         this.userPicture = userPicture;
         this.userName = userName;
         this.text = text;
@@ -42,8 +44,8 @@ public class RecivedTwok {
         this.isFollowed = isFollowed;
     }
 
-    public RecivedTwok(String text, int uid, String bgcol, String fontcol, int fontsize, int fonttype, int halign, int valign, String userName, Bitmap userPicture, boolean isFollowed, Double lat, Double lon) {
-        this(text, uid, bgcol, fontcol, fontsize, fonttype, halign, valign, userName, userPicture, isFollowed);
+    public RecivedTwok(int uid, String userName, Bitmap userPicture, int pversion, boolean isFollowed, String text, String bgcol, String fontcol, int fontsize, int fonttype, int halign, int valign, Double lat, Double lon) {
+        this(uid, userName, userPicture, pversion, isFollowed, text, bgcol, fontcol, fontsize, fonttype, halign, valign);
         if (TwoksUtils.isValidCoord(lat, lon)) {
             this.lat = lat;
             this.lon = lon;
@@ -112,36 +114,38 @@ public class RecivedTwok {
         isFollowed = followed;
     }
 
+    public int getPversion() {
+        return pversion;
+    }
+
     @NonNull
     @Override
     public String toString() {
-        return new StringBuilder()
-                .append("Twok{")
-                .append("text='")
-                .append(text)
-                .append('\'')
-                .append(", uid='")
-                .append(uid)
-                .append('\'')
-                .append(", bgcol='")
-                .append(bgcol)
-                .append('\'')
-                .append(", fontcol='")
-                .append(fontcol)
-                .append('\'')
-                .append(", fontsize=")
-                .append(fontsize)
-                .append(", fonttype=")
-                .append(fonttype)
-                .append(", halign=")
-                .append(halign)
-                .append(", valign=")
-                .append(valign)
-                .append(", lat=")
-                .append(lat)
-                .append(", lon=")
-                .append(lon)
-                .append('}')
-                .toString();
+        return "Twok{" +
+                "text='" +
+                text +
+                '\'' +
+                ", uid='" +
+                uid +
+                '\'' +
+                ", bgcol='" +
+                bgcol +
+                '\'' +
+                ", fontcol='" +
+                fontcol +
+                '\'' +
+                ", fontsize=" +
+                fontsize +
+                ", fonttype=" +
+                fonttype +
+                ", halign=" +
+                halign +
+                ", valign=" +
+                valign +
+                ", lat=" +
+                lat +
+                ", lon=" +
+                lon +
+                '}';
     }
 }
