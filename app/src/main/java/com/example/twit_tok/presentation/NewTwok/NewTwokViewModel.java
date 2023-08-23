@@ -6,8 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.twit_tok.domain.model.NewTwok;
 import com.example.twit_tok.common.Colors;
+import com.example.twit_tok.domain.model.NewTwok;
 
 import java.util.Objects;
 
@@ -37,7 +37,8 @@ public class NewTwokViewModel extends ViewModel {
     }
 
     private Integer nextChoice(Integer choice) {
-        return 1 + (choice % 3);
+        if (choice == 2) return 0;
+        return 1 + (choice % 2);
     }
 
     public String getText() {

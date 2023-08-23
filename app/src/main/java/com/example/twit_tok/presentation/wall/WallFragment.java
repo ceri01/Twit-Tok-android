@@ -2,13 +2,15 @@ package com.example.twit_tok.presentation.wall;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -26,13 +28,24 @@ import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class WallFragment extends Fragment implements WallEventListener {
+    private final Handler handler = new Handler();
     @Inject
     WallViewModel wallViewModel;
     private FragmentWallBinding binding;
+    private ProgressBar progressBar;
+    private WallAdapter wa;
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (wallViewModel.getBufferLength() <= 0) {
+            wallViewModel.getTwoks();
+        }
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -40,18 +53,16 @@ public class WallFragment extends Fragment implements WallEventListener {
 
         binding = FragmentWallBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        progressBar = root.findViewById(R.id.buffering);
 
-        wallViewModel.getTwoks();
         ViewPager2 viewPager = root.findViewById(R.id.wall);
-        WallAdapter wa = new WallAdapter(requireContext(), wallViewModel.getBuffer(), WallFragment.this);
+        this.wa = new WallAdapter(requireContext(), wallViewModel.getBuffer(), WallFragment.this);
         viewPager.setAdapter(wa);
 
-        wallViewModel.isReady().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+        wallViewModel.isReady().observe(getViewLifecycleOwner(), new Observer<Integer>() {
             @Override
-            public void onChanged(Boolean isReady) {
-                if (isReady) {
-                    wa.notifyDataSetChanged();
-                }
+            public void onChanged(Integer position) {
+                wa.notifyItemInserted(position);
             }
         });
 
@@ -59,18 +70,26 @@ public class WallFragment extends Fragment implements WallEventListener {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels);
-/*                if (wallViewModel.getBufferLength() >= 100) {
-                    wallViewModel.resetBuffer();
-                } else if (position > (wallViewModel.getBufferLength() / 2) + 1) {
-                    wallViewModel.getNewTwoks();
-                }*/
             }
 
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
+                if (position >= 10 && wallViewModel.getBufferLength() >= 10) {
+                    showBufferingWhileLoading();
+                    wallViewModel.resetBuffer();
+                    wa.resetTwokBuffer(wallViewModel.getBuffer());
+                    wa.notifyDataSetChanged();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            hideBufferingWhenLoaded();
+                        }
+                    }, 3000);
+                } else if (position >= (wallViewModel.getBufferLength() / 2) + 1) {
+                    wallViewModel.getTwoks();
+                }
             }
-
         });
         return root;
     }
@@ -94,6 +113,18 @@ public class WallFragment extends Fragment implements WallEventListener {
             Toast.makeText(requireContext(), R.string.coordinates_not_available, Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    private void showBufferingWhileLoading() {
+        binding.getRoot().findViewById(R.id.wall).setVisibility(View.GONE);
+        requireActivity().findViewById(R.id.nav_view).setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    private void hideBufferingWhenLoaded() {
+        progressBar.setVisibility(View.GONE);
+        requireActivity().findViewById(R.id.nav_view).setVisibility(View.VISIBLE);
+        binding.getRoot().findViewById(R.id.wall).setVisibility(View.VISIBLE);
     }
 
     @Override

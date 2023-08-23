@@ -1,5 +1,7 @@
 package com.example.twit_tok.domain.model;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import java.util.Iterator;
@@ -7,9 +9,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.inject.Inject;
+
 public class RecivedTwoksBuffer implements Iterable<RecivedTwok> {
     private final List<RecivedTwok> recivedTwoks;
 
+    @Inject
     public RecivedTwoksBuffer() {
         this.recivedTwoks = new LinkedList<>();
     }

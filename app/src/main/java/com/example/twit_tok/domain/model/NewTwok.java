@@ -21,10 +21,10 @@ public class NewTwok {
         this.text = "Insert new Twok";
         this.bgcol = Colors.fromIntToHexString(Constants.DEFAULT_NEW_TWOK_BACKGROUND_COLOR);
         this.fontcol = Colors.fromIntToHexString(Constants.DEFAULT_NEW_TWOK_TEXT_COLOR);
-        this.fontsize = 2;
+        this.fontsize = 1;
         this.fonttype = 1;
-        this.valign = 2;
-        this.halign = 2;
+        this.valign = 1;
+        this.halign = 1;
         this.lat = null;
         this.lon = null;
     }
@@ -105,10 +105,10 @@ public class NewTwok {
         this.text = "Insert new Twok";
         this.bgcol = Colors.fromIntToHexString(Constants.DEFAULT_NEW_TWOK_BACKGROUND_COLOR);
         this.fontcol = Colors.fromIntToHexString(Constants.DEFAULT_NEW_TWOK_TEXT_COLOR);
-        this.fontsize = 2;
+        this.fontsize = 1;
         this.fonttype = 1;
-        this.valign = 2;
-        this.halign = 2;
+        this.valign = 1;
+        this.halign = 1;
         this.lat = null;
         this.lon = null;
     }

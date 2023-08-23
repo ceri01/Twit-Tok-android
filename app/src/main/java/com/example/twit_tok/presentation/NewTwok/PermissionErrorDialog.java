@@ -10,7 +10,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.twit_tok.R;
-import com.example.twit_tok.presentation.NoticeDialogPermissionListener;
 
 public class PermissionErrorDialog extends DialogFragment {
     @NonNull

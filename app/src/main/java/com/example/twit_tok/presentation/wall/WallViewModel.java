@@ -31,14 +31,14 @@ import retrofit2.Response;
 
 public class WallViewModel extends ViewModel {
     private final Users users;
+    private final MutableLiveData<Integer> lastElementInserted;
     private final RecivedTwoksBuffer buffer;
-    private MutableLiveData<Boolean> ready;
 
     @Inject
-    public WallViewModel(Users users) {
+    public WallViewModel(Users users, RecivedTwoksBuffer buffer) {
         this.users = users;
-        this.buffer = new RecivedTwoksBuffer();
-        this.ready = new MutableLiveData<>(false);
+        this.buffer = buffer;
+        this.lastElementInserted = new MutableLiveData<>(buffer.getlength());
     }
 
     // TODO: gestisci null in entrambi i casi
@@ -68,7 +68,6 @@ public class WallViewModel extends ViewModel {
     }
 
     private void retrieveTwoks() {
-        Log.d("retrieveNewTwoks", "dentro getNewTwok");
         ListenableFuture<Sid> listenableFutureSid = TwokDatabase.getInstance(App.getInstance().getApplicationContext()).getSidDao().getSid();
         listenableFutureSid.addListener(() -> {
             try {
@@ -79,9 +78,11 @@ public class WallViewModel extends ViewModel {
                     public void onResponse(@NonNull Call<RecivedTwok> call, @NonNull Response<RecivedTwok> response) {
                         if (!Objects.isNull(response)) {
                             RecivedTwok data = response.body();
+                            Log.d("retrieveNewTwoks", "? " + data.toString());
                             if (TwoksUtils.isValidTwok(data)) {
-                                System.out.println(data);
+                                Log.d("retrieveNewTwoks", "VALIDO " + data.toString());
                                 buffer.insert(response.body());
+                                lastElementInserted.setValue(buffer.getlength());
                             }
                         }
                     }
@@ -102,30 +103,26 @@ public class WallViewModel extends ViewModel {
 
     public void getTwoks() {
         for (int i = 0; i < Constants.DEFAULT_AMOUNT_OF_NEW_TWOKS; i++) {
-            Log.d("retrieveNewTwoks", i + "");
             retrieveTwoks();
-            if (i == 7) {
-                Log.d("retrieveNewTwoks", i + " buffer -> " + getBufferLength());
-                this.ready.setValue(true);
-            }
         }
     }
 
-    public MutableLiveData<Boolean> isReady() {
-        return ready;
+    public MutableLiveData<Integer> isReady() {
+        return lastElementInserted;
     }
 
     public RecivedTwoksBuffer getBuffer() {
         return buffer;
     }
 
-    public int getBufferLength() {
-        return this.buffer.getlength();
+    public void resetBuffer() {
+        lastElementInserted.setValue(0);
+        buffer.reset();
+        getTwoks();
     }
 
-    public void resetBuffer() {
-        buffer.reset();
-        retrieveTwoks();
+    public int getBufferLength() {
+        return this.buffer.getlength();
     }
 
     // TODO metti anche retrieveNewTwoks con tid

@@ -10,10 +10,10 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twit_tok.R;
+import com.example.twit_tok.common.Colors;
 import com.example.twit_tok.common.Constants;
 import com.example.twit_tok.common.Converters;
 import com.example.twit_tok.domain.model.RecivedTwok;
-import com.example.twit_tok.common.Colors;
 import com.example.twit_tok.domain.model.User;
 import com.example.twit_tok.presentation.WallEventListener;
 import com.google.android.material.button.MaterialButton;

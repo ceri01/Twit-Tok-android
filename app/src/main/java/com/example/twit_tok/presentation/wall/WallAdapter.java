@@ -1,7 +1,6 @@
 package com.example.twit_tok.presentation.wall;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,17 +15,17 @@ import com.example.twit_tok.presentation.WallEventListener;
 
 public class WallAdapter extends RecyclerView.Adapter<WallViewHolder> {
     private final LayoutInflater inflater;
-    private final RecivedTwoksBuffer recivedTwoks;
     private final WallEventListener listener;
+    private RecivedTwoksBuffer buffer;
 
-    public WallAdapter(Context context, RecivedTwoksBuffer recivedTwoks, WallEventListener listener) {
+    public WallAdapter(Context context, RecivedTwoksBuffer buffer, WallEventListener listener) {
         inflater = LayoutInflater.from(context);
-        Log.d("SIUM", recivedTwoks.getlength() + "");
-        for (RecivedTwok recivedTwok : recivedTwoks) {
-            Log.d("SIUM", recivedTwok.getText());
-        }
-        this.recivedTwoks = recivedTwoks;
+        this.buffer = buffer;
         this.listener = listener;
+    }
+
+    public void resetTwokBuffer(RecivedTwoksBuffer buffer) {
+        this.buffer = buffer;
     }
 
     @NonNull
@@ -38,13 +37,13 @@ public class WallAdapter extends RecyclerView.Adapter<WallViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull WallViewHolder holder, int position) {
-        RecivedTwok recivedTwokToShow = recivedTwoks.getByPosition(position);
+        RecivedTwok recivedTwokToShow = buffer.getByPosition(position);
         holder.updateContent(recivedTwokToShow, listener);
     }
 
     @Override
     public int getItemCount() {
-        return recivedTwoks.getlength();
+        return buffer.getlength();
     }
 }
 

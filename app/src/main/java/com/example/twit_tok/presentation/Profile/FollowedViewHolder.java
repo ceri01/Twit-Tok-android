@@ -8,8 +8,8 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twit_tok.R;
-import com.example.twit_tok.domain.model.User;
 import com.example.twit_tok.common.Converters;
+import com.example.twit_tok.domain.model.User;
 
 import org.jetbrains.annotations.NotNull;
 

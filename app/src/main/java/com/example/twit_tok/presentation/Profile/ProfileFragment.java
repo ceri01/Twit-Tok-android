@@ -16,14 +16,12 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.twit_tok.App;
 import com.example.twit_tok.R;
+import com.example.twit_tok.common.Converters;
 import com.example.twit_tok.databinding.FragmentProfileBinding;
 import com.example.twit_tok.presentation.NoticeDialogPictureListener;
 import com.example.twit_tok.presentation.NoticeDialogTextListener;
-import com.example.twit_tok.common.Converters;
 import com.example.twit_tok.presentation.ProfileEventListener;
 
 import java.util.Objects;
@@ -35,10 +33,10 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class ProfileFragment extends Fragment implements NoticeDialogTextListener, NoticeDialogPictureListener, ProfileEventListener {
 
+    private final NoticeDialogTextListener listener = null;
     @Inject
     ProfileViewModel profileViewModel;
     private FragmentProfileBinding binding;
-    private final NoticeDialogTextListener listener = null;
 
     @Override
     public void onAttach(@NonNull Context context) {

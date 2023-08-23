@@ -11,7 +11,6 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.twit_tok.R;
 import com.example.twit_tok.common.TwoksUtils;
-import com.example.twit_tok.presentation.NewTwok.SetLocationDialogFragment;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
