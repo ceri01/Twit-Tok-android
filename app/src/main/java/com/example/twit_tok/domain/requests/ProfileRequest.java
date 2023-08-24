@@ -58,20 +58,4 @@ public class ProfileRequest {
     public int pversion() {
         return pversion;
     }
-
-    public void setUid(int uid) {
-        this.uid = uid;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setPicture(String picture) {
-        this.picture = picture;
-    }
-
-    public void setPversion(int pversion) {
-        this.pversion = pversion;
-    }
 }

@@ -1,7 +1,5 @@
 package com.example.twit_tok.domain.model;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
 import java.util.Iterator;
@@ -11,19 +9,19 @@ import java.util.Objects;
 
 import javax.inject.Inject;
 
-public class RecivedTwoksBuffer implements Iterable<RecivedTwok> {
-    private final List<RecivedTwok> recivedTwoks;
+public class TwokToShowBuffer implements Iterable<TwokToShow> {
+    private final List<TwokToShow> recivedTwoks;
 
     @Inject
-    public RecivedTwoksBuffer() {
+    public TwokToShowBuffer() {
         this.recivedTwoks = new LinkedList<>();
     }
 
-    public RecivedTwok getByPosition(int position) {
+    public TwokToShow getByPosition(int position) {
         return this.recivedTwoks.get(position);
     }
 
-    public void insert(RecivedTwok t) {
+    public void insert(TwokToShow t) {
         Objects.requireNonNull(t, "twok cannot be null");
         this.recivedTwoks.add(t);
     }
@@ -38,9 +36,9 @@ public class RecivedTwoksBuffer implements Iterable<RecivedTwok> {
 
     @NonNull
     @Override
-    public Iterator<RecivedTwok> iterator() {
-        return new Iterator<RecivedTwok>() {
-            final Iterator<RecivedTwok> i = recivedTwoks.iterator();
+    public Iterator<TwokToShow> iterator() {
+        return new Iterator<TwokToShow>() {
+            final Iterator<TwokToShow> i = recivedTwoks.iterator();
 
             @Override
             public boolean hasNext() {
@@ -48,7 +46,7 @@ public class RecivedTwoksBuffer implements Iterable<RecivedTwok> {
             }
 
             @Override
-            public RecivedTwok next() {
+            public TwokToShow next() {
                 return i.next();
             }
         };

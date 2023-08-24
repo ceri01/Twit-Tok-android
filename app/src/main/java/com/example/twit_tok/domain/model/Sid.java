@@ -6,6 +6,7 @@ import java.util.Objects;
 
 public final class Sid {
     private final String sid;
+    private String uid;
 
     public Sid(String sid) {
         Objects.requireNonNull(sid, "Sid cannot be null");
@@ -14,6 +15,14 @@ public final class Sid {
 
     public String sid() {
         return sid;
+    }
+
+    public String uid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     @NonNull

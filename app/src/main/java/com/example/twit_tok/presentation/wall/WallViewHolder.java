@@ -13,7 +13,8 @@ import com.example.twit_tok.R;
 import com.example.twit_tok.common.Colors;
 import com.example.twit_tok.common.Constants;
 import com.example.twit_tok.common.Converters;
-import com.example.twit_tok.domain.model.RecivedTwok;
+import com.example.twit_tok.domain.model.RawTwok;
+import com.example.twit_tok.domain.model.TwokToShow;
 import com.example.twit_tok.domain.model.User;
 import com.example.twit_tok.presentation.WallEventListener;
 import com.google.android.material.button.MaterialButton;
@@ -38,7 +39,7 @@ public class WallViewHolder extends RecyclerView.ViewHolder {
         this.followUnfollow = view.findViewById(R.id.twok_follow);
     }
 
-    public void updateContent(@NonNull RecivedTwok recivedTwokToShow, WallEventListener listener) {
+    public void updateContent(@NonNull TwokToShow recivedTwokToShow, WallEventListener listener) {
         if (!Objects.isNull(recivedTwokToShow.getUserPicture())) {
             userPicture.setImageBitmap(recivedTwokToShow.getUserPicture());
         }

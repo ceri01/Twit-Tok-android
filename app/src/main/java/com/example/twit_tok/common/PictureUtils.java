@@ -24,6 +24,10 @@ public class PictureUtils {
         return s.getBytes().length / 1000 < 100;
     }
 
+    public static boolean isValidPicture(String s) {
+        return !Objects.isNull(s) && isValidDimension(s) && isValidDimension(s);
+    }
+
     public static Bitmap getDefaultPicture() {
         Drawable image = ResourcesCompat.getDrawable(App.getInstance().getResources(), R.mipmap.ic_default_picture_round, null);
         return Bitmap.createBitmap(image.getIntrinsicWidth(), image.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);

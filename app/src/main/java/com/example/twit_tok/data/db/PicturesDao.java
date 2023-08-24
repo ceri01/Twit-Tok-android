@@ -9,6 +9,8 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import com.example.twit_tok.domain.model.Picture;
+import com.example.twit_tok.domain.model.User;
+import com.example.twit_tok.domain.requests.ProfileRequest;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -20,11 +22,11 @@ import java.util.concurrent.Executors;
 @Dao
 public interface PicturesDao {
     @Query("SELECT * FROM PictureEntity")
-    ListenableFuture<List<Picture>> getPictures();
+    ListenableFuture<List<ProfileRequest>> getPictures();
 
     @Query("SELECT * FROM PictureEntity WHERE uid == :uid")
-    ListenableFuture<Picture> getPictures(int uid);
+    ListenableFuture<ProfileRequest> getPictures(int uid);
 
-    @Query("INSERT INTO PictureEntity VALUES(:uid, :picture, :pversion)")
-    ListenableFuture<Void> addUserPicture(int uid, Bitmap picture, int pversion);
+    @Query("INSERT INTO PictureEntity VALUES(:uid, :name, :picture, :pversion)")
+    ListenableFuture<Void> addUserPicture(int uid, String name, Bitmap picture, int pversion);
 }

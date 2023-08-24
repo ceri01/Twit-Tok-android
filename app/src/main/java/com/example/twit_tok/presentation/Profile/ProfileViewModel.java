@@ -17,7 +17,6 @@ import com.example.twit_tok.domain.model.Sid;
 import com.example.twit_tok.domain.model.User;
 import com.example.twit_tok.domain.model.Users;
 import com.example.twit_tok.domain.requests.ProfileRequest;
-import com.example.twit_tok.domain.requests.SidRequest;
 import com.example.twit_tok.domain.requests.UpdateProfileNameRequest;
 import com.example.twit_tok.domain.requests.UpdateProfilePictureRequest;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -77,7 +76,7 @@ public class ProfileViewModel extends ViewModel {
         ListenableFuture<Sid> lfSid = TwokDatabase.getInstance(App.getInstance().getApplicationContext()).getSidDao().getSid();
         lfSid.addListener(() -> {
             try {
-                SidRequest sid = new SidRequest(lfSid.get().sid());
+                Sid sid = new Sid(lfSid.get().sid());
                 Call<ProfileRequest> followed = TwokApiInstance.getTwokApi().getProfile(sid);
                 followed.enqueue(new Callback<ProfileRequest>() {
                     @Override
@@ -106,7 +105,7 @@ public class ProfileViewModel extends ViewModel {
         ListenableFuture<Sid> lfSid = TwokDatabase.getInstance(App.getInstance().getApplicationContext()).getSidDao().getSid();
         lfSid.addListener(() -> {
             try {
-                SidRequest sid = new SidRequest(lfSid.get().sid());
+                Sid sid = new Sid(lfSid.get().sid());
                 Call<List<User>> followed = TwokApiInstance.getTwokApi().getFollowed(sid);
                 followed.enqueue(new Callback<List<User>>() {
                     @Override

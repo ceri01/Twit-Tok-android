@@ -1,7 +1,5 @@
 package com.example.twit_tok.domain.model;
 
-import android.graphics.Bitmap;
-
 import androidx.annotation.NonNull;
 
 import com.example.twit_tok.common.Colors;
@@ -9,11 +7,8 @@ import com.example.twit_tok.common.TwoksUtils;
 
 import java.util.Objects;
 
-public class RecivedTwok {
+public class RawTwok {
     private final int uid;
-    private final String userName;
-    private final Bitmap userPicture;
-    private final int pversion;
     private final String text;
     private boolean isFollowed = false;
     private String bgcol;
@@ -26,7 +21,7 @@ public class RecivedTwok {
     private Double lon = null;
 
 
-    public RecivedTwok(int uid, String userName, Bitmap userPicture, int pversion, boolean isFollowed, String text, String bgcol, String fontcol, int fontsize, int fonttype, int halign, int valign) {
+    public RawTwok(int uid, String text, String bgcol, String fontcol, int fontsize, int fonttype, int halign, int valign) {
         Objects.requireNonNull(text, "text cannot be null");
         Objects.requireNonNull(fontcol, "fontcol cannot be null");
         Objects.requireNonNull(bgcol, "bgcol cannot be null");
@@ -36,16 +31,12 @@ public class RecivedTwok {
         if (TwoksUtils.isValidParameter(fonttype)) this.fonttype = fonttype;
         if (TwoksUtils.isValidParameter(valign)) this.valign = valign;
         if (TwoksUtils.isValidParameter(halign)) this.halign = halign;
-        this.pversion = pversion;
-        this.userPicture = userPicture;
-        this.userName = userName;
         this.text = text;
         this.uid = uid;
-        this.isFollowed = isFollowed;
     }
 
-    public RecivedTwok(int uid, String userName, Bitmap userPicture, int pversion, boolean isFollowed, String text, String bgcol, String fontcol, int fontsize, int fonttype, int halign, int valign, Double lat, Double lon) {
-        this(uid, userName, userPicture, pversion, isFollowed, text, bgcol, fontcol, fontsize, fonttype, halign, valign);
+    public RawTwok(int uid, String text, String bgcol, String fontcol, int fontsize, int fonttype, int halign, int valign, Double lat, Double lon) {
+        this(uid, text, bgcol, fontcol, fontsize, fonttype, halign, valign);
         if (TwoksUtils.isValidCoord(lat, lon)) {
             this.lat = lat;
             this.lon = lon;
@@ -98,24 +89,12 @@ public class RecivedTwok {
         return lon;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public Bitmap getUserPicture() {
-        return userPicture;
-    }
-
     public boolean getIsFollowed() {
         return isFollowed;
     }
 
     public void setFollowed(boolean followed) {
         isFollowed = followed;
-    }
-
-    public int getPversion() {
-        return pversion;
     }
 
     @NonNull

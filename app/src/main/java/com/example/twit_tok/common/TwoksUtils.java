@@ -1,7 +1,6 @@
 package com.example.twit_tok.common;
 
-import com.example.twit_tok.domain.model.RecivedTwok;
-import com.google.android.gms.common.util.Strings;
+import com.example.twit_tok.domain.model.RawTwok;
 
 import java.util.Objects;
 
@@ -14,7 +13,7 @@ public class TwoksUtils {
         return (!Objects.isNull(lat) && !Objects.isNull(lon) && (lat >= -90 && lat <= 90) && (lon >= -180 && lon <= 180));
     }
 
-    public static boolean isValidTwok(RecivedTwok twok) {
+    public static boolean isValidTwok(RawTwok twok) {
         return  !Objects.isNull(twok) &&
                 !twok.getText().isBlank() &&
                 isValidParameter(twok.getFontsize()) &&

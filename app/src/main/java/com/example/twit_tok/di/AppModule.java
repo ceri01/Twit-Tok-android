@@ -2,7 +2,7 @@ package com.example.twit_tok.di;
 
 import com.example.twit_tok.domain.model.NewTwok;
 import com.example.twit_tok.domain.model.Profile;
-import com.example.twit_tok.domain.model.RecivedTwoksBuffer;
+import com.example.twit_tok.domain.model.TwokToShowBuffer;
 import com.example.twit_tok.domain.model.Users;
 
 import javax.inject.Singleton;
@@ -35,7 +35,7 @@ public class AppModule {
 
     @Provides
     @Singleton
-    public RecivedTwoksBuffer provideTwokBuffer() {
-        return new RecivedTwoksBuffer();
+    public TwokToShowBuffer provideTwokBuffer() {
+        return new TwokToShowBuffer();
     }
 }

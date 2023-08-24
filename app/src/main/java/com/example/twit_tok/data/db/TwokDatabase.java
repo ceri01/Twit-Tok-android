@@ -13,8 +13,8 @@ import com.example.twit_tok.data.api.TwokApiInstance;
 import com.example.twit_tok.domain.entity.PictureEntity;
 import com.example.twit_tok.domain.entity.ProfileEntity;
 import com.example.twit_tok.domain.entity.SidEntity;
+import com.example.twit_tok.domain.model.Sid;
 import com.example.twit_tok.domain.requests.ProfileRequest;
-import com.example.twit_tok.domain.requests.SidRequest;
 import com.example.twit_tok.common.Converters;
 
 import java.util.Objects;
@@ -44,17 +44,17 @@ public abstract class TwokDatabase extends RoomDatabase {
                     @Override
                     public void onCreate(@NonNull SupportSQLiteDatabase db) {
                         super.onCreate(db);
-                        Call<SidRequest> init = TwokApiInstance.getTwokApi().getSid();
-                        init.enqueue(new retrofit2.Callback<SidRequest>() {
+                        Call<Sid> init = TwokApiInstance.getTwokApi().getSid();
+                        init.enqueue(new retrofit2.Callback<Sid>() {
                             @Override
-                            public void onResponse(@NonNull Call<SidRequest> call, @NonNull Response<SidRequest> sidResponse) {
+                            public void onResponse(@NonNull Call<Sid> call, @NonNull Response<Sid> sidResponse) {
                                 Call<ProfileRequest> profile = TwokApiInstance.getTwokApi().getProfile(sidResponse.body());
                                 profile.enqueue(new retrofit2.Callback<ProfileRequest>() {
                                     @Override
                                     public void onResponse(@NonNull Call<ProfileRequest> call, @NonNull Response<ProfileRequest> response) {
                                         if (!Objects.isNull(response.body())) {
                                             ProfileRequest profileResponse = response.body();
-                                            String sid = sidResponse.body().getSid();
+                                            String sid = sidResponse.body().sid();
 
                                             String profileTrigger = "CREATE TRIGGER IF NOT EXISTS unique_profile " +
                                                     "BEFORE INSERT ON ProfileEntity FOR EACH ROW " +
@@ -88,7 +88,7 @@ public abstract class TwokDatabase extends RoomDatabase {
                             }
 
                             @Override
-                            public void onFailure(@NonNull Call<SidRequest> call, @NonNull Throwable t) {
+                            public void onFailure(@NonNull Call<Sid> call, @NonNull Throwable t) {
                                 t.printStackTrace();
                             }
                         });

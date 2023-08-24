@@ -9,22 +9,23 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twit_tok.R;
-import com.example.twit_tok.domain.model.RecivedTwok;
-import com.example.twit_tok.domain.model.RecivedTwoksBuffer;
+import com.example.twit_tok.domain.model.RawTwok;
+import com.example.twit_tok.domain.model.TwokToShow;
+import com.example.twit_tok.domain.model.TwokToShowBuffer;
 import com.example.twit_tok.presentation.WallEventListener;
 
 public class WallAdapter extends RecyclerView.Adapter<WallViewHolder> {
     private final LayoutInflater inflater;
     private final WallEventListener listener;
-    private RecivedTwoksBuffer buffer;
+    private TwokToShowBuffer buffer;
 
-    public WallAdapter(Context context, RecivedTwoksBuffer buffer, WallEventListener listener) {
+    public WallAdapter(Context context, TwokToShowBuffer buffer, WallEventListener listener) {
         inflater = LayoutInflater.from(context);
         this.buffer = buffer;
         this.listener = listener;
     }
 
-    public void resetTwokBuffer(RecivedTwoksBuffer buffer) {
+    public void resetTwokBuffer(TwokToShowBuffer buffer) {
         this.buffer = buffer;
     }
 
@@ -37,7 +38,7 @@ public class WallAdapter extends RecyclerView.Adapter<WallViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull WallViewHolder holder, int position) {
-        RecivedTwok recivedTwokToShow = buffer.getByPosition(position);
+        TwokToShow recivedTwokToShow = buffer.getByPosition(position);
         holder.updateContent(recivedTwokToShow, listener);
     }
 

@@ -8,16 +8,22 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.twit_tok.App;
 import com.example.twit_tok.common.Constants;
+import com.example.twit_tok.common.Converters;
+import com.example.twit_tok.common.PictureUtils;
 import com.example.twit_tok.common.TwoksUtils;
 import com.example.twit_tok.data.api.TwokApiInstance;
 import com.example.twit_tok.data.db.TwokDatabase;
-import com.example.twit_tok.domain.model.RecivedTwok;
-import com.example.twit_tok.domain.model.RecivedTwoksBuffer;
+import com.example.twit_tok.data.repository.TwokRepository;
+import com.example.twit_tok.data.repository.TwokRepositoryImpl;
+import com.example.twit_tok.domain.model.IsFollowed;
+import com.example.twit_tok.domain.model.RawTwok;
+import com.example.twit_tok.domain.model.TwokToShow;
+import com.example.twit_tok.domain.model.TwokToShowBuffer;
 import com.example.twit_tok.domain.model.Sid;
 import com.example.twit_tok.domain.model.User;
 import com.example.twit_tok.domain.model.Users;
 import com.example.twit_tok.domain.requests.BasicDataRequest;
-import com.example.twit_tok.domain.requests.SidRequest;
+import com.example.twit_tok.domain.requests.ProfileRequest;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import java.util.Objects;
@@ -32,10 +38,11 @@ import retrofit2.Response;
 public class WallViewModel extends ViewModel {
     private final Users users;
     private final MutableLiveData<Integer> lastElementInserted;
-    private final RecivedTwoksBuffer buffer;
+    private final TwokToShowBuffer buffer;
+    private final TwokRepositoryImpl twokRepository = new TwokRepositoryImpl();
 
     @Inject
-    public WallViewModel(Users users, RecivedTwoksBuffer buffer) {
+    public WallViewModel(Users users, TwokToShowBuffer buffer) {
         this.users = users;
         this.buffer = buffer;
         this.lastElementInserted = new MutableLiveData<>(buffer.getlength());
@@ -58,8 +65,8 @@ public class WallViewModel extends ViewModel {
         ListenableFuture<Sid> listenableFutureSid = TwokDatabase.getInstance(App.getInstance().getApplicationContext()).getSidDao().getSid();
         listenableFutureSid.addListener(() -> {
             try {
-                SidRequest sid = new SidRequest(listenableFutureSid.get().sid());
-                BasicDataRequest bdr = new BasicDataRequest(sid.getSid(), String.valueOf(uid));
+                Sid sid = new Sid(listenableFutureSid.get().sid());
+                BasicDataRequest bdr = new BasicDataRequest(sid.sid(), String.valueOf(uid));
                 operation.apply(bdr).execute();
             } catch (Exception e) {
                 // TODO: Gestisci errore in caso faili la richiesta di rete
@@ -71,25 +78,82 @@ public class WallViewModel extends ViewModel {
         ListenableFuture<Sid> listenableFutureSid = TwokDatabase.getInstance(App.getInstance().getApplicationContext()).getSidDao().getSid();
         listenableFutureSid.addListener(() -> {
             try {
-                SidRequest sid = new SidRequest(listenableFutureSid.get().sid());
-                Call<RecivedTwok> twok = TwokApiInstance.getTwokApi().getRandomTwok(sid);
-                twok.enqueue(new Callback<RecivedTwok>() {
+                Sid sid = new Sid(listenableFutureSid.get().sid());
+                twokRepository.fetchRandomTwok(sid, new Callback<RawTwok>() {
                     @Override
-                    public void onResponse(@NonNull Call<RecivedTwok> call, @NonNull Response<RecivedTwok> response) {
-                        if (!Objects.isNull(response)) {
-                            RecivedTwok data = response.body();
-                            Log.d("retrieveNewTwoks", "? " + data.toString());
-                            if (TwoksUtils.isValidTwok(data)) {
-                                Log.d("retrieveNewTwoks", "VALIDO " + data.toString());
-                                buffer.insert(response.body());
-                                lastElementInserted.setValue(buffer.getlength());
-                            }
+                    public void onResponse(@NonNull Call<RawTwok> call, @NonNull Response<RawTwok> response) {
+                        RawTwok rawTwok = response.body();
+                        if (TwoksUtils.isValidTwok(rawTwok)) {
+                            BasicDataRequest bdr = new BasicDataRequest(sid.sid(), "" + Objects.requireNonNull(rawTwok).getUid());
+                            twokRepository.fetchLocalUserData(rawTwok.getUid(), new Callback<ProfileRequest>() {
+                                @Override
+                                public void onResponse(@NonNull Call<ProfileRequest> call, @NonNull Response<ProfileRequest> response) {
+                                    final User[] user = new User[1];
+                                    final TwokToShow[] twok = new TwokToShow[1];
+                                    if (!Objects.isNull(response.body())) {
+                                        user[0] = new User(Objects.requireNonNull(response.body()).uid(), response.body().name(), response.body().picture(), response.body().pversion(), false);
+                                        twokRepository.isFollowed(bdr, new Callback<IsFollowed>() {
+                                            @Override
+                                            public void onResponse(@NonNull Call<IsFollowed> call, @NonNull Response<IsFollowed> response) {
+                                                boolean isFollowed = Objects.requireNonNull(response.body()).isFollowed();
+                                                twok[0] = new TwokToShow(rawTwok, user[0].name(), Converters.fromBase64ToBitmap(user[0].picture()), user[0].pversion(), isFollowed);
+                                                buffer.insert(twok[0]);
+                                                lastElementInserted.setValue(buffer.getlength());
+                                            }
+
+                                            @Override
+                                            public void onFailure(@NonNull Call<IsFollowed> call, @NonNull Throwable t) {
+                                                Log.d("retrieveNewTwoks", "Risposta negativa isFollowed");
+                                                // TODO: Gestisci errore in caso faili la richiesta di rete
+                                            }
+                                        });
+                                    } else {
+                                        twokRepository.fetchRemoteUserData(bdr, new Callback<ProfileRequest>() {
+                                            @Override
+                                            public void onResponse(@NonNull Call<ProfileRequest> call, @NonNull Response<ProfileRequest> response) {
+                                                user[0] = new User(Objects.requireNonNull(response.body()).uid(), response.body().name(), response.body().picture(), response.body().pversion(), false);
+                                                twokRepository.isFollowed(bdr, new Callback<IsFollowed>() {
+                                                    @Override
+                                                    public void onResponse(@NonNull Call<IsFollowed> call, @NonNull Response<IsFollowed> response) {
+                                                        boolean isFollowed = Objects.requireNonNull(response.body()).isFollowed();
+                                                        if (PictureUtils.isValidPicture(user[0].picture())) {
+                                                            twok[0] = new TwokToShow(rawTwok, user[0].name(), Converters.fromBase64ToBitmap(user[0].picture()), user[0].pversion(), isFollowed);
+                                                        } else {
+                                                            twok[0] = new TwokToShow(rawTwok, user[0].name(), null, user[0].pversion(), isFollowed);
+                                                        }
+                                                        buffer.insert(twok[0]);
+                                                        lastElementInserted.setValue(buffer.getlength());
+                                                    }
+
+                                                    @Override
+                                                    public void onFailure(@NonNull Call<IsFollowed> call, @NonNull Throwable t) {
+                                                        Log.d("retrieveNewTwoks", "Risposta negativa isFollowed");
+                                                        // TODO: Gestisci errore in caso faili la richiesta di rete
+                                                    }
+                                                });
+                                            }
+
+                                            @Override
+                                            public void onFailure(@NonNull Call<ProfileRequest> call, @NonNull Throwable t) {
+                                                Log.d("retrieveNewTwoks", "Risposta negativa remoteUser");
+                                                // TODO: Gestisci errore in caso faili la richiesta di rete
+                                            }
+                                        });
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(@NonNull Call<ProfileRequest> call, @NonNull Throwable t) {
+                                    Log.d("retrieveNewTwoks", "Risposta negativa localUser");
+                                    // TODO: Gestisci errore in caso faili la richiesta di rete
+                                }
+                            });
                         }
                     }
 
                     @Override
-                    public void onFailure(@NonNull Call<RecivedTwok> call, @NonNull Throwable t) {
-                        Log.d("retrieveNewTwoks", "Risposta negativa");
+                    public void onFailure(@NonNull Call<RawTwok> call, @NonNull Throwable t) {
+                        Log.d("retrieveNewTwoks", "Risposta negativa rawtwok");
                         t.printStackTrace();
                         // TODO: Gestisci errore in caso faili la richiesta di rete
                     }
@@ -111,7 +175,7 @@ public class WallViewModel extends ViewModel {
         return lastElementInserted;
     }
 
-    public RecivedTwoksBuffer getBuffer() {
+    public TwokToShowBuffer getBuffer() {
         return buffer;
     }
 

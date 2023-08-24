@@ -11,6 +11,9 @@ public class PictureEntity {
     @PrimaryKey
     public int uid;
 
+    @ColumnInfo(name = "name")
+    public String name;
+
     @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
     public Bitmap picture;
 

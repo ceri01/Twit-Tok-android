@@ -1,13 +1,13 @@
 package com.example.twit_tok.data.api;
 
 import com.example.twit_tok.domain.model.IsFollowed;
+import com.example.twit_tok.domain.model.Sid;
 import com.example.twit_tok.domain.model.User;
-import com.example.twit_tok.domain.model.RecivedTwok;
+import com.example.twit_tok.domain.model.RawTwok;
 import com.example.twit_tok.domain.requests.BasicDebugRequest;
 import com.example.twit_tok.domain.requests.BasicDataRequest;
 import com.example.twit_tok.domain.requests.ProfileRequest;
 import com.example.twit_tok.domain.requests.UpdateProfileNameRequest;
-import com.example.twit_tok.domain.requests.SidRequest;
 import com.example.twit_tok.domain.requests.UpdateProfilePictureRequest;
 import com.example.twit_tok.domain.requests.AddTwokRequest;
 
@@ -19,10 +19,10 @@ import retrofit2.http.POST;
 
 public interface TwokApi {
     @POST("register")
-    Call<SidRequest> getSid();
+    Call<Sid> getSid();
 
     @POST("getProfile")
-    Call<ProfileRequest> getProfile(@Body SidRequest sid);
+    Call<ProfileRequest> getProfile(@Body Sid sid);
 
     @POST("setProfile")
     Call<Void> setProfileName(@Body UpdateProfileNameRequest profile);
@@ -31,19 +31,19 @@ public interface TwokApi {
     Call<Void> setProfilePicture(@Body UpdateProfilePictureRequest profile);
 
     @POST("getTwok")
-    Call<RecivedTwok> getTwokWithUid(@Body BasicDebugRequest data);
+    Call<RawTwok> getTwokWithUid(@Body BasicDebugRequest data);
 
     @POST("getTwok")
-    Call<RecivedTwok> getTwokWithUid(@Body BasicDataRequest data);
+    Call<RawTwok> getTwokWithUid(@Body BasicDataRequest data);
 
     @POST("getTwok")
-    Call<RecivedTwok> getRandomTwok(@Body SidRequest sid);
+    Call<RawTwok> getRandomTwok(@Body Sid sid);
 
     @POST("addTwok")
     Call<Void> addTwok(@Body AddTwokRequest twok);
 
     @POST("getPicture")
-    Call<User> getPicture(@Body BasicDataRequest data);
+    Call<ProfileRequest> getUserData(@Body BasicDataRequest data);
 
     @POST("follow")
     Call<Void> follow(@Body BasicDataRequest data);
@@ -52,7 +52,7 @@ public interface TwokApi {
     Call<Void> unfollow(@Body BasicDataRequest data);
 
     @POST("getFollowed")
-    Call<List<User>> getFollowed(@Body SidRequest sid);
+    Call<List<User>> getFollowed(@Body Sid sid);
 
     @POST("isFollowed")
     Call<IsFollowed> isFollowed(@Body BasicDataRequest data);
