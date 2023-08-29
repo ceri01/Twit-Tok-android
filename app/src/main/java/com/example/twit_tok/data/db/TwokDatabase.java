@@ -27,8 +27,6 @@ import retrofit2.Response;
 @TypeConverters(Converters.class)
 public abstract class TwokDatabase extends RoomDatabase {
 
-
-    private static final String DB_NAME = "twit-twok.db";
     private static volatile TwokDatabase instance;
 
     public static synchronized TwokDatabase getInstance(Context context) {
@@ -45,23 +43,23 @@ public abstract class TwokDatabase extends RoomDatabase {
                     public void onCreate(@NonNull SupportSQLiteDatabase db) {
                         super.onCreate(db);
                         Call<Sid> init = TwokApiInstance.getTwokApi().getSid();
-                        init.enqueue(new retrofit2.Callback<Sid>() {
+                        init.enqueue(new retrofit2.Callback<>() {
                             @Override
                             public void onResponse(@NonNull Call<Sid> call, @NonNull Response<Sid> sidResponse) {
                                 Call<ProfileRequest> profile = TwokApiInstance.getTwokApi().getProfile(sidResponse.body());
-                                profile.enqueue(new retrofit2.Callback<ProfileRequest>() {
+                                profile.enqueue(new retrofit2.Callback<>() {
                                     @Override
                                     public void onResponse(@NonNull Call<ProfileRequest> call, @NonNull Response<ProfileRequest> response) {
                                         if (!Objects.isNull(response.body())) {
                                             ProfileRequest profileResponse = response.body();
-                                            String sid = sidResponse.body().sid();
+                                            String sid = Objects.requireNonNull(sidResponse.body()).sid();
 
                                             String profileTrigger = "CREATE TRIGGER IF NOT EXISTS unique_profile " +
                                                     "BEFORE INSERT ON ProfileEntity FOR EACH ROW " +
                                                     "BEGIN " +
                                                     "SELECT RAISE(ABORT, \"User already exists\") " +
                                                     "FROM ProfileEntity " +
-                                                    "WHERE uid != " + profileResponse.uid() +
+                                                    "WHERE uid != " + Objects.requireNonNull(profileResponse).uid() +
                                                     "; END;";
 
                                             String sidTrigger = "CREATE TRIGGER IF NOT EXISTS unique_sid " +
