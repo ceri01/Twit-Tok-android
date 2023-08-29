@@ -2,8 +2,6 @@ package com.example.twit_tok.common;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 
 import androidx.room.TypeConverter;
 
@@ -23,10 +21,6 @@ public class Converters {
         return BitmapFactory.decodeByteArray(image, 0, image.length);
     }
 
-    public static String fromByteToBase64(byte[] bytes) {
-        return Base64.getEncoder().encodeToString(bytes);
-    }
-
     public static byte[] fromBase64ToByte(String str) {
         return Base64.getDecoder().decode(str.replace("\n", ""));
     }
@@ -38,14 +32,5 @@ public class Converters {
     public static Bitmap fromBase64ToBitmap(String picture) {
         byte[] byteImage = Converters.fromBase64ToByte(picture);
         return BitmapFactory.decodeByteArray(byteImage, 0, byteImage.length);
-    }
-
-    public static Bitmap fromDrawableToBitmap(Drawable drawable) {
-        if (drawable instanceof BitmapDrawable bitmapDrawable) {
-            if (bitmapDrawable.getBitmap() != null) {
-                return bitmapDrawable.getBitmap();
-            }
-        }
-        return null;
     }
 }

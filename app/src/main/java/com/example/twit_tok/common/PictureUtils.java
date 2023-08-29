@@ -1,13 +1,5 @@
 package com.example.twit_tok.common;
 
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
-
-import androidx.core.content.res.ResourcesCompat;
-
-import com.example.twit_tok.App;
-import com.example.twit_tok.R;
-
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -27,10 +19,5 @@ public class PictureUtils {
 
     public static boolean isValidPicture(String s) {
         return !Objects.isNull(s) && isValidFormat(s) && isValidDimension(s);
-    }
-
-    public static Bitmap getDefaultPicture() {
-        Drawable image = ResourcesCompat.getDrawable(App.getInstance().getResources(), R.mipmap.ic_default_picture_round, null);
-        return Bitmap.createBitmap(image.getIntrinsicWidth(), image.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
     }
 }
