@@ -28,7 +28,7 @@ public class TwokRepositoryImpl implements TwokRepository {
 
     @Override
     public void isFollowed(BasicDataRequest bdr, Callback<IsFollowed> callback) {
-        remoteDataSource.fetchisFollowed(bdr, callback);
+        remoteDataSource.fetchIsFollowed(bdr, callback);
     }
 
     @Override
