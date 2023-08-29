@@ -34,7 +34,7 @@ public interface TwokApi {
     Call<RawTwok> getTwokWithUid(@Body BasicDebugRequest data);
 
     @POST("getTwok")
-    Call<RawTwok> getTwokWithUid(@Body BasicDataRequest data);
+    Call<RawTwok> getTwokWithTid(@Body BasicDataRequest data);
 
     @POST("getTwok")
     Call<RawTwok> getRandomTwok(@Body Sid sid);
