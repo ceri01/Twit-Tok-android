@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/userPicture"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="95dp"
+        android:layout_height="105dp"
         android:contentDescription="@string/picture"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/userName"
@@ -18,8 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5"
-        app:tint="@color/gray"
-        tools:srcCompat="@drawable/edit_picture" />
+        android:src="@mipmap/ic_default_picture_round"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/followUnfollow"
