@@ -37,7 +37,7 @@ public class TwokToShowBuffer implements Iterable<TwokToShow> {
     @NonNull
     @Override
     public Iterator<TwokToShow> iterator() {
-        return new Iterator<TwokToShow>() {
+        return new Iterator<>() {
             final Iterator<TwokToShow> i = recivedTwoks.iterator();
 
             @Override

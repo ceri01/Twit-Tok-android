@@ -28,8 +28,10 @@ public final class Sid {
     @NonNull
     @Override
     public String toString() {
-        return "Sid[" +
-                "sid=" + sid + ']';
+        //noinspection StringBufferReplaceableByString
+        StringBuilder sb = new StringBuilder("Sid{sid='");
+        sb.append(sid);
+        return sb.toString();
     }
 
 }

@@ -58,8 +58,4 @@ public final class User {
     public int pversion() {
         return pversion;
     }
-
-    public boolean isFollowed() {
-        return isFollowed;
-    }
 }

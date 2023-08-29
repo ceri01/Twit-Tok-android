@@ -5,6 +5,7 @@ import com.example.twit_tok.common.Constants;
 
 import javax.inject.Inject;
 
+/** @noinspection unused*/
 public class NewTwok {
     private String text;
     private String bgcol;
@@ -85,16 +86,8 @@ public class NewTwok {
         this.valign = valign;
     }
 
-    public Double getLat() {
-        return lat;
-    }
-
     public void setLat(Double lat) {
         this.lat = lat;
-    }
-
-    public Double getLon() {
-        return lon;
     }
 
     public void setLon(Double lon) {

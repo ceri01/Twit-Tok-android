@@ -53,17 +53,6 @@ public class Profile {
         }
     }
 
-    @NonNull
-    @Override
-    public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", picture='" + picture + '\'' +
-                ", uid=" + uid +
-                ", pversion=" + pversion +
-                '}';
-    }
-
     public int uid() {
         return uid;
     }
@@ -80,5 +69,20 @@ public class Profile {
         return pversion;
     }
 
-
+    @NonNull
+    @Override
+    public String toString() {
+        //noinspection StringBufferReplaceableByString
+        StringBuilder sb = new StringBuilder("User{uid='");
+        sb.append(uid)
+                .append("', pversion='")
+                .append(pversion)
+                .append("', name='")
+                .append(name)
+                .append("', picture='")
+                .append(picture)
+                .append("', picture='")
+                .append(picture);
+        return sb.toString();
+    }
 }

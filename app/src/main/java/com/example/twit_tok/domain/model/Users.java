@@ -19,13 +19,6 @@ public class Users implements Iterable<User> {
         this.user = new LinkedHashMap<>();
     }
 
-    public Users(Users users) {
-        this.user = new LinkedHashMap<>();
-        for (User u : users) {
-            this.user.put(u.uid(), new User(u));
-        }
-    }
-
     public void insert(User t) {
         Objects.requireNonNull(t, "twok cannot be null");
         this.user.put(t.uid(), t);
@@ -41,18 +34,14 @@ public class Users implements Iterable<User> {
     }
 
     public User getByPosition(int position) {
-        List<User> tmp = new ArrayList<User>(this.user.values());
+        List<User> tmp = new ArrayList<>(this.user.values());
         return tmp.get(position);
-    }
-
-    public void reset() {
-        this.user.clear();
     }
 
     @NonNull
     @Override
     public Iterator<User> iterator() {
-        return new Iterator<User>() {
+        return new Iterator<>() {
             final Iterator<User> i = user.values().iterator();
 
             @Override

@@ -109,31 +109,29 @@ public class RawTwok {
     @NonNull
     @Override
     public String toString() {
-        return "Twok{" +
-                "text='" +
-                text +
-                '\'' +
-                ", uid='" +
-                uid +
-                '\'' +
-                ", bgcol='" +
-                bgcol +
-                '\'' +
-                ", fontcol='" +
-                fontcol +
-                '\'' +
-                ", fontsize=" +
-                fontsize +
-                ", fonttype=" +
-                fonttype +
-                ", halign=" +
-                halign +
-                ", valign=" +
-                valign +
-                ", lat=" +
-                lat +
-                ", lon=" +
-                lon +
-                '}';
+        //noinspection StringBufferReplaceableByString
+        StringBuilder sb = new StringBuilder("Twok{uid='");
+        sb.append(uid)
+                .append("', pversion='")
+                .append(pversion)
+                .append("', text='")
+                .append(text)
+                .append("', bgcol='")
+                .append(bgcol)
+                .append("', fontcol='")
+                .append(fontcol)
+                .append("', fontsize='")
+                .append(fontsize)
+                .append("', fonttype='")
+                .append(fonttype)
+                .append("', halign='")
+                .append(halign)
+                .append("', valign='")
+                .append(valign)
+                .append("', lat='")
+                .append(lat)
+                .append("', lon='")
+                .append(lon);
+        return sb.toString();
     }
 }
