@@ -5,10 +5,12 @@ import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import org.jetbrains.annotations.NotNull;
+
 @Entity(indices = @Index(value = {"uid"}, unique = true))
 public class SidEntity {
     @PrimaryKey
-    public String sid;
+    public @NotNull String sid;
 
     @ColumnInfo(name = "uid")
     public int uid;
