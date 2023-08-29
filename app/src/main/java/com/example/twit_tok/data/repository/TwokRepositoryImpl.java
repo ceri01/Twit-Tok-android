@@ -7,7 +7,10 @@ import com.example.twit_tok.domain.model.RawTwok;
 import com.example.twit_tok.domain.model.Sid;
 import com.example.twit_tok.domain.model.User;
 import com.example.twit_tok.domain.requests.BasicDataRequest;
+import com.example.twit_tok.domain.requests.DBProfileRequest;
 import com.example.twit_tok.domain.requests.ProfileRequest;
+
+import java.util.List;
 
 import retrofit2.Callback;
 
@@ -41,7 +44,7 @@ public class TwokRepositoryImpl implements TwokRepository {
     }
 
     @Override
-    public void fetchLocalUserData(int uid, Callback<ProfileRequest> callback) {
-        localDataSource.fetchLocalUserData(uid, callback);
+    public void fetchUserPicturesLocally(int uid, Callback<DBProfileRequest> callback) {
+        localDataSource.fetchUserPicturesLocally(uid, callback);
     }
 }

@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -20,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.twit_tok.R;
 import com.example.twit_tok.common.Converters;
 import com.example.twit_tok.databinding.FragmentProfileBinding;
+import com.example.twit_tok.di.FollowedAdapterFactory;
 import com.example.twit_tok.presentation.NoticeDialogPictureListener;
 import com.example.twit_tok.presentation.NoticeDialogTextListener;
 import com.example.twit_tok.presentation.ProfileEventListener;
@@ -33,14 +35,23 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class ProfileFragment extends Fragment implements NoticeDialogTextListener, NoticeDialogPictureListener, ProfileEventListener {
 
-    private final NoticeDialogTextListener listener = null;
     @Inject
     ProfileViewModel profileViewModel;
+    @Inject
+    FollowedAdapterFactory followedAdapterFactory;
+    private FollowedAdapter fa;
     private FragmentProfileBinding binding;
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        profileViewModel.retriveProfileData();
+        profileViewModel.retriveFollowedData();
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -50,13 +61,16 @@ public class ProfileFragment extends Fragment implements NoticeDialogTextListene
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        FollowedAdapter fa = new FollowedAdapter(requireContext(), profileViewModel.getUsers());
-
         Button editNameButton = root.findViewById(R.id.edit_name);
         Button editPictureButton = root.findViewById(R.id.edit_picture);
 
         TextView nameView = root.findViewById(R.id.name);
         ImageView pictureView = root.findViewById(R.id.picture);
+
+        RecyclerView rc = binding.followedList.findViewById(R.id.followed_list);
+        rc.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
+        fa = followedAdapterFactory.create(requireContext(), ProfileFragment.this);
+        rc.setAdapter(fa);
 
         profileViewModel.getProfileNameChanged().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
@@ -76,6 +90,13 @@ public class ProfileFragment extends Fragment implements NoticeDialogTextListene
             }
         });
 
+        profileViewModel.isReady().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer position) {
+                fa.notifyDataSetChanged();
+            }
+        });
+
         editNameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,10 +110,6 @@ public class ProfileFragment extends Fragment implements NoticeDialogTextListene
                 showChangePictureDialog();
             }
         });
-
-        RecyclerView rc = binding.followedList.findViewById(R.id.followed_list);
-        rc.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
-        rc.setAdapter(fa);
 
         return root;
     }
@@ -134,6 +151,6 @@ public class ProfileFragment extends Fragment implements NoticeDialogTextListene
 
     @Override
     public void onUnfollowButtonPressed(int uid) {
-        profileViewModel.unfollow(uid);
+        profileViewModel.unfollowUser(uid);
     }
 }

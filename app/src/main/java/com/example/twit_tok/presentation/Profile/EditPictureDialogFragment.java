@@ -62,7 +62,6 @@ public class EditPictureDialogFragment extends DialogFragment {
 
     private void selectImage(ImageView imageView) {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-        Log.d("IMG", "Sono dentro");
         activityResultLauncher.launch(intent);
     }
 

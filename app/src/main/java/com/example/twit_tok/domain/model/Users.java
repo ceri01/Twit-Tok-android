@@ -1,20 +1,15 @@
 package com.example.twit_tok.domain.model;
 
 import androidx.annotation.NonNull;
-import androidx.compose.ui.graphics.drawscope.Stroke;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 import javax.inject.Inject;
-
-import dagger.Module;
 
 public class Users implements Iterable<User> {
     private final Map<Integer, User> user;

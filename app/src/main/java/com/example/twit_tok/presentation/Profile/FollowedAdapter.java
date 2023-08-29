@@ -11,16 +11,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.twit_tok.R;
 import com.example.twit_tok.domain.model.User;
 import com.example.twit_tok.domain.model.Users;
+import com.example.twit_tok.presentation.ProfileEventListener;
 
 import javax.inject.Inject;
+
+import dagger.assisted.Assisted;
+import dagger.assisted.AssistedInject;
 
 public class FollowedAdapter extends RecyclerView.Adapter<FollowedViewHolder> {
     private final LayoutInflater inflater;
     private final Users users;
+    private final ProfileEventListener listener;
 
-    @Inject
-    public FollowedAdapter(Context context, Users users) {
+    @AssistedInject
+    public FollowedAdapter(Users users, @Assisted Context context, @Assisted ProfileEventListener listener) {
         this.inflater = LayoutInflater.from(context);
+        this.listener = listener;
         this.users = users;
     }
 
@@ -34,7 +40,7 @@ public class FollowedAdapter extends RecyclerView.Adapter<FollowedViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull FollowedViewHolder holder, int position) {
         User userToShow = users.getByPosition(position);
-        holder.updateContent(userToShow);
+        holder.updateContent(userToShow, listener);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.example.twit_tok.domain.model;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.example.twit_tok.common.Colors;
@@ -9,6 +11,7 @@ import java.util.Objects;
 
 public class RawTwok {
     private final int uid;
+    private final int pversion;
     private final String text;
     private boolean isFollowed = false;
     private String bgcol;
@@ -21,7 +24,8 @@ public class RawTwok {
     private Double lon = null;
 
 
-    public RawTwok(int uid, String text, String bgcol, String fontcol, int fontsize, int fonttype, int halign, int valign) {
+    public RawTwok(int uid, int pversion, String text, String bgcol, String fontcol, int fontsize, int fonttype, int halign, int valign) {
+        Log.d("SIUM1", ""+pversion);
         Objects.requireNonNull(text, "text cannot be null");
         Objects.requireNonNull(fontcol, "fontcol cannot be null");
         Objects.requireNonNull(bgcol, "bgcol cannot be null");
@@ -31,12 +35,13 @@ public class RawTwok {
         if (TwoksUtils.isValidParameter(fonttype)) this.fonttype = fonttype;
         if (TwoksUtils.isValidParameter(valign)) this.valign = valign;
         if (TwoksUtils.isValidParameter(halign)) this.halign = halign;
+        this.pversion = pversion;
         this.text = text;
         this.uid = uid;
     }
 
-    public RawTwok(int uid, String text, String bgcol, String fontcol, int fontsize, int fonttype, int halign, int valign, Double lat, Double lon) {
-        this(uid, text, bgcol, fontcol, fontsize, fonttype, halign, valign);
+    public RawTwok(int uid, int pversion, String text, String bgcol, String fontcol, int fontsize, int fonttype, int halign, int valign, Double lat, Double lon) {
+        this(uid, pversion, text, bgcol, fontcol, fontsize, fonttype, halign, valign);
         if (TwoksUtils.isValidCoord(lat, lon)) {
             this.lat = lat;
             this.lon = lon;
@@ -95,6 +100,10 @@ public class RawTwok {
 
     public void setFollowed(boolean followed) {
         isFollowed = followed;
+    }
+
+    public int getPversion() {
+        return this.pversion;
     }
 
     @NonNull

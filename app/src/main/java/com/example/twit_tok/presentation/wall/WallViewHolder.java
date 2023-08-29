@@ -1,6 +1,7 @@
 package com.example.twit_tok.presentation.wall;
 
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,12 +14,14 @@ import com.example.twit_tok.R;
 import com.example.twit_tok.common.Colors;
 import com.example.twit_tok.common.Constants;
 import com.example.twit_tok.common.Converters;
+import com.example.twit_tok.common.PictureUtils;
 import com.example.twit_tok.domain.model.RawTwok;
 import com.example.twit_tok.domain.model.TwokToShow;
 import com.example.twit_tok.domain.model.User;
 import com.example.twit_tok.presentation.WallEventListener;
 import com.google.android.material.button.MaterialButton;
 
+import java.util.Locale;
 import java.util.Objects;
 
 public class WallViewHolder extends RecyclerView.ViewHolder {
@@ -76,14 +79,26 @@ public class WallViewHolder extends RecyclerView.ViewHolder {
                     followUnfollow.setText(R.string.follow);
                     listener.onUnfollowButtonPressed(recivedTwokToShow.getUid());
                 } else {
-                    if (listener.onFollowButtonPressed(new User(
-                            recivedTwokToShow.getUid(),
-                            recivedTwokToShow.getUserName(),
-                            Converters.fromBitmapToBase64(recivedTwokToShow.getUserPicture()),
-                            recivedTwokToShow.getPversion(),
-                            recivedTwokToShow.getIsFollowed()))) {
-                        followUnfollow.setText(R.string.unfollow);
+                    User user;
+                    if (!Objects.isNull(recivedTwokToShow.getUserPicture())) {
+                        Log.d("PROBLEMA", "if");
+                        user = new User(
+                                recivedTwokToShow.getUid(),
+                                recivedTwokToShow.getUserName(),
+                                Converters.fromBitmapToBase64(recivedTwokToShow.getUserPicture()),
+                                recivedTwokToShow.getPversion(),
+                                recivedTwokToShow.getIsFollowed());
+                    } else {
+                        Log.d("PROBLEMA", "else");
+                        user = new User(
+                                recivedTwokToShow.getUid(),
+                                recivedTwokToShow.getUserName(),
+                                null,
+                                recivedTwokToShow.getPversion(),
+                                recivedTwokToShow.getIsFollowed());
                     }
+                    listener.onFollowButtonPressed(user);
+                    followUnfollow.setText(R.string.unfollow);
                 }
                 recivedTwokToShow.setFollowed(!recivedTwokToShow.getIsFollowed());
                 // probabilemnte qui ci sarà da aspettare prima di fare le righe sopra
