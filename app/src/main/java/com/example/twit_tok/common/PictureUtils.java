@@ -1,10 +1,7 @@
 package com.example.twit_tok.common;
 
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.service.autofill.FieldClassification;
-import android.util.Log;
 
 import androidx.core.content.res.ResourcesCompat;
 

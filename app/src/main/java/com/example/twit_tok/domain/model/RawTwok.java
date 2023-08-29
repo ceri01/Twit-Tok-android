@@ -25,7 +25,7 @@ public class RawTwok {
 
 
     public RawTwok(int uid, int pversion, String text, String bgcol, String fontcol, int fontsize, int fonttype, int halign, int valign) {
-        Log.d("SIUM1", ""+pversion);
+        Log.d("SIUM1", "" + pversion);
         Objects.requireNonNull(text, "text cannot be null");
         Objects.requireNonNull(fontcol, "fontcol cannot be null");
         Objects.requireNonNull(bgcol, "bgcol cannot be null");

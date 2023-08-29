@@ -1,17 +1,14 @@
 package com.example.twit_tok.domain.requests;
 
 import androidx.annotation.NonNull;
-import androidx.room.Ignore;
 
 import java.util.Objects;
 
-import javax.inject.Inject;
-
 public class ProfileRequest {
-    private int uid;
-    private String name;
-    private String picture;
-    private int pversion;
+    private final int uid;
+    private final String name;
+    private final String picture;
+    private final int pversion;
 
     public ProfileRequest(int uid, String name, String picture, int pversion) {
         Objects.requireNonNull(name, "Name cannot be null");

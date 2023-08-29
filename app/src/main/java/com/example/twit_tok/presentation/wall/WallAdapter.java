@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twit_tok.R;
-import com.example.twit_tok.domain.model.RawTwok;
 import com.example.twit_tok.domain.model.TwokToShow;
 import com.example.twit_tok.domain.model.TwokToShowBuffer;
 import com.example.twit_tok.presentation.WallEventListener;

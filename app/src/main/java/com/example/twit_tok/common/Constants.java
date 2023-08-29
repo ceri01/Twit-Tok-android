@@ -2,7 +2,6 @@ package com.example.twit_tok.common;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.util.Log;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;

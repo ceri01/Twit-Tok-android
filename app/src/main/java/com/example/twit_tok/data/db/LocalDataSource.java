@@ -13,8 +13,6 @@ import com.example.twit_tok.domain.requests.UpdateProfileNameRequest;
 import com.example.twit_tok.domain.requests.UpdateProfilePictureRequest;
 import com.google.common.util.concurrent.ListenableFuture;
 
-import java.util.Objects;
-
 import retrofit2.Callback;
 import retrofit2.Response;
 

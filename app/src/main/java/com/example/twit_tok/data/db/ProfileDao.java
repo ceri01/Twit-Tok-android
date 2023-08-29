@@ -5,8 +5,6 @@ import android.graphics.Bitmap;
 import androidx.room.Dao;
 import androidx.room.Query;
 
-import com.example.twit_tok.domain.model.Profile;
-import com.example.twit_tok.domain.model.User;
 import com.example.twit_tok.domain.requests.ProfileRequest;
 import com.google.common.util.concurrent.ListenableFuture;
 

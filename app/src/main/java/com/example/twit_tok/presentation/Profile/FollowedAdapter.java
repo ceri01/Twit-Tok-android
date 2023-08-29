@@ -13,8 +13,6 @@ import com.example.twit_tok.domain.model.User;
 import com.example.twit_tok.domain.model.Users;
 import com.example.twit_tok.presentation.ProfileEventListener;
 
-import javax.inject.Inject;
-
 import dagger.assisted.Assisted;
 import dagger.assisted.AssistedInject;
 

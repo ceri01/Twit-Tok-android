@@ -13,7 +13,7 @@ public class Colors {
     }
 
     public static String fromIntToHexString(int color) {
-        String s =String.format("%06X", (0xFFFFFF & color));
+        String s = String.format("%06X", (0xFFFFFF & color));
         System.out.println(s);
         return s;
     }

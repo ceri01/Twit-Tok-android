@@ -10,8 +10,6 @@ import com.example.twit_tok.domain.requests.BasicDataRequest;
 import com.example.twit_tok.domain.requests.DBProfileRequest;
 import com.example.twit_tok.domain.requests.ProfileRequest;
 
-import java.util.List;
-
 import retrofit2.Callback;
 
 public class TwokRepositoryImpl implements TwokRepository {

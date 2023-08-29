@@ -14,7 +14,7 @@ public class TwoksUtils {
     }
 
     public static boolean isValidTwok(RawTwok twok) {
-        return  !Objects.isNull(twok) &&
+        return !Objects.isNull(twok) &&
                 !twok.getText().isBlank() &&
                 isValidParameter(twok.getFontsize()) &&
                 isValidParameter(twok.getHalign()) &&
@@ -22,6 +22,6 @@ public class TwoksUtils {
                 isValidParameter(twok.getFonttype()) &&
                 Colors.isValid(twok.getFontcol()) &&
                 Colors.isValid(twok.getBgcol()) &&
-               ((Objects.isNull(twok.getLat()) && Objects.isNull(twok.getLon())) || isValidCoord(twok.getLat(), twok.getLon()));
+                ((Objects.isNull(twok.getLat()) && Objects.isNull(twok.getLon())) || isValidCoord(twok.getLat(), twok.getLon()));
     }
 }

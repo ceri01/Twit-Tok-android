@@ -1,7 +1,5 @@
 package com.example.twit_tok.presentation.wall;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -16,9 +14,9 @@ import com.example.twit_tok.data.db.TwokDatabase;
 import com.example.twit_tok.data.repository.TwokRepositoryImpl;
 import com.example.twit_tok.domain.model.IsFollowed;
 import com.example.twit_tok.domain.model.RawTwok;
+import com.example.twit_tok.domain.model.Sid;
 import com.example.twit_tok.domain.model.TwokToShow;
 import com.example.twit_tok.domain.model.TwokToShowBuffer;
-import com.example.twit_tok.domain.model.Sid;
 import com.example.twit_tok.domain.model.User;
 import com.example.twit_tok.domain.model.Users;
 import com.example.twit_tok.domain.requests.BasicDataRequest;

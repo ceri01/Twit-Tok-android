@@ -16,13 +16,22 @@ import retrofit2.Callback;
 
 public interface ProfileRepository {
     void fetchFollowedUsers(Sid sid, Callback<List<User>> callback);
+
     void fetchProfileData(Sid sid, Callback<ProfileRequest> callback);
+
     void fetchRemoteUserData(BasicDataRequest bdr, Callback<ProfileRequest> callback);
+
     void setProfileName(UpdateProfileNameRequest pnr, Callback<Void> callback);
+
     void setProfilePicture(UpdateProfilePictureRequest ppr, Callback<Void> callback);
+
     void unfollowUser(BasicDataRequest bdr, Callback<Void> callback);
+
     void fetchUserPicturesLocally(int uid, Callback<DBProfileRequest> callback);
+
     void saveUserDataLocally(User user);
+
     void setProfileNameLocally(Sid sid, int uid, String name, Callback<UpdateProfileNameRequest> callback);
+
     void setProfilePictureLocally(Sid sid, int uid, Bitmap bitmapPicture, String stringPicture, Callback<UpdateProfilePictureRequest> callback);
 }

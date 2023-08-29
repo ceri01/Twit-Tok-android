@@ -14,14 +14,11 @@ import com.example.twit_tok.R;
 import com.example.twit_tok.common.Colors;
 import com.example.twit_tok.common.Constants;
 import com.example.twit_tok.common.Converters;
-import com.example.twit_tok.common.PictureUtils;
-import com.example.twit_tok.domain.model.RawTwok;
 import com.example.twit_tok.domain.model.TwokToShow;
 import com.example.twit_tok.domain.model.User;
 import com.example.twit_tok.presentation.WallEventListener;
 import com.google.android.material.button.MaterialButton;
 
-import java.util.Locale;
 import java.util.Objects;
 
 public class WallViewHolder extends RecyclerView.ViewHolder {

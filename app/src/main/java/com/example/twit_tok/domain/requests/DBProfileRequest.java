@@ -7,10 +7,10 @@ import androidx.annotation.NonNull;
 import java.util.Objects;
 
 public class DBProfileRequest {
-    private int uid;
-    private String name;
-    private Bitmap picture;
-    private int pversion;
+    private final int uid;
+    private final String name;
+    private final Bitmap picture;
+    private final int pversion;
 
     public DBProfileRequest(int uid, String name, Bitmap picture, int pversion) {
         Objects.requireNonNull(name, "Name cannot be null");

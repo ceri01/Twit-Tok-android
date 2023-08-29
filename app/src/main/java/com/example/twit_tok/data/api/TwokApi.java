@@ -1,15 +1,15 @@
 package com.example.twit_tok.data.api;
 
 import com.example.twit_tok.domain.model.IsFollowed;
+import com.example.twit_tok.domain.model.RawTwok;
 import com.example.twit_tok.domain.model.Sid;
 import com.example.twit_tok.domain.model.User;
-import com.example.twit_tok.domain.model.RawTwok;
-import com.example.twit_tok.domain.requests.BasicDebugRequest;
+import com.example.twit_tok.domain.requests.AddTwokRequest;
 import com.example.twit_tok.domain.requests.BasicDataRequest;
+import com.example.twit_tok.domain.requests.BasicDebugRequest;
 import com.example.twit_tok.domain.requests.ProfileRequest;
 import com.example.twit_tok.domain.requests.UpdateProfileNameRequest;
 import com.example.twit_tok.domain.requests.UpdateProfilePictureRequest;
-import com.example.twit_tok.domain.requests.AddTwokRequest;
 
 import java.util.List;
 
