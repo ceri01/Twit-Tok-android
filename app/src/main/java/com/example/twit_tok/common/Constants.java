@@ -56,19 +56,16 @@ public class Constants {
             0, layoutParams -> {
                 layoutParams.bottomToBottom = -1;
                 layoutParams.topToTop = ConstraintSet.PARENT_ID;
-                Log.d("HOMEFRAGMENT", layoutParams.toString());
                 return layoutParams;
             },
             1, layoutParams -> {
                 layoutParams.topToTop = ConstraintSet.PARENT_ID;
                 layoutParams.bottomToBottom = ConstraintSet.PARENT_ID;
-                Log.d("HOMEFRAGMENT", layoutParams.toString());
                 return layoutParams;
             },
             2, layoutParams -> {
                 layoutParams.topToTop = -1;
                 layoutParams.bottomToBottom = ConstraintSet.PARENT_ID;
-                Log.d("HOMEFRAGMENT", layoutParams.toString());
                 return layoutParams;
             }
     );
