@@ -1,6 +1,7 @@
 package com.example.twit_tok.data.api;
 
 import com.example.twit_tok.domain.model.IsFollowed;
+import com.example.twit_tok.domain.model.NewTwok;
 import com.example.twit_tok.domain.model.RawTwok;
 import com.example.twit_tok.domain.model.Sid;
 import com.example.twit_tok.domain.model.User;

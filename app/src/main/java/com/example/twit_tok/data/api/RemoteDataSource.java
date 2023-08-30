@@ -1,9 +1,11 @@
 package com.example.twit_tok.data.api;
 
 import com.example.twit_tok.domain.model.IsFollowed;
+import com.example.twit_tok.domain.model.NewTwok;
 import com.example.twit_tok.domain.model.RawTwok;
 import com.example.twit_tok.domain.model.Sid;
 import com.example.twit_tok.domain.model.User;
+import com.example.twit_tok.domain.requests.AddTwokRequest;
 import com.example.twit_tok.domain.requests.BasicDataRequest;
 import com.example.twit_tok.domain.requests.ProfileRequest;
 import com.example.twit_tok.domain.requests.UpdateProfileNameRequest;
@@ -53,5 +55,9 @@ public class RemoteDataSource {
     public void unfollowUser(BasicDataRequest bdr, Callback<Void> callback) {
         Call<Void> unfollowCall = TwokApiInstance.getTwokApi().unfollow(bdr);
         unfollowCall.enqueue(callback);
+    }
+
+    public void addTwok(AddTwokRequest atr) {
+        Call<Void> addTwokCall = TwokApiInstance.getTwokApi().addTwok(atr);
     }
 }
