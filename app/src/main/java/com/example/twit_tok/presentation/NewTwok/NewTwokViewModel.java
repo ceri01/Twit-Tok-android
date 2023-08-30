@@ -1,6 +1,7 @@
 package com.example.twit_tok.presentation.NewTwok;
 
 import android.location.Location;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
@@ -17,9 +18,14 @@ import com.example.twit_tok.domain.requests.AddTwokRequest;
 import com.example.twit_tok.presentation.NewTwokEventListener;
 import com.google.common.util.concurrent.ListenableFuture;
 
+import java.util.Locale;
 import java.util.Objects;
 
 import javax.inject.Inject;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class NewTwokViewModel extends ViewModel {
     private final NewTwok twok;
@@ -138,10 +144,24 @@ public class NewTwokViewModel extends ViewModel {
             ListenableFuture<Sid> lfSid = TwokDatabase.getInstance(App.getInstance().getApplicationContext()).getSidDao().getSid();
             lfSid.addListener(() -> {
                 try {
+                    Log.d("RESPONSE", "dentro");
                     Sid sid = new Sid(lfSid.get().sid());
                     AddTwokRequest atr = new AddTwokRequest(sid.sid(), twok);
-                    twokRepository.addTwok(atr);
+                    twokRepository.addTwok(atr, new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            Log.d("RESPONSE", response.body() + "");
+                            resetTwok();
+                        }
+
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                            t.printStackTrace();
+                        }
+                    });
                 } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.d("RESPONSE", "errore");
                     // TODO: gestisci errore in caso non ri riesca a prendere sid da db
                 }
             }, App.getInstance().getMainExecutor());

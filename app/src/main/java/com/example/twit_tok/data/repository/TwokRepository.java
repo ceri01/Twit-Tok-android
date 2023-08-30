@@ -10,6 +10,8 @@ import com.example.twit_tok.domain.requests.BasicDataRequest;
 import com.example.twit_tok.domain.requests.DBProfileRequest;
 import com.example.twit_tok.domain.requests.ProfileRequest;
 
+import java.io.IOException;
+
 import retrofit2.Callback;
 
 public interface TwokRepository {
@@ -23,5 +25,5 @@ public interface TwokRepository {
 
     void saveUserDataLocally(User user);
 
-    void addTwok(AddTwokRequest twok);
+    void addTwok(AddTwokRequest twok, Callback<Void> callback);
 }

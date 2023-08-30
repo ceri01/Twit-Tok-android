@@ -1,5 +1,7 @@
 package com.example.twit_tok.data.api;
 
+import android.util.Log;
+
 import com.example.twit_tok.domain.model.IsFollowed;
 import com.example.twit_tok.domain.model.NewTwok;
 import com.example.twit_tok.domain.model.RawTwok;
@@ -11,10 +13,13 @@ import com.example.twit_tok.domain.requests.ProfileRequest;
 import com.example.twit_tok.domain.requests.UpdateProfileNameRequest;
 import com.example.twit_tok.domain.requests.UpdateProfilePictureRequest;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RemoteDataSource {
     public void fetchRandomTwok(Sid sid, Callback<RawTwok> callback) {
@@ -57,7 +62,8 @@ public class RemoteDataSource {
         unfollowCall.enqueue(callback);
     }
 
-    public void addTwok(AddTwokRequest atr) {
+    public void addTwok(AddTwokRequest atr, Callback<Void> callback) {
         Call<Void> addTwokCall = TwokApiInstance.getTwokApi().addTwok(atr);
+        addTwokCall.enqueue(callback);
     }
 }

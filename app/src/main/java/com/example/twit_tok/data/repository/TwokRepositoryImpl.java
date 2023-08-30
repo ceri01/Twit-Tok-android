@@ -12,6 +12,8 @@ import com.example.twit_tok.domain.requests.BasicDataRequest;
 import com.example.twit_tok.domain.requests.DBProfileRequest;
 import com.example.twit_tok.domain.requests.ProfileRequest;
 
+import java.io.IOException;
+
 import retrofit2.Callback;
 
 public class TwokRepositoryImpl implements TwokRepository {
@@ -49,7 +51,7 @@ public class TwokRepositoryImpl implements TwokRepository {
     }
 
     @Override
-    public void addTwok(AddTwokRequest twok) {
-        remoteDataSource.addTwok(twok);
+    public void addTwok(AddTwokRequest twok, Callback<Void> callback) {
+        remoteDataSource.addTwok(twok, callback);
     }
 }

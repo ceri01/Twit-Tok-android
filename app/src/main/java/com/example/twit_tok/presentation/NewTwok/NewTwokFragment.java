@@ -210,6 +210,11 @@ public class NewTwokFragment extends Fragment implements NoticeDialogTextListene
             @Override
             public void onClick(View v) {
                 newTwokViewModel.addTwok(NewTwokFragment.this);
+                Objects.requireNonNull(Constants.VALIGN.get(Constants.DEFAULT_VERTICAL_ALIGNAMENT)).apply(lp);
+                Objects.requireNonNull(Constants.HALIGN.get(Constants.DEFAULT_HORIZONTAL_ALIGNAMENT)).apply(lp);
+                text.setTextSize(Constants.DEFAULT_FONT_SIZE);
+                text.setTypeface(Constants.DEFAULT_FONT_FAMILY);
+                text.setLayoutParams(lp);
             }
         });
         return root;
