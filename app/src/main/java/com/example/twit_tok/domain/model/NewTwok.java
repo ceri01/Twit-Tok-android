@@ -1,7 +1,10 @@
 package com.example.twit_tok.domain.model;
 
+import androidx.annotation.NonNull;
+
 import com.example.twit_tok.common.Colors;
 import com.example.twit_tok.common.Constants;
+import com.example.twit_tok.common.TwoksUtils;
 
 import javax.inject.Inject;
 
@@ -38,56 +41,64 @@ public class NewTwok {
         this.text = text;
     }
 
-    public String getBgColor() {
+    public String getBgcol() {
         return bgcol;
     }
 
-    public void setBgColor(String bgcol) {
+    public void setBgcol(String bgcol) {
         this.bgcol = bgcol;
     }
 
-    public String getFontColor() {
+    public String getFontcol() {
         return fontcol;
     }
 
-    public void setFontColor(String fontcol) {
+    public void setFontcol(String fontcol) {
         this.fontcol = fontcol;
     }
 
-    public int getFontSize() {
+    public int getFontsize() {
         return fontsize;
     }
 
-    public void setFontSize(int fontsize) {
+    public void setFontsize(int fontsize) {
         this.fontsize = fontsize;
     }
 
-    public int getFontType() {
+    public int getFonttype() {
         return fonttype;
     }
 
-    public void setFontType(int fonttype) {
+    public void setFonttype(int fonttype) {
         this.fonttype = fonttype;
     }
 
-    public int getHAlign() {
+    public int getHalign() {
         return halign;
     }
 
-    public void setHAlign(int halign) {
+    public void setHalign(int halign) {
         this.halign = halign;
     }
 
-    public int getVAlign() {
+    public int getValign() {
         return valign;
     }
 
-    public void setVAlign(int valign) {
+    public void setValign(int valign) {
         this.valign = valign;
+    }
+
+    public Double getLat() {
+        return lat;
     }
 
     public void setLat(Double lat) {
         this.lat = lat;
+    }
+
+    public Double getLon() {
+        return lon;
     }
 
     public void setLon(Double lon) {
@@ -104,5 +115,30 @@ public class NewTwok {
         this.halign = 1;
         this.lat = null;
         this.lon = null;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        //noinspection StringBufferReplaceableByString
+        StringBuilder sb = new StringBuilder("Twok{text='")
+                .append(text)
+                .append("', bgcol='")
+                .append(bgcol)
+                .append("', fontcol='")
+                .append(fontcol)
+                .append("', fontsize='")
+                .append(fontsize)
+                .append("', fonttype='")
+                .append(fonttype)
+                .append("', halign='")
+                .append(halign)
+                .append("', valign='")
+                .append(valign)
+                .append("', lat='")
+                .append(lat)
+                .append("', lon='")
+                .append(lon);
+        return sb.toString();
     }
 }
