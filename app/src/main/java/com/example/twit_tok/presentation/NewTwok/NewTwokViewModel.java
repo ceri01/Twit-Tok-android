@@ -6,8 +6,16 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.twit_tok.App;
 import com.example.twit_tok.common.Colors;
+import com.example.twit_tok.common.TwoksUtils;
+import com.example.twit_tok.data.db.TwokDatabase;
+import com.example.twit_tok.data.repository.TwokRepositoryImpl;
 import com.example.twit_tok.domain.model.NewTwok;
+import com.example.twit_tok.domain.model.Sid;
+import com.example.twit_tok.domain.requests.AddTwokRequest;
+import com.example.twit_tok.presentation.NewTwokEventListener;
+import com.google.common.util.concurrent.ListenableFuture;
 
 import java.util.Objects;
 
@@ -15,6 +23,7 @@ import javax.inject.Inject;
 
 public class NewTwokViewModel extends ViewModel {
     private final NewTwok twok;
+    private final TwokRepositoryImpl twokRepository = new TwokRepositoryImpl();
 
     private final MutableLiveData<String> twokText;
     private final MutableLiveData<Integer> hAlign;
@@ -28,21 +37,17 @@ public class NewTwokViewModel extends ViewModel {
     public NewTwokViewModel(@NonNull NewTwok newTwok) {
         this.twok = newTwok;
         this.twokText = new MutableLiveData<>(newTwok.getText());
-        this.hAlign = new MutableLiveData<>(newTwok.getHAlign());
-        this.vAlign = new MutableLiveData<>(newTwok.getVAlign());
-        this.fontType = new MutableLiveData<>(newTwok.getFontType());
-        this.fontSize = new MutableLiveData<>(newTwok.getFontSize());
-        this.bgColor = new MutableLiveData<>(Colors.fromHexStringToInt(newTwok.getBgColor()));
-        this.fontColor = new MutableLiveData<>(Colors.fromHexStringToInt(newTwok.getFontColor()));
+        this.hAlign = new MutableLiveData<>(newTwok.getHalign());
+        this.vAlign = new MutableLiveData<>(newTwok.getValign());
+        this.fontType = new MutableLiveData<>(newTwok.getFonttype());
+        this.fontSize = new MutableLiveData<>(newTwok.getFontsize());
+        this.bgColor = new MutableLiveData<>(Colors.fromHexStringToInt(newTwok.getBgcol()));
+        this.fontColor = new MutableLiveData<>(Colors.fromHexStringToInt(newTwok.getFontcol()));
     }
 
     private Integer nextChoice(Integer choice) {
         if (choice == 2) return 0;
         return 1 + (choice % 2);
-    }
-
-    public String getText() {
-        return twok.getText();
     }
 
     public MutableLiveData<String> onChangeText() {
@@ -61,8 +66,8 @@ public class NewTwokViewModel extends ViewModel {
     }
 
     public void setHAlign() {
-        var value = nextChoice(twok.getHAlign());
-        this.twok.setHAlign(value);
+        var value = nextChoice(twok.getHalign());
+        this.twok.setHalign(value);
         this.hAlign.setValue(value);
     }
 
@@ -71,8 +76,8 @@ public class NewTwokViewModel extends ViewModel {
     }
 
     public void setVAlign() {
-        var value = nextChoice(twok.getVAlign());
-        this.twok.setVAlign(value);
+        var value = nextChoice(twok.getValign());
+        this.twok.setValign(value);
         this.vAlign.setValue(value);
     }
 
@@ -81,8 +86,8 @@ public class NewTwokViewModel extends ViewModel {
     }
 
     public void setFontType() {
-        var value = nextChoice(twok.getFontType());
-        this.twok.setFontType(value);
+        var value = nextChoice(twok.getFonttype());
+        this.twok.setFonttype(value);
         this.fontType.setValue(value);
     }
 
@@ -91,8 +96,8 @@ public class NewTwokViewModel extends ViewModel {
     }
 
     public void setFontSize() {
-        var value = nextChoice(twok.getFontSize());
-        this.twok.setFontSize(value);
+        var value = nextChoice(twok.getFontsize());
+        this.twok.setFontsize(value);
         this.fontSize.setValue(value);
     }
 
@@ -101,7 +106,7 @@ public class NewTwokViewModel extends ViewModel {
     }
 
     public void setBgColor(Integer color) {
-        this.twok.setBgColor(Colors.fromIntToHexString(color));
+        this.twok.setBgcol(Colors.fromIntToHexString(color));
         this.bgColor.setValue(color);
     }
 
@@ -110,7 +115,7 @@ public class NewTwokViewModel extends ViewModel {
     }
 
     public void setFontColor(Integer color) {
-        this.twok.setFontColor(Colors.fromIntToHexString(color));
+        this.twok.setFontcol(Colors.fromIntToHexString(color));
         this.fontColor.setValue(color);
     }
 
@@ -123,8 +128,25 @@ public class NewTwokViewModel extends ViewModel {
 
     public void resetTwok() {
         this.twok.reset();
-        this.bgColor.setValue(Colors.fromHexStringToInt(twok.getBgColor()));
-        this.fontColor.setValue(Colors.fromHexStringToInt(twok.getFontColor()));
+        this.bgColor.setValue(Colors.fromHexStringToInt(twok.getBgcol()));
+        this.fontColor.setValue(Colors.fromHexStringToInt(twok.getFontcol()));
         this.twokText.setValue(twok.getText());
+    }
+
+    public void addTwok(NewTwokEventListener listener) {
+        if (TwoksUtils.isValidTwokToSend(twok)) {
+            ListenableFuture<Sid> lfSid = TwokDatabase.getInstance(App.getInstance().getApplicationContext()).getSidDao().getSid();
+            lfSid.addListener(() -> {
+                try {
+                    Sid sid = new Sid(lfSid.get().sid());
+                    AddTwokRequest atr = new AddTwokRequest(sid.sid(), twok);
+                    twokRepository.addTwok(atr);
+                } catch (Exception e) {
+                    // TODO: gestisci errore in caso non ri riesca a prendere sid da db
+                }
+            }, App.getInstance().getMainExecutor());
+        } else {
+            listener.OnInvalidTwokSend();
+        }
     }
 }

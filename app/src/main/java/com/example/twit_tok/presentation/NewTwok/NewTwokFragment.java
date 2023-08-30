@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -21,7 +22,10 @@ import androidx.lifecycle.Observer;
 import com.example.twit_tok.R;
 import com.example.twit_tok.common.Constants;
 import com.example.twit_tok.common.LocationUtils;
+import com.example.twit_tok.data.repository.TwokRepositoryImpl;
 import com.example.twit_tok.databinding.FragmentNewTwokBinding;
+import com.example.twit_tok.domain.requests.AddTwokRequest;
+import com.example.twit_tok.presentation.NewTwokEventListener;
 import com.example.twit_tok.presentation.NoticeDialogBgColorListener;
 import com.example.twit_tok.presentation.NoticeDialogLocationListener;
 import com.example.twit_tok.presentation.NoticeDialogPermissionListener;
@@ -36,7 +40,7 @@ import javax.inject.Inject;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
-public class NewTwokFragment extends Fragment implements NoticeDialogTextListener, NoticeDialogBgColorListener, NoticeDialogTextColorListener, NoticeDialogPermissionListener, NoticeDialogLocationListener {
+public class NewTwokFragment extends Fragment implements NoticeDialogTextListener, NoticeDialogBgColorListener, NoticeDialogTextColorListener, NoticeDialogPermissionListener, NoticeDialogLocationListener, NewTwokEventListener {
     private final ActivityResultLauncher<String> requestPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
         if (isGranted) {
         } else {
@@ -205,7 +209,7 @@ public class NewTwokFragment extends Fragment implements NoticeDialogTextListene
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                newTwokViewModel.addTwok(NewTwokFragment.this);
             }
         });
         return root;
@@ -267,5 +271,10 @@ public class NewTwokFragment extends Fragment implements NoticeDialogTextListene
     @Override
     public void onSetLocationPositiveClick(Location location) {
         this.newTwokViewModel.setCoordinates(location);
+    }
+
+    @Override
+    public void OnInvalidTwokSend() {
+        Toast.makeText(requireContext(), R.string.Invalid_twok, Toast.LENGTH_SHORT).show();
     }
 }

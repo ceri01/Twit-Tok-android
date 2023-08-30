@@ -30,4 +30,5 @@
     <string name="coordinates_not_available">Coordinates not available</string>
     <string name="unfollow">Unfollow</string>
     <string name="updating">Updating...</string>
+    <string name="Invalid_twok">Invalid twok, unable to sent twok.</string>
 </resources>
