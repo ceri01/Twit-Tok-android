@@ -1,7 +1,5 @@
 package com.example.twit_tok.domain.model;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
 import com.example.twit_tok.common.Colors;
@@ -12,7 +10,7 @@ import java.util.Objects;
 public class RawTwok {
     private final int uid;
     private final int pversion;
-    private final String text;
+    private String text;
     private boolean isFollowed = false;
     private String bgcol;
     private String fontcol;
@@ -23,12 +21,8 @@ public class RawTwok {
     private Double lat = null;
     private Double lon = null;
 
-
     public RawTwok(int uid, int pversion, String text, String bgcol, String fontcol, int fontsize, int fonttype, int halign, int valign) {
-        Log.d("SIUM1", "" + pversion);
-        Objects.requireNonNull(text, "text cannot be null");
-        Objects.requireNonNull(fontcol, "fontcol cannot be null");
-        Objects.requireNonNull(bgcol, "bgcol cannot be null");
+        if (TwoksUtils.isValidText(text)) this.text = text;
         if (Colors.isValid(bgcol)) this.bgcol = bgcol;
         if (Colors.isValid(bgcol)) this.fontcol = fontcol;
         if (TwoksUtils.isValidParameter(fontsize)) this.fontsize = fontsize;
@@ -36,7 +30,6 @@ public class RawTwok {
         if (TwoksUtils.isValidParameter(valign)) this.valign = valign;
         if (TwoksUtils.isValidParameter(halign)) this.halign = halign;
         this.pversion = pversion;
-        this.text = text;
         this.uid = uid;
     }
 

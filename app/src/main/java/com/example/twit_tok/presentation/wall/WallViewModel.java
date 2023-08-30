@@ -105,7 +105,7 @@ public class WallViewModel extends ViewModel {
                     @Override
                     public void onResponse(@NonNull Call<RawTwok> call, @NonNull Response<RawTwok> response) {
                         RawTwok rawTwok = response.body();
-                        if (TwoksUtils.isValidTwok(rawTwok)) {
+                        if (TwoksUtils.isValidRecivedTwok(rawTwok)) {
                             BasicDataRequest bdr = new BasicDataRequest(sid.sid(), String.valueOf(Objects.requireNonNull(rawTwok).getUid()));
                             twokRepository.fetchUserPicturesLocally(rawTwok.getUid(), new Callback<DBProfileRequest>() {
                                 @Override
