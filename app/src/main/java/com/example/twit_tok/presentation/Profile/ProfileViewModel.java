@@ -65,10 +65,6 @@ public class ProfileViewModel extends ViewModel {
         return fetchedFollowedAmount;
     }
 
-    public User getUsersByPosition(int position) {
-        return new User(this.users.getByPosition(position));
-    }
-
     public Profile getProfile() {
         return new Profile(this.profile);
     }

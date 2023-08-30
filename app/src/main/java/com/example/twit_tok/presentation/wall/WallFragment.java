@@ -75,7 +75,7 @@ public class WallFragment extends Fragment implements WallEventListener {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-                if (position >= 100 && wallViewModel.getBufferLength() >= 150) {
+                if (position >= 50 && wallViewModel.getBufferLength() >= 50) {
                     showBufferingWhileLoading();
                     wallViewModel.resetBuffer();
                     wa.resetTwokBuffer(wallViewModel.getBuffer());
@@ -86,7 +86,7 @@ public class WallFragment extends Fragment implements WallEventListener {
                             hideBufferingWhenLoaded();
                         }
                     }, 3000);
-                } else if (position >= (wallViewModel.getBufferLength() / 2) + 1) {
+                } else if (position >= (wallViewModel.getBufferLength() - 3)) {
                     wallViewModel.getTwoks();
                 }
             }

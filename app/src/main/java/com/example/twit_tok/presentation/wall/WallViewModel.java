@@ -1,5 +1,8 @@
 package com.example.twit_tok.presentation.wall;
 
+import android.graphics.Bitmap;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -51,7 +54,6 @@ public class WallViewModel extends ViewModel {
         listenableFutureSid.addListener(() -> {
             try {
                 Sid sid = new Sid(listenableFutureSid.get().sid());
-                System.out.println(user);
                 BasicDataRequest bdr = new BasicDataRequest(sid.sid(), String.valueOf(user.uid()));
                 Call<Void> followCall = TwokApiInstance.getTwokApi().follow(bdr);
                 followCall.enqueue(new Callback<Void>() {
@@ -111,7 +113,9 @@ public class WallViewModel extends ViewModel {
                                 @Override
                                 public void onResponse(@NonNull Call<DBProfileRequest> call, @NonNull Response<DBProfileRequest> response) {
                                     final TwokToShow[] twok = new TwokToShow[1];
-                                    if (!Objects.isNull(response.body()) && rawTwok.getPversion() != Objects.requireNonNull(response.body()).pversion()) {
+
+                                    if (!Objects.isNull(response.body()) && rawTwok.getPversion() == Objects.requireNonNull(response.body()).pversion()) {
+                                        String img = Converters.fromBitmapToBase64(response.body().picture());
                                         DBProfileRequest user = response.body();
                                         twokRepository.isFollowed(bdr, new Callback<IsFollowed>() {
                                             @Override
@@ -131,7 +135,12 @@ public class WallViewModel extends ViewModel {
                                         twokRepository.fetchRemoteUserData(bdr, new Callback<ProfileRequest>() {
                                             @Override
                                             public void onResponse(@NonNull Call<ProfileRequest> call, @NonNull Response<ProfileRequest> response) {
-                                                User user = new User(Objects.requireNonNull(response.body()).uid(), response.body().name(), response.body().picture(), response.body().pversion(), false);
+                                                User user;
+                                                if (!Objects.isNull(response.body().picture()) && PictureUtils.isValidPicture(response.body().picture().replace("\n", ""))) {
+                                                    user = new User(Objects.requireNonNull(response.body()).uid(), response.body().name(), response.body().picture().replace("\n", ""), response.body().pversion(), false);
+                                                } else {
+                                                    user = new User(Objects.requireNonNull(response.body()).uid(), response.body().name(), null, response.body().pversion(), false);
+                                                }
                                                 twokRepository.isFollowed(bdr, new Callback<IsFollowed>() {
                                                     @Override
                                                     public void onResponse(@NonNull Call<IsFollowed> call, @NonNull Response<IsFollowed> response) {
@@ -139,8 +148,7 @@ public class WallViewModel extends ViewModel {
                                                         if (PictureUtils.isValidPicture(user.picture())) {
                                                             twokRepository.saveUserDataLocally(user);
                                                             twok[0] = new TwokToShow(rawTwok, user.name(), Converters.fromBase64ToBitmap(user.picture()), isFollowed);
-                                                        } else {
-                                                            twok[0] = new TwokToShow(rawTwok, user.name(), null, isFollowed);
+                                                        } else {twok[0] = new TwokToShow(rawTwok, user.name(), null, isFollowed);
                                                         }
                                                         buffer.insert(twok[0]);
                                                         lastElementInserted.setValue(buffer.getlength());

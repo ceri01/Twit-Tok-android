@@ -1,6 +1,7 @@
 package com.example.twit_tok.presentation.wall;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,7 @@ public class WallAdapter extends RecyclerView.Adapter<WallViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull WallViewHolder holder, int position) {
+        holder.setIsRecyclable(false); // used because some icons did not correspond to the correct users
         TwokToShow recivedTwokToShow = buffer.getByPosition(position);
         holder.updateContent(recivedTwokToShow, listener);
     }

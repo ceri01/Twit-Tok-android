@@ -31,7 +31,7 @@ public class FollowedViewHolder extends RecyclerView.ViewHolder {
 
     public void updateContent(User user, ProfileEventListener listener) {
         this.name.setText(user.name());
-        Log.d("FOTO UTENTE", user.toString());
+        // TODO fai richiesta foto a database
         if (PictureUtils.isValidPicture(user.picture())) {
             this.picture.setImageBitmap(Converters.fromBase64ToBitmap(user.picture()));
         }

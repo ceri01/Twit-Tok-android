@@ -14,6 +14,7 @@ import com.example.twit_tok.R;
 import com.example.twit_tok.common.Colors;
 import com.example.twit_tok.common.Constants;
 import com.example.twit_tok.common.Converters;
+import com.example.twit_tok.common.PictureUtils;
 import com.example.twit_tok.domain.model.TwokToShow;
 import com.example.twit_tok.domain.model.User;
 import com.example.twit_tok.presentation.WallEventListener;

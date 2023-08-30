@@ -1,6 +1,7 @@
 package com.example.twit_tok.presentation.Profile;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import com.example.twit_tok.R;
 import com.example.twit_tok.domain.model.User;
 import com.example.twit_tok.domain.model.Users;
 import com.example.twit_tok.presentation.ProfileEventListener;
+
+import java.util.Objects;
 
 import dagger.assisted.Assisted;
 import dagger.assisted.AssistedInject;

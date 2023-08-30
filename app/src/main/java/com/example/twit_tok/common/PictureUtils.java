@@ -1,5 +1,7 @@
 package com.example.twit_tok.common;
 
+import android.util.Log;
+
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,7 +16,7 @@ public class PictureUtils {
     }
 
     public static boolean isValidDimension(String s) {
-        return s.getBytes().length / 1000 < 100;
+        return s.length() < 137000;
     }
 
     public static boolean isValidPicture(String s) {

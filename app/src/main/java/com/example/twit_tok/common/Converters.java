@@ -22,7 +22,7 @@ public class Converters {
     }
 
     public static byte[] fromBase64ToByte(String str) {
-        return Base64.getDecoder().decode(str.replace("\n", ""));
+        return Base64.getDecoder().decode(str);
     }
 
     public static String fromBitmapToBase64(Bitmap image) {

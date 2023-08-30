@@ -18,8 +18,6 @@ import retrofit2.Response;
 
 public class LocalDataSource {
     public void addUserPicture(User user) {
-        Log.d("PIC", PictureUtils.isValidPicture(user.picture()) + " " + user.picture());
-
         if (!PictureUtils.isValidPicture(user.picture())) {
             TwokDatabase.getInstance(App.getInstance().getApplicationContext()).getPicturesDao().addUserPicture(
                     user.uid(),
