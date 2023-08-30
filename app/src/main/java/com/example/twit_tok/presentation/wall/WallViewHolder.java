@@ -78,7 +78,6 @@ public class WallViewHolder extends RecyclerView.ViewHolder {
                 } else {
                     User user;
                     if (!Objects.isNull(recivedTwokToShow.getUserPicture())) {
-                        Log.d("PROBLEMA", "if");
                         user = new User(
                                 recivedTwokToShow.getUid(),
                                 recivedTwokToShow.getUserName(),
@@ -86,7 +85,6 @@ public class WallViewHolder extends RecyclerView.ViewHolder {
                                 recivedTwokToShow.getPversion(),
                                 recivedTwokToShow.getIsFollowed());
                     } else {
-                        Log.d("PROBLEMA", "else");
                         user = new User(
                                 recivedTwokToShow.getUid(),
                                 recivedTwokToShow.getUserName(),

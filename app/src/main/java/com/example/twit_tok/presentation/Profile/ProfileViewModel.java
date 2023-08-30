@@ -118,7 +118,6 @@ public class ProfileViewModel extends ViewModel {
                     @Override
                     public void onResponse(@NonNull Call<List<User>> call, @NonNull Response<List<User>> response) {
                         for (User u : Objects.requireNonNull(response.body())) {
-                            Log.d("SEGUITI", u.toString());
                             if (!Objects.isNull(u)) {
                                 profileRepository.fetchUserPicturesLocally(u.uid(), new Callback<DBProfileRequest>() {
                                     @Override
@@ -150,7 +149,6 @@ public class ProfileViewModel extends ViewModel {
 
                                     @Override
                                     public void onFailure(@NonNull Call<DBProfileRequest> call, @NonNull Throwable t) {
-                                        Log.d("SEGUITI", t.toString());
                                         t.printStackTrace();
                                         // TODO gestisci errore connessione
                                     }
@@ -255,7 +253,6 @@ public class ProfileViewModel extends ViewModel {
                 profileRepository.unfollowUser(bdr, new Callback<Void>() {
                     @Override
                     public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
-                        Log.d("Funziona", response.message());
                         users.remove(uid);
                         fetchedFollowedAmount.postValue(users.getlength());
                     }

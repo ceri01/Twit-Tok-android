@@ -144,13 +144,11 @@ public class NewTwokViewModel extends ViewModel {
             ListenableFuture<Sid> lfSid = TwokDatabase.getInstance(App.getInstance().getApplicationContext()).getSidDao().getSid();
             lfSid.addListener(() -> {
                 try {
-                    Log.d("RESPONSE", "dentro");
                     Sid sid = new Sid(lfSid.get().sid());
                     AddTwokRequest atr = new AddTwokRequest(sid.sid(), twok);
                     twokRepository.addTwok(atr, new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
-                            Log.d("RESPONSE", response.body() + "");
                             resetTwok();
                         }
 
@@ -161,7 +159,6 @@ public class NewTwokViewModel extends ViewModel {
                     });
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Log.d("RESPONSE", "errore");
                     // TODO: gestisci errore in caso non ri riesca a prendere sid da db
                 }
             }, App.getInstance().getMainExecutor());
