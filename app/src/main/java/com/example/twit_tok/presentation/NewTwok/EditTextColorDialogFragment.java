@@ -19,7 +19,7 @@ import top.defaults.colorpicker.ColorObserver;
 import top.defaults.colorpicker.ColorPickerView;
 
 public class EditTextColorDialogFragment extends DialogFragment {
-    NoticeDialogTextColorListener listener;
+    private final NoticeDialogTextColorListener listener;
     private int newColor = Constants.DEFAULT_NEW_TWOK_TEXT_COLOR;
 
     public EditTextColorDialogFragment(NoticeDialogTextColorListener listener) {

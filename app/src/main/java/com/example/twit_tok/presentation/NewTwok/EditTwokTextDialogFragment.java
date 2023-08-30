@@ -14,7 +14,7 @@ import com.example.twit_tok.R;
 import com.example.twit_tok.presentation.NoticeDialogTextListener;
 
 public class EditTwokTextDialogFragment extends DialogFragment {
-    NoticeDialogTextListener listener;
+    private final NoticeDialogTextListener listener;
 
     public EditTwokTextDialogFragment(NoticeDialogTextListener listener) {
         this.listener = listener;

@@ -18,7 +18,7 @@ import top.defaults.colorpicker.ColorObserver;
 import top.defaults.colorpicker.ColorPickerView;
 
 public class EditBgColorDialogFragment extends DialogFragment {
-    NoticeDialogBgColorListener listener;
+    final NoticeDialogBgColorListener listener;
     private int newColor = Constants.DEFAULT_NEW_TWOK_BACKGROUND_COLOR;
 
     public EditBgColorDialogFragment(NoticeDialogBgColorListener listener) {

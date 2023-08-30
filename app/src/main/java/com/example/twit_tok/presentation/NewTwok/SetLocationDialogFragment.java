@@ -30,7 +30,7 @@ import com.google.android.material.button.MaterialButton;
 import java.util.Objects;
 
 public class SetLocationDialogFragment extends DialogFragment implements OnMapReadyCallback {
-    NoticeDialogLocationListener listener;
+    private final NoticeDialogLocationListener listener;
     private GoogleMap map;
     private Location currentPosition;
     private FusedLocationProviderClient fusedLocationProviderClient;

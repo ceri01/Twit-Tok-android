@@ -33,6 +33,7 @@ import java.util.Objects;
 public class EditPictureDialogFragment extends DialogFragment {
 
     private final MutableLiveData<Bitmap> pictureToShow = new MutableLiveData<>();
+    private final NoticeDialogPictureListener listener;
     private final ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
@@ -51,7 +52,6 @@ public class EditPictureDialogFragment extends DialogFragment {
                     }
                 }
             });
-    NoticeDialogPictureListener listener;
 
 
     public EditPictureDialogFragment(NoticeDialogPictureListener listener, Bitmap pictureToShow) {
