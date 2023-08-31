@@ -1,6 +1,9 @@
 package com.example.twit_tok.presentation.Profile;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,10 +17,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.twit_tok.MainActivity;
 import com.example.twit_tok.R;
 import com.example.twit_tok.common.Converters;
 import com.example.twit_tok.databinding.FragmentProfileBinding;
@@ -25,6 +30,7 @@ import com.example.twit_tok.di.FollowedAdapterFactory;
 import com.example.twit_tok.presentation.NoticeDialogPictureListener;
 import com.example.twit_tok.presentation.NoticeDialogTextListener;
 import com.example.twit_tok.presentation.ProfileEventListener;
+import com.google.android.material.button.MaterialButton;
 
 import java.util.Objects;
 
@@ -63,6 +69,7 @@ public class ProfileFragment extends Fragment implements NoticeDialogTextListene
 
         Button editNameButton = root.findViewById(R.id.edit_name);
         Button editPictureButton = root.findViewById(R.id.edit_picture);
+        MaterialButton offlineButton = root.findViewById(R.id.offline_button);
 
         TextView nameView = root.findViewById(R.id.name);
         ImageView pictureView = root.findViewById(R.id.picture);
@@ -71,6 +78,14 @@ public class ProfileFragment extends Fragment implements NoticeDialogTextListene
         rc.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
         fa = followedAdapterFactory.create(requireContext(), ProfileFragment.this);
         rc.setAdapter(fa);
+
+        profileViewModel.isOffline().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean isOffline) {
+                root.findViewById(R.id.followed_list).setVisibility(View.GONE);
+                root.findViewById(R.id.offline_profile).setVisibility(View.VISIBLE);
+            }
+        });
 
         profileViewModel.getProfileNameChanged().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
@@ -96,6 +111,14 @@ public class ProfileFragment extends Fragment implements NoticeDialogTextListene
                 fa.notifyDataSetChanged();
             }
         });
+
+        offlineButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity)requireActivity()).restart();
+            }
+        });
+
 
         editNameButton.setOnClickListener(new View.OnClickListener() {
             @Override

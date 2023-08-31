@@ -85,6 +85,9 @@ dependencies {
 
     // google maps
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
+
+    // phoenix library
+    implementation 'com.jakewharton:process-phoenix:2.1.2'
 }
 
 // Allow references to generated code

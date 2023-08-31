@@ -1,5 +1,9 @@
 package com.example.twit_tok;
 
+import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +14,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.twit_tok.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.jakewharton.processphoenix.ProcessPhoenix;
 
 import java.util.Objects;
 
@@ -35,5 +40,9 @@ public class MainActivity extends AppCompatActivity {
         if (Objects.isNull(savedInstanceState)) {
             navView.setSelectedItemId(R.id.navigation_wall);
         }
+    }
+
+    public void restart() {
+        ProcessPhoenix.triggerRebirth(getBaseContext());
     }
 }

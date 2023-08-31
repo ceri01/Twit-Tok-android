@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.twit_tok.App;
 import com.example.twit_tok.common.Colors;
+import com.example.twit_tok.common.NetUtils;
 import com.example.twit_tok.common.TwoksUtils;
 import com.example.twit_tok.data.db.TwokDatabase;
 import com.example.twit_tok.data.repository.TwokRepositoryImpl;
@@ -30,6 +31,7 @@ import retrofit2.Response;
 public class NewTwokViewModel extends ViewModel {
     private final NewTwok twok;
     private final TwokRepositoryImpl twokRepository = new TwokRepositoryImpl();
+    private final MutableLiveData<Boolean> isOffline = new MutableLiveData<>();
 
     private final MutableLiveData<String> twokText;
     private final MutableLiveData<Integer> hAlign;
@@ -54,6 +56,10 @@ public class NewTwokViewModel extends ViewModel {
     private Integer nextChoice(Integer choice) {
         if (choice == 2) return 0;
         return 1 + (choice % 2);
+    }
+
+    public MutableLiveData<Boolean> isOffline() {
+        return isOffline;
     }
 
     public MutableLiveData<String> onChangeText() {
@@ -154,16 +160,21 @@ public class NewTwokViewModel extends ViewModel {
 
                         @Override
                         public void onFailure(Call<Void> call, Throwable t) {
-                            t.printStackTrace();
+                            offlineCheck();
                         }
                     });
                 } catch (Exception e) {
                     e.printStackTrace();
-                    // TODO: gestisci errore in caso non ri riesca a prendere sid da db
                 }
             }, App.getInstance().getMainExecutor());
         } else {
             listener.OnInvalidTwokSend();
+        }
+    }
+
+    private void offlineCheck() {
+        if (!NetUtils.isNetworkConnected()) {
+            isOffline.postValue(true);
         }
     }
 }

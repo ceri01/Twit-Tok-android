@@ -20,6 +20,11 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+    <include
+        android:id="@+id/offline_profile"
+        layout="@layout/offline"
+        android:visibility="gone"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/followed_list"
         android:layout_width="409dp"
@@ -29,5 +34,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_header" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_header"
+        android:visibility="visible"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

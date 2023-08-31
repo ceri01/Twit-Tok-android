@@ -1,8 +1,5 @@
 package com.example.twit_tok.presentation.wall;
 
-import android.graphics.Bitmap;
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -10,6 +7,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.twit_tok.App;
 import com.example.twit_tok.common.Constants;
 import com.example.twit_tok.common.Converters;
+import com.example.twit_tok.common.NetUtils;
 import com.example.twit_tok.common.PictureUtils;
 import com.example.twit_tok.common.TwoksUtils;
 import com.example.twit_tok.data.api.TwokApiInstance;
@@ -38,6 +36,7 @@ import retrofit2.Response;
 public class WallViewModel extends ViewModel {
     private final Users users;
     private final MutableLiveData<Integer> lastElementInserted;
+    private final MutableLiveData<Boolean> isOffline = new MutableLiveData<>();
     private final TwokToShowBuffer buffer;
     private final TwokRepositoryImpl twokRepository = new TwokRepositoryImpl();
 
@@ -64,11 +63,11 @@ public class WallViewModel extends ViewModel {
 
                     @Override
                     public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
-                        // TODO: Gestisci errore in caso faili la richiesta di rete
+                        offlineCheck();
                     }
                 });
             } catch (Exception e) {
-                // TODO: Gestisci errore in caso faili la richiesta di rete
+                // TODO: DATABASE
             }
         }, App.getInstance().getMainExecutor());
     }
@@ -89,11 +88,11 @@ public class WallViewModel extends ViewModel {
                     @Override
                     public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
                         t.printStackTrace();
-                        // TODO: Gestisci errore in caso faili la richiesta di rete
+                        offlineCheck();
                     }
                 });
             } catch (Exception e) {
-                // TODO: Gestisci errore in caso faili la richiesta di rete
+                // TODO: DATABASE
             }
         }, App.getInstance().getMainExecutor());
     }
@@ -128,7 +127,7 @@ public class WallViewModel extends ViewModel {
 
                                             @Override
                                             public void onFailure(@NonNull Call<IsFollowed> call, @NonNull Throwable t) {
-                                                // TODO: Gestisci errore in caso faili la richiesta di rete
+                                                offlineCheck();
                                             }
                                         });
                                     } else {
@@ -136,7 +135,7 @@ public class WallViewModel extends ViewModel {
                                             @Override
                                             public void onResponse(@NonNull Call<ProfileRequest> call, @NonNull Response<ProfileRequest> response) {
                                                 User user;
-                                                if (!Objects.isNull(response.body().picture()) && PictureUtils.isValidPicture(response.body().picture().replace("\n", ""))) {
+                                                if (!Objects.isNull(Objects.requireNonNull(response.body()).picture()) && PictureUtils.isValidPicture(response.body().picture().replace("\n", ""))) {
                                                     user = new User(Objects.requireNonNull(response.body()).uid(), response.body().name(), response.body().picture().replace("\n", ""), response.body().pversion(), false);
                                                 } else {
                                                     user = new User(Objects.requireNonNull(response.body()).uid(), response.body().name(), null, response.body().pversion(), false);
@@ -156,14 +155,14 @@ public class WallViewModel extends ViewModel {
 
                                                     @Override
                                                     public void onFailure(@NonNull Call<IsFollowed> call, @NonNull Throwable t) {
-                                                        // TODO: Gestisci errore in caso faili la richiesta di rete
+                                                        offlineCheck();
                                                     }
                                                 });
                                             }
 
                                             @Override
                                             public void onFailure(@NonNull Call<ProfileRequest> call, @NonNull Throwable t) {
-                                                // TODO: Gestisci errore in caso faili la richiesta di rete
+                                                offlineCheck();
                                             }
                                         });
                                     }
@@ -171,7 +170,7 @@ public class WallViewModel extends ViewModel {
 
                                 @Override
                                 public void onFailure(@NonNull Call<DBProfileRequest> call, @NonNull Throwable t) {
-                                    // TODO: Gestisci errore in caso faili la richiesta di rete
+                                    offlineCheck();
                                 }
                             });
                         }
@@ -179,13 +178,12 @@ public class WallViewModel extends ViewModel {
 
                     @Override
                     public void onFailure(@NonNull Call<RawTwok> call, @NonNull Throwable t) {
-                        t.printStackTrace();
-                        // TODO: Gestisci errore in caso faili la richiesta di rete
+                        offlineCheck();
                     }
                 });
             } catch (Exception e) {
                 e.printStackTrace();
-                // TODO: Gestisci errore in caso faili la richiesta di rete
+                // TODO: DATABASE
             }
         }, App.getInstance().getMainExecutor());
     }
@@ -194,6 +192,16 @@ public class WallViewModel extends ViewModel {
         for (int i = 0; i < Constants.DEFAULT_AMOUNT_OF_NEW_TWOKS; i++) {
             retrieveTwoks();
         }
+    }
+
+    private void offlineCheck() {
+        if (!NetUtils.isNetworkConnected()) {
+            isOffline.postValue(true);
+        }
+    }
+
+    public MutableLiveData<Boolean> isOffline() {
+        return isOffline;
     }
 
     public MutableLiveData<Integer> isReady() {

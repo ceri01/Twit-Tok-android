@@ -31,4 +31,6 @@
     <string name="unfollow">Unfollow</string>
     <string name="updating">Updating...</string>
     <string name="Invalid_twok">Invalid twok, unable to sent twok.</string>
+    <string name="offline_advice">You\'re offline, check your connection and try again</string>
+    <string name="reload_app">Reload app</string>
 </resources>

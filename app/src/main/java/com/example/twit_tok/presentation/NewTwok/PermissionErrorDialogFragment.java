@@ -11,7 +11,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.twit_tok.R;
 
-public class PermissionErrorDialog extends DialogFragment {
+public class PermissionErrorDialogFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {

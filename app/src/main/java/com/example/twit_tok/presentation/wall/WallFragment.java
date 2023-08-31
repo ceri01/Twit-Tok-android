@@ -1,6 +1,9 @@
 package com.example.twit_tok.presentation.wall;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -16,11 +19,14 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.twit_tok.MainActivity;
 import com.example.twit_tok.R;
 import com.example.twit_tok.common.TwoksUtils;
 import com.example.twit_tok.databinding.FragmentWallBinding;
 import com.example.twit_tok.domain.model.User;
+import com.example.twit_tok.presentation.Profile.ProfileFragment;
 import com.example.twit_tok.presentation.WallEventListener;
+import com.google.android.material.button.MaterialButton;
 
 import javax.inject.Inject;
 
@@ -55,6 +61,8 @@ public class WallFragment extends Fragment implements WallEventListener {
         View root = binding.getRoot();
         progressBar = root.findViewById(R.id.buffering);
 
+        MaterialButton offlineButton = root.findViewById(R.id.offline_button);
+
         ViewPager2 viewPager = root.findViewById(R.id.wall);
         this.wa = new WallAdapter(requireContext(), wallViewModel.getBuffer(), WallFragment.this);
         viewPager.setAdapter(wa);
@@ -63,6 +71,22 @@ public class WallFragment extends Fragment implements WallEventListener {
             @Override
             public void onChanged(Integer position) {
                 wa.notifyItemInserted(position);
+            }
+        });
+
+        wallViewModel.isOffline().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean isOffline) {
+                root.findViewById(R.id.wall).setVisibility(View.GONE);
+                root.findViewById(R.id.buffering_text).setVisibility(View.GONE);
+                root.findViewById(R.id.offline_wall).setVisibility(View.VISIBLE);
+            }
+        });
+
+        offlineButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity)requireActivity()).restart();
             }
         });
 

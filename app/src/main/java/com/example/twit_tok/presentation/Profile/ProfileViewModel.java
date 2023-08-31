@@ -4,11 +4,13 @@ import android.graphics.Bitmap;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.twit_tok.App;
 import com.example.twit_tok.common.Converters;
+import com.example.twit_tok.common.NetUtils;
 import com.example.twit_tok.common.PictureUtils;
 import com.example.twit_tok.data.db.TwokDatabase;
 import com.example.twit_tok.data.repository.ProfileRepositoryImpl;
@@ -41,6 +43,7 @@ public class ProfileViewModel extends ViewModel {
     private final MutableLiveData<Bitmap> profilePictureChanged;
     private final MutableLiveData<Integer> fetchedFollowedAmount;
     private final ProfileRepositoryImpl profileRepository = new ProfileRepositoryImpl();
+    private final MutableLiveData<Boolean> isOffline = new MutableLiveData<>();
 
 
     @Inject
@@ -51,6 +54,10 @@ public class ProfileViewModel extends ViewModel {
         profileNameChanged = new MutableLiveData<>("");
         fetchedFollowedAmount = new MutableLiveData<>();
         profilePictureChanged = new MutableLiveData<>(null);
+    }
+
+    public MutableLiveData<Boolean> isOffline() {
+        return isOffline;
     }
 
     public MutableLiveData<String> getProfileNameChanged() {
@@ -96,11 +103,11 @@ public class ProfileViewModel extends ViewModel {
                     @Override
                     public void onFailure(@NonNull Call<ProfileRequest> call, @NonNull Throwable t) {
                         t.printStackTrace();
-                        // TODO: Gestisci errore in caso faili la richiesta di rete
+                        offlineCheck();
                     }
                 });
             } catch (Exception e) {
-                // TODO: gestisci errore in caso non ri riesca a prendere sid da db
+                // TODO: DATABASE
             }
         }, App.getInstance().getMainExecutor());
     }
@@ -134,7 +141,7 @@ public class ProfileViewModel extends ViewModel {
 
                                                 @Override
                                                 public void onFailure(@NonNull Call<ProfileRequest> call, @NonNull Throwable t) {
-                                                    // TODO gestisci errore connessione
+                                                    offlineCheck();
                                                 }
                                             });
                                         } else {
@@ -146,7 +153,7 @@ public class ProfileViewModel extends ViewModel {
                                     @Override
                                     public void onFailure(@NonNull Call<DBProfileRequest> call, @NonNull Throwable t) {
                                         t.printStackTrace();
-                                        // TODO gestisci errore connessione
+                                        offlineCheck();
                                     }
                                 });
                             }
@@ -156,11 +163,11 @@ public class ProfileViewModel extends ViewModel {
                     @Override
                     public void onFailure(@NonNull Call<List<User>> call, @NonNull Throwable t) {
                         t.printStackTrace();
-                        // TODO: Gestisci errore in caso faili la richiesta di rete
+                        offlineCheck();
                     }
                 });
             } catch (Exception e) {
-                // TODO: gestisci errore in caso non ri riesca a prendere sid da db
+                // TODO: DATABASE
             }
         }, App.getInstance().getMainExecutor());
     }
@@ -181,7 +188,7 @@ public class ProfileViewModel extends ViewModel {
 
                             @Override
                             public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
-                                // TODO gestisci errore connessione
+                                offlineCheck();
                             }
                         });
                     }
@@ -225,18 +232,18 @@ public class ProfileViewModel extends ViewModel {
 
                             @Override
                             public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
-                                // TODO gestisci errore di rete
+                                offlineCheck();
                             }
                         });
                     }
 
                     @Override
                     public void onFailure(@NonNull Call<UpdateProfilePictureRequest> call, @NonNull Throwable t) {
-                        t.printStackTrace();
+                        offlineCheck();
                     }
                 });
             } catch (Exception e) {
-                e.printStackTrace();
+                // TODO: DATABASE
             }
         }, App.getInstance().getMainExecutor());
     }
@@ -255,12 +262,18 @@ public class ProfileViewModel extends ViewModel {
 
                     @Override
                     public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
-                        // TODO: Gestisci errore in caso faili la richiesta di rete
+                        offlineCheck();
                     }
                 });
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }, App.getInstance().getMainExecutor());
+    }
+
+    private void offlineCheck() {
+        if (!NetUtils.isNetworkConnected()) {
+            isOffline.postValue(true);
+        }
     }
 }

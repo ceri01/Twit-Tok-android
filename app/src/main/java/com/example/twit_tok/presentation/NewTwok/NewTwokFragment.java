@@ -19,12 +19,11 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 
+import com.example.twit_tok.MainActivity;
 import com.example.twit_tok.R;
 import com.example.twit_tok.common.Constants;
 import com.example.twit_tok.common.LocationUtils;
-import com.example.twit_tok.data.repository.TwokRepositoryImpl;
 import com.example.twit_tok.databinding.FragmentNewTwokBinding;
-import com.example.twit_tok.domain.requests.AddTwokRequest;
 import com.example.twit_tok.presentation.NewTwokEventListener;
 import com.example.twit_tok.presentation.NoticeDialogBgColorListener;
 import com.example.twit_tok.presentation.NoticeDialogLocationListener;
@@ -77,6 +76,7 @@ public class NewTwokFragment extends Fragment implements NoticeDialogTextListene
         MaterialButton confirmButton = root.findViewById(R.id.add_twok_confirm_buttond);
         MaterialButton editTextColorButton = root.findViewById(R.id.add_twok_edit_text_color);
         MaterialButton editBackgroundColorButton = root.findViewById(R.id.add_twok_edit_background_color);
+        MaterialButton offlineButton = root.findViewById(R.id.offline_button);
         TextView text = root.findViewById(R.id.add_twok_text);
         ConstraintLayout textContainer = root.findViewById(R.id.add_twok_text_container);
         ConstraintLayout.LayoutParams lp = new ConstraintLayout.LayoutParams(text.getLayoutParams());
@@ -131,6 +131,14 @@ public class NewTwokFragment extends Fragment implements NoticeDialogTextListene
             @Override
             public void onChanged(Integer color) {
                 text.setTextColor(color);
+            }
+        });
+
+        newTwokViewModel.isOffline().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean isOffline) {
+                root.findViewById(R.id.new_twok).setVisibility(View.GONE);
+                root.findViewById(R.id.offline_new_twok).setVisibility(View.VISIBLE);
             }
         });
 
@@ -217,6 +225,14 @@ public class NewTwokFragment extends Fragment implements NoticeDialogTextListene
                 text.setLayoutParams(lp);
             }
         });
+
+        offlineButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity)requireActivity()).restart();
+            }
+        });
+
         return root;
     }
 
@@ -247,8 +263,8 @@ public class NewTwokFragment extends Fragment implements NoticeDialogTextListene
     }
 
     private void showPermissionErrorDialog() {
-        DialogFragment dialog = new PermissionErrorDialog();
-        dialog.show(getParentFragmentManager(), "PermissionErrorDialog");
+        DialogFragment dialog = new PermissionErrorDialogFragment();
+        dialog.show(getParentFragmentManager(), "PermissionErrorDialogFragment");
     }
 
     @Override
