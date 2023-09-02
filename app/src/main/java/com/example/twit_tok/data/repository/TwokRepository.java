@@ -17,9 +17,9 @@ import retrofit2.Callback;
 public interface TwokRepository {
     void isFollowed(BasicDataRequest bdr, Callback<IsFollowed> callback);
 
-    void fetchRandomTwok(Sid sid, Callback<RawTwok> callback);
-
     void fetchRandomTwok(BasicDataRequest bdr, Callback<RawTwok> callback);
+
+    void fetchRandomUserTwok(BasicDataRequest bdr, Callback<RawTwok> callback);
 
     void fetchRemoteUserData(BasicDataRequest bdr, Callback<ProfileRequest> callback);
 

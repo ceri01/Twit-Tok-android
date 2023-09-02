@@ -49,7 +49,7 @@ public class UserWallViewModel extends ViewModel {
 
     private void retrieveTwoks(String sid, int uid, User user) {
         BasicDataRequest bdr = new BasicDataRequest(sid, String.valueOf(uid));
-        twokRepository.fetchRandomTwok(bdr, new Callback<RawTwok>() {
+        twokRepository.fetchRandomUserTwok(bdr, new Callback<RawTwok>() {
             @Override
             public void onResponse(@NonNull Call<RawTwok> call, @NonNull Response<RawTwok> response) {
                 RawTwok rawTwok = response.body();

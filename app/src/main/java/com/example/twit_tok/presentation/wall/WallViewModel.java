@@ -105,13 +105,15 @@ public class WallViewModel extends ViewModel {
         ListenableFuture<Sid> listenableFutureSid = TwokDatabase.getInstance(App.getInstance().getApplicationContext()).getSidDao().getSid();
         listenableFutureSid.addListener(() -> {
             try {
-                Sid sid = new Sid(listenableFutureSid.get().sid());
-                twokRepository.fetchRandomTwok(sid, new Callback<RawTwok>() {
+                String sid = listenableFutureSid.get().sid();
+                BasicDataRequest bdr = new BasicDataRequest(sid);
+                twokRepository.fetchRandomTwok(bdr, new Callback<RawTwok>() {
                     @Override
                     public void onResponse(@NonNull Call<RawTwok> call, @NonNull Response<RawTwok> response) {
                         RawTwok rawTwok = response.body();
                         if (TwoksUtils.isValidRecivedTwok(rawTwok)) {
-                            BasicDataRequest bdr = new BasicDataRequest(sid.sid(), String.valueOf(Objects.requireNonNull(rawTwok).getUid()));
+                            Log.d("TID", String.valueOf(rawTwok.toString()));
+                            BasicDataRequest bdr = new BasicDataRequest(sid, String.valueOf(Objects.requireNonNull(rawTwok).getUid()));
                             twokRepository.fetchUserPicturesLocally(rawTwok.getUid(), new Callback<DBProfileRequest>() {
                                 @Override
                                 public void onResponse(@NonNull Call<DBProfileRequest> call, @NonNull Response<DBProfileRequest> response) {

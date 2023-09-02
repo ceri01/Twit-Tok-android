@@ -1,9 +1,7 @@
 package com.example.twit_tok.data.api;
 
-import android.util.Log;
-
+import com.example.twit_tok.common.Constants;
 import com.example.twit_tok.domain.model.IsFollowed;
-import com.example.twit_tok.domain.model.NewTwok;
 import com.example.twit_tok.domain.model.RawTwok;
 import com.example.twit_tok.domain.model.Sid;
 import com.example.twit_tok.domain.model.User;
@@ -13,22 +11,26 @@ import com.example.twit_tok.domain.requests.ProfileRequest;
 import com.example.twit_tok.domain.requests.UpdateProfileNameRequest;
 import com.example.twit_tok.domain.requests.UpdateProfilePictureRequest;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Response;
 
 public class RemoteDataSource {
-    public void fetchRandomTwok(Sid sid, Callback<RawTwok> callback) {
-        Call<RawTwok> rawTwokCall = TwokApiInstance.getTwokApi().getRandomTwok(sid);
+    public void fetchRandomTwok(BasicDataRequest bdr, Callback<RawTwok> callback) {
+        if (Constants.tidSequence != -1) {
+            bdr = new BasicDataRequest(bdr.getSid(), bdr.getUid(), String.valueOf(Constants.tidSequence));
+            Constants.tidSequence++;
+        }
+        Call<RawTwok> rawTwokCall = TwokApiInstance.getTwokApi().getRandomTwok(bdr);
         rawTwokCall.enqueue(callback);
+        if (Constants.tidSequence != -1) {
+            Constants.tidSequence++;
+        }
     }
 
-    public void fetchRandomTwokWithUid(BasicDataRequest bdr, Callback<RawTwok> callback) {
-        Call<RawTwok> rawTwokCall = TwokApiInstance.getTwokApi().getTwokWithUid(bdr);
+    public void fetchRandomUserTwok(BasicDataRequest bdr, Callback<RawTwok> callback) {
+        Call<RawTwok> rawTwokCall = TwokApiInstance.getTwokApi().getRandomTwok(bdr);
         rawTwokCall.enqueue(callback);
     }
 
