@@ -1,5 +1,7 @@
 package com.example.twit_tok.presentation.wall;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -28,7 +30,9 @@ import com.google.common.util.concurrent.ListenableFuture;
 import java.util.Objects;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
+import dagger.hilt.android.lifecycle.HiltViewModel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -37,11 +41,11 @@ public class WallViewModel extends ViewModel {
     private final Users users;
     private final MutableLiveData<Integer> lastElementInserted;
     private final MutableLiveData<Boolean> isOffline = new MutableLiveData<>();
-    private final TwokToShowBuffer buffer;
+    private final @Named("twokBuffer") TwokToShowBuffer buffer;
     private final TwokRepositoryImpl twokRepository = new TwokRepositoryImpl();
 
     @Inject
-    public WallViewModel(Users users, TwokToShowBuffer buffer) {
+    public WallViewModel(Users users, @Named("twokBuffer") TwokToShowBuffer buffer) {
         this.users = users;
         this.buffer = buffer;
         this.lastElementInserted = new MutableLiveData<>(buffer.getlength());
@@ -114,7 +118,6 @@ public class WallViewModel extends ViewModel {
                                     final TwokToShow[] twok = new TwokToShow[1];
 
                                     if (!Objects.isNull(response.body()) && rawTwok.getPversion() == Objects.requireNonNull(response.body()).pversion()) {
-                                        String img = Converters.fromBitmapToBase64(response.body().picture());
                                         DBProfileRequest user = response.body();
                                         twokRepository.isFollowed(bdr, new Callback<IsFollowed>() {
                                             @Override

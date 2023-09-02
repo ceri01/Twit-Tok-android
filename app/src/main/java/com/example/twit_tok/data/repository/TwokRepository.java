@@ -19,6 +19,8 @@ public interface TwokRepository {
 
     void fetchRandomTwok(Sid sid, Callback<RawTwok> callback);
 
+    void fetchRandomTwok(BasicDataRequest bdr, Callback<RawTwok> callback);
+
     void fetchRemoteUserData(BasicDataRequest bdr, Callback<ProfileRequest> callback);
 
     void fetchUserPicturesLocally(int uid, Callback<DBProfileRequest> callback);

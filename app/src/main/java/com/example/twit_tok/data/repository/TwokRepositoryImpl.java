@@ -41,6 +41,11 @@ public class TwokRepositoryImpl implements TwokRepository {
     }
 
     @Override
+    public void fetchRandomTwok(BasicDataRequest bdr, Callback<RawTwok> callback) {
+        remoteDataSource.fetchRandomTwokWithUid(bdr, callback);
+    }
+
+    @Override
     public void fetchRemoteUserData(BasicDataRequest bdr, Callback<ProfileRequest> callback) {
         remoteDataSource.fetchUserData(bdr, callback);
     }

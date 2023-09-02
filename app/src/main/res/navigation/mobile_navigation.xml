@@ -18,6 +18,12 @@
         tools:layout="@layout/fragment_wall" />
 
     <fragment
+        android:id="@+id/navigation_userwall"
+        android:name="com.example.twit_tok.presentation.user_wall.UserWallFragment"
+        android:label="User wall"
+        tools:layout="@layout/fragment_user_wall" />
+
+    <fragment
         android:id="@+id/navigation_profile"
         android:name="com.example.twit_tok.presentation.Profile.ProfileFragment"
         android:label="@string/title_profile"

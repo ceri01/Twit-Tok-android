@@ -32,7 +32,7 @@ public interface TwokApi {
     Call<Void> setProfilePicture(@Body UpdateProfilePictureRequest profile);
 
     @POST("getTwok")
-    Call<RawTwok> getTwokWithUid(@Body BasicDebugRequest data);
+    Call<RawTwok> getTwokWithUid(@Body BasicDataRequest data);
 
     @POST("getTwok")
     Call<RawTwok> getTwokWithTid(@Body BasicDataRequest data);

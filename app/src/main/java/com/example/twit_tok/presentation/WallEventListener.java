@@ -8,4 +8,6 @@ public interface WallEventListener {
     void onFollowButtonPressed(User user);
 
     void onUnfollowButtonPressed(int uid);
+
+    void onUsernamePressed(int uid);
 }

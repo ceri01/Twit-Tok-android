@@ -37,7 +37,6 @@ import retrofit2.Response;
 
 public class ProfileViewModel extends ViewModel {
     private final Users users;
-    private final Profile profile;
 
     private final MutableLiveData<String> profileNameChanged;
     private final MutableLiveData<Bitmap> profilePictureChanged;
@@ -47,10 +46,9 @@ public class ProfileViewModel extends ViewModel {
 
 
     @Inject
-    public ProfileViewModel(Users users, Profile profile) {
+    public ProfileViewModel(Users users) {
         Objects.requireNonNull(users, "Given model is null");
         this.users = users;
-        this.profile = profile;
         profileNameChanged = new MutableLiveData<>("");
         fetchedFollowedAmount = new MutableLiveData<>();
         profilePictureChanged = new MutableLiveData<>(null);
@@ -72,10 +70,6 @@ public class ProfileViewModel extends ViewModel {
         return fetchedFollowedAmount;
     }
 
-    public Profile getProfile() {
-        return new Profile(this.profile);
-    }
-
     private void addUser(int uid, String name, String picture, int pversion) {
         if (!PictureUtils.isValidPicture(picture)) {
             users.insert(new User(uid, name, null, pversion, true));
@@ -84,7 +78,7 @@ public class ProfileViewModel extends ViewModel {
         }
     }
 
-    public void retriveProfileData() {
+    public void retriveProfileData() { // Sistema
         ListenableFuture<Sid> lfSid = TwokDatabase.getInstance(App.getInstance().getApplicationContext()).getSidDao().getSid();
         lfSid.addListener(() -> {
             try {
@@ -93,10 +87,13 @@ public class ProfileViewModel extends ViewModel {
                     @Override
                     public void onResponse(@NonNull Call<ProfileRequest> call, @NonNull Response<ProfileRequest> response) {
                         ProfileRequest p = response.body();
-                        profile.changeProfile(p);
-                        profileNameChanged.setValue(profile.name());
-                        if (!Objects.isNull(profile.picture())) {
-                            profilePictureChanged.setValue(Converters.fromBase64ToBitmap(profile.picture()));
+                        if (!Objects.isNull(p)) {
+                            if (!Objects.isNull(p.name()) && !p.name().isBlank()) {
+                                profileNameChanged.setValue(p.name());
+                            }
+                            if (!Objects.isNull(p.picture())) {
+                                profilePictureChanged.setValue(Converters.fromBase64ToBitmap(p.picture()));
+                            }
                         }
                     }
 
@@ -173,17 +170,17 @@ public class ProfileViewModel extends ViewModel {
     }
 
     public void setProfileName(String name) {
-        profile.changeProfile(new ProfileRequest(profile.uid(), name, profile.picture(), profile.pversion()));
+        //profile.changeProfile(new ProfileRequest(profile.uid(), name, profile.picture(), profile.pversion()));
         ListenableFuture<Sid> sid = TwokDatabase.getInstance(App.getInstance().getApplicationContext()).getSidDao().getSid();
         sid.addListener(() -> {
             try {
-                profileRepository.setProfileNameLocally(sid.get(), profile.uid(), name, new Callback<UpdateProfileNameRequest>() {
+                profileRepository.setProfileNameLocally(sid.get(), name, new Callback<UpdateProfileNameRequest>() {
                     @Override
                     public void onResponse(@NonNull Call<UpdateProfileNameRequest> call, @NonNull Response<UpdateProfileNameRequest> response) {
                         profileRepository.setProfileName(response.body(), new Callback<Void>() {
                             @Override
                             public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
-                                profileNameChanged.setValue(profile.name());
+                                profileNameChanged.setValue(name);
                             }
 
                             @Override
@@ -210,18 +207,16 @@ public class ProfileViewModel extends ViewModel {
         if (PictureUtils.isValidPicture(picture)) {
             convertedPicture = Converters.fromBase64ToBitmap(picture);
             verifiedPicture = picture;
-            profile.changeProfile(new ProfileRequest(profile.uid(), profile.name(), verifiedPicture, profile.pversion()));
 
         } else {
             convertedPicture = null;
             verifiedPicture = null;
-            profile.changeProfile(new ProfileRequest(profile.uid(), profile.name(), null, profile.pversion()));
         }
 
         ListenableFuture<Sid> sid = TwokDatabase.getInstance(App.getInstance().getApplicationContext()).getSidDao().getSid();
         sid.addListener(() -> {
             try {
-                profileRepository.setProfilePictureLocally(sid.get(), profile.uid(), convertedPicture, verifiedPicture, new Callback<UpdateProfilePictureRequest>() {
+                profileRepository.setProfilePictureLocally(sid.get(), convertedPicture, verifiedPicture, new Callback<UpdateProfilePictureRequest>() {
                     @Override
                     public void onResponse(@NonNull Call<UpdateProfilePictureRequest> call, @NonNull Response<UpdateProfilePictureRequest> response) {
                         profileRepository.setProfilePicture(response.body(), new Callback<Void>() {

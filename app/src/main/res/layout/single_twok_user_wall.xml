@@ -10,20 +10,20 @@
 
 
     <ImageView
-        android:id="@+id/twok_user_profile"
+        android:id="@+id/wall_twok_user_profile"
         android:layout_width="95dp"
         android:layout_height="105dp"
         android:layout_marginEnd="46dp"
         android:src="@mipmap/ic_default_picture_round"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/twok_user_name"
+        app:layout_constraintEnd_toStartOf="@+id/wall_twok_user_name"
         app:layout_constraintHorizontal_bias="0.33"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5" />
 
     <TextView
-        android:id="@+id/twok_user_name"
+        android:id="@+id/wall_twok_user_name"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="-18dp"
@@ -31,25 +31,25 @@
         android:maxLength="19"
         android:text="@string/defaultUsername"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/twok_map"
-        app:layout_constraintStart_toEndOf="@+id/twok_user_profile"
+        app:layout_constraintEnd_toStartOf="@+id/wall_twok_map"
+        app:layout_constraintStart_toEndOf="@+id/wall_twok_user_profile"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.523" />
 
     <Button
-        android:id="@+id/twok_follow"
+        android:id="@+id/wall_twok_follow"
         android:layout_width="110dp"
         android:layout_height="43dp"
         android:layout_marginStart="32dp"
         android:text="@string/follow"
         android:textSize="12dp"
-        app:layout_constraintBottom_toTopOf="@+id/twok_map"
-        app:layout_constraintStart_toEndOf="@+id/twok_user_name"
+        app:layout_constraintBottom_toTopOf="@+id/wall_twok_map"
+        app:layout_constraintStart_toEndOf="@+id/wall_twok_user_name"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/twok_map"
+        android:id="@+id/wall_twok_map"
         android:layout_width="110dp"
         android:layout_height="43dp"
         android:layout_marginStart="32dp"
@@ -57,7 +57,7 @@
         android:text="@string/map"
         android:textSize="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/twok_user_name"
-        app:layout_constraintTop_toBottomOf="@+id/twok_follow" />
+        app:layout_constraintStart_toEndOf="@+id/wall_twok_user_name"
+        app:layout_constraintTop_toBottomOf="@+id/wall_twok_follow" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

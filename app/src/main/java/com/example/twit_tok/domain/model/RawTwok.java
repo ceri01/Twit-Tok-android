@@ -10,6 +10,7 @@ import java.util.Objects;
 public class RawTwok {
     private final int uid;
     private final int pversion;
+    private final int tid;
     private String text;
     private boolean isFollowed = false;
     private String bgcol;
@@ -21,7 +22,7 @@ public class RawTwok {
     private Double lat = null;
     private Double lon = null;
 
-    public RawTwok(int uid, int pversion, String text, String bgcol, String fontcol, int fontsize, int fonttype, int halign, int valign) {
+    public RawTwok(int uid, int pversion, int tid, String text, String bgcol, String fontcol, int fontsize, int fonttype, int halign, int valign) {
         if (TwoksUtils.isValidText(text)) this.text = text;
         if (Colors.isValid(bgcol)) this.bgcol = bgcol;
         if (Colors.isValid(bgcol)) this.fontcol = fontcol;
@@ -31,10 +32,11 @@ public class RawTwok {
         if (TwoksUtils.isValidParameter(halign)) this.halign = halign;
         this.pversion = pversion;
         this.uid = uid;
+        this.tid = tid;
     }
 
-    public RawTwok(int uid, int pversion, String text, String bgcol, String fontcol, int fontsize, int fonttype, int halign, int valign, Double lat, Double lon) {
-        this(uid, pversion, text, bgcol, fontcol, fontsize, fonttype, halign, valign);
+    public RawTwok(int uid, int pversion, int tid, String text, String bgcol, String fontcol, int fontsize, int fonttype, int halign, int valign, Double lat, Double lon) {
+        this(uid, pversion, tid, text, bgcol, fontcol, fontsize, fonttype, halign, valign);
         if (TwoksUtils.isValidCoord(lat, lon)) {
             this.lat = lat;
             this.lon = lon;
@@ -43,6 +45,10 @@ public class RawTwok {
 
     public int getUid() {
         return uid;
+    }
+
+    public int getTid() {
+        return tid;
     }
 
     public String getText() {
@@ -107,6 +113,8 @@ public class RawTwok {
         sb.append(uid)
                 .append("', pversion='")
                 .append(pversion)
+                .append("', tid='")
+                .append(tid)
                 .append("', text='")
                 .append(text)
                 .append("', bgcol='")

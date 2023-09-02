@@ -27,6 +27,11 @@ public class RemoteDataSource {
         rawTwokCall.enqueue(callback);
     }
 
+    public void fetchRandomTwokWithUid(BasicDataRequest bdr, Callback<RawTwok> callback) {
+        Call<RawTwok> rawTwokCall = TwokApiInstance.getTwokApi().getTwokWithUid(bdr);
+        rawTwokCall.enqueue(callback);
+    }
+
     public void fetchIsFollowed(BasicDataRequest basicDataRequest, Callback<IsFollowed> callback) {
         Call<IsFollowed> isFollowedCall = TwokApiInstance.getTwokApi().isFollowed(basicDataRequest);
         isFollowedCall.enqueue(callback);

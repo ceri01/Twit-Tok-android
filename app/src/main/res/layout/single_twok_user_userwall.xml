@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/linearLayout3"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/gray"
+    android:paddingHorizontal="10dp">
+
+
+    <ImageView
+        android:id="@+id/userwall_twok_user_profile"
+        android:layout_width="95dp"
+        android:layout_height="105dp"
+        android:layout_marginEnd="46dp"
+        android:src="@mipmap/ic_default_picture_round"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/userwall_twok_user_name"
+        app:layout_constraintHorizontal_bias="0.33"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <TextView
+        android:id="@+id/userwall_twok_user_name"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-18dp"
+        android:layout_marginEnd="100dp"
+        android:maxLength="19"
+        android:text="@string/defaultUsername"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/userwall_twok_map"
+        app:layout_constraintStart_toEndOf="@+id/userwall_twok_user_profile"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.523" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/userwall_twok_go_back"
+        android:layout_width="60dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="80dp"
+        app:backgroundTint="#F44336"
+        app:icon="@drawable/go_back"
+        app:layout_constraintBottom_toTopOf="@+id/userwall_twok_map"
+        app:layout_constraintStart_toEndOf="@+id/userwall_twok_user_name"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/userwall_twok_map"
+        android:layout_width="110dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/map"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/userwall_twok_user_name"
+        app:layout_constraintTop_toBottomOf="@+id/userwall_twok_go_back" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+

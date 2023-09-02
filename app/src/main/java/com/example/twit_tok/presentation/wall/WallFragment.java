@@ -1,9 +1,8 @@
 package com.example.twit_tok.presentation.wall;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
+import static androidx.navigation.Navigation.findNavController;
+
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -16,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -24,8 +25,8 @@ import com.example.twit_tok.R;
 import com.example.twit_tok.common.TwoksUtils;
 import com.example.twit_tok.databinding.FragmentWallBinding;
 import com.example.twit_tok.domain.model.User;
-import com.example.twit_tok.presentation.Profile.ProfileFragment;
 import com.example.twit_tok.presentation.WallEventListener;
+import com.example.twit_tok.presentation.user_wall.UserWallFragment;
 import com.google.android.material.button.MaterialButton;
 
 import javax.inject.Inject;
@@ -63,7 +64,7 @@ public class WallFragment extends Fragment implements WallEventListener {
 
         MaterialButton offlineButton = root.findViewById(R.id.offline_button);
 
-        ViewPager2 viewPager = root.findViewById(R.id.wall);
+        ViewPager2 viewPager = root.findViewById(R.id.wall_viewpager);
         this.wa = new WallAdapter(requireContext(), wallViewModel.getBuffer(), WallFragment.this);
         viewPager.setAdapter(wa);
 
@@ -77,7 +78,7 @@ public class WallFragment extends Fragment implements WallEventListener {
         wallViewModel.isOffline().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean isOffline) {
-                root.findViewById(R.id.wall).setVisibility(View.GONE);
+                root.findViewById(R.id.wall_viewpager).setVisibility(View.GONE);
                 root.findViewById(R.id.buffering_text).setVisibility(View.GONE);
                 root.findViewById(R.id.offline_wall).setVisibility(View.VISIBLE);
             }
@@ -136,11 +137,10 @@ public class WallFragment extends Fragment implements WallEventListener {
         } else {
             Toast.makeText(requireContext(), R.string.coordinates_not_available, Toast.LENGTH_SHORT).show();
         }
-
     }
 
     private void showBufferingWhileLoading() {
-        binding.getRoot().findViewById(R.id.wall).setVisibility(View.GONE);
+        binding.getRoot().findViewById(R.id.wall_viewpager).setVisibility(View.GONE);
         requireActivity().findViewById(R.id.nav_view).setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
     }
@@ -148,7 +148,7 @@ public class WallFragment extends Fragment implements WallEventListener {
     private void hideBufferingWhenLoaded() {
         progressBar.setVisibility(View.GONE);
         requireActivity().findViewById(R.id.nav_view).setVisibility(View.VISIBLE);
-        binding.getRoot().findViewById(R.id.wall).setVisibility(View.VISIBLE);
+        binding.getRoot().findViewById(R.id.wall_viewpager).setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -159,5 +159,12 @@ public class WallFragment extends Fragment implements WallEventListener {
     @Override
     public void onUnfollowButtonPressed(int uid) {
         wallViewModel.unfollowUser(uid);
+    }
+
+    @Override
+    public void onUsernamePressed(int uid) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("uid", uid);
+        findNavController(this.requireView()).navigate(R.id.navigation_userwall, bundle);
     }
 }

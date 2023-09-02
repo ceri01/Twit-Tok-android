@@ -66,13 +66,13 @@ public class ProfileRepositoryImpl implements ProfileRepository {
     }
 
     @Override
-    public void setProfileNameLocally(Sid sid, int uid, String name, Callback<UpdateProfileNameRequest> callback) {
-        localDataSource.setProfileName(sid, uid, name, callback);
+    public void setProfileNameLocally(Sid sid, String name, Callback<UpdateProfileNameRequest> callback) {
+        localDataSource.setProfileName(sid, name, callback);
 
     }
 
     @Override
-    public void setProfilePictureLocally(Sid sid, int uid, Bitmap bitmapPicture, String stringPicture, Callback<UpdateProfilePictureRequest> callback) {
-        localDataSource.setProfilePicture(sid, uid, bitmapPicture, stringPicture, callback);
+    public void setProfilePictureLocally(Sid sid, Bitmap bitmapPicture, String stringPicture, Callback<UpdateProfilePictureRequest> callback) {
+        localDataSource.setProfilePicture(sid, bitmapPicture, stringPicture, callback);
     }
 }

@@ -46,11 +46,11 @@ public class LocalDataSource {
         }, App.getInstance().getMainExecutor());
     }
 
-    public void setProfileName(Sid sid, int uid, String name, Callback<UpdateProfileNameRequest> callback) {
+    public void setProfileName(Sid sid, String name, Callback<UpdateProfileNameRequest> callback) {
         UpdateProfileNameRequest pr = new UpdateProfileNameRequest();
         pr.setSid(sid.sid());
         pr.setName(name);
-        ListenableFuture<Void> updateNameRequest = TwokDatabase.getInstance(App.getInstance().getApplicationContext()).getProfileDao().updateProfileName(name, uid);
+        ListenableFuture<Void> updateNameRequest = TwokDatabase.getInstance(App.getInstance().getApplicationContext()).getProfileDao().updateProfileName(name, Integer.parseInt(sid.uid()));
         updateNameRequest.addListener(() -> {
             try {
                 callback.onResponse(null, Response.success(pr));
@@ -60,11 +60,11 @@ public class LocalDataSource {
         }, App.getInstance().getMainExecutor());
     }
 
-    public void setProfilePicture(Sid sid, int uid, Bitmap bitmapPicture, String stringPicture, Callback<UpdateProfilePictureRequest> callback) {
+    public void setProfilePicture(Sid sid, Bitmap bitmapPicture, String stringPicture, Callback<UpdateProfilePictureRequest> callback) {
         UpdateProfilePictureRequest pr = new UpdateProfilePictureRequest();
         pr.setSid(sid.sid());
         pr.setPicture(stringPicture);
-        ListenableFuture<Void> listenableFuturePicture = TwokDatabase.getInstance(App.getInstance().getApplicationContext()).getProfileDao().updateProfilePicture(bitmapPicture, uid);
+        ListenableFuture<Void> listenableFuturePicture = TwokDatabase.getInstance(App.getInstance().getApplicationContext()).getProfileDao().updateProfilePicture(bitmapPicture, Integer.parseInt(sid.uid()));
         listenableFuturePicture.addListener(() -> {
             try {
                 callback.onResponse(null, Response.success(pr));
