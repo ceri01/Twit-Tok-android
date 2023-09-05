@@ -40,6 +40,7 @@ public class FollowedAdapter extends RecyclerView.Adapter<FollowedViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull FollowedViewHolder holder, int position) {
+        holder.setIsRecyclable(false);
         User userToShow = users.getByPosition(position);
         holder.updateContent(userToShow, listener);
     }
