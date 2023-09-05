@@ -106,6 +106,7 @@ public class WallViewModel extends ViewModel {
         listenableFutureSid.addListener(() -> {
             try {
                 String sid = listenableFutureSid.get().sid();
+                System.out.println(listenableFutureSid.get().uid());
                 BasicDataRequest bdr = new BasicDataRequest(sid);
                 twokRepository.fetchRandomTwok(bdr, new Callback<RawTwok>() {
                     @Override
@@ -151,7 +152,7 @@ public class WallViewModel extends ViewModel {
                                                         boolean isFollowed = Objects.requireNonNull(response.body()).isFollowed();
                                                         if (PictureUtils.isValidPicture(user.picture())) {
                                                             twokRepository.saveUserDataLocally(user);
-                                                            twok[0] = new TwokToShow(rawTwok, user.name(), Converters.fromBase64ToBitmap(user.picture()), isFollowed);
+                                                            twok[0] = new TwokToShow(rawTwok, user.name(), user.picture(), isFollowed);
                                                         } else {twok[0] = new TwokToShow(rawTwok, user.name(), null, isFollowed);
                                                         }
                                                         buffer.insert(twok[0]);

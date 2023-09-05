@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.twit_tok.R;
 import com.example.twit_tok.common.Colors;
 import com.example.twit_tok.common.Constants;
+import com.example.twit_tok.common.Converters;
 import com.example.twit_tok.domain.model.TwokToShow;
 import com.example.twit_tok.presentation.UserWallEventListener;
 import com.google.android.material.button.MaterialButton;
@@ -38,7 +39,7 @@ public class UserWallViewHolder extends RecyclerView.ViewHolder {
 
     public void updateContent(@NonNull TwokToShow recivedTwokToShow, UserWallEventListener listener) {
         if (!Objects.isNull(recivedTwokToShow.getUserPicture())) {
-            userPicture.setImageBitmap(recivedTwokToShow.getUserPicture());
+            userPicture.setImageBitmap(Converters.fromBase64ToBitmap(recivedTwokToShow.getUserPicture()));
         }
         content.setBackgroundColor(Colors.fromHexStringToInt(recivedTwokToShow.getBgcol()));
         userName.setText(recivedTwokToShow.getUserName());

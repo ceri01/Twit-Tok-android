@@ -29,7 +29,7 @@ public class LocalDataSource {
             TwokDatabase.getInstance(App.getInstance().getApplicationContext()).getPicturesDao().addUserPicture(
                     user.uid(),
                     user.name(),
-                    Converters.fromBase64ToBitmap(user.picture()),
+                    user.picture(),
                     user.pversion()
             );
         }
@@ -60,11 +60,11 @@ public class LocalDataSource {
         }, App.getInstance().getMainExecutor());
     }
 
-    public void setProfilePicture(Sid sid, Bitmap bitmapPicture, String stringPicture, Callback<UpdateProfilePictureRequest> callback) {
+    public void setProfilePicture(Sid sid, String stringPicture, Callback<UpdateProfilePictureRequest> callback) {
         UpdateProfilePictureRequest pr = new UpdateProfilePictureRequest();
         pr.setSid(sid.sid());
         pr.setPicture(stringPicture);
-        ListenableFuture<Void> listenableFuturePicture = TwokDatabase.getInstance(App.getInstance().getApplicationContext()).getProfileDao().updateProfilePicture(bitmapPicture, Integer.parseInt(sid.uid()));
+        ListenableFuture<Void> listenableFuturePicture = TwokDatabase.getInstance(App.getInstance().getApplicationContext()).getProfileDao().updateProfilePicture(stringPicture, Integer.parseInt(sid.uid()));
         listenableFuturePicture.addListener(() -> {
             try {
                 callback.onResponse(null, Response.success(pr));

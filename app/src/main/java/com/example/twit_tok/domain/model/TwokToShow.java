@@ -4,9 +4,9 @@ import android.graphics.Bitmap;
 
 public class TwokToShow extends RawTwok {
     private final String username;
-    private final Bitmap picture;
+    private final String picture;
 
-    public TwokToShow(RawTwok rawTwok, String username, Bitmap picture, boolean isFollowed) {
+    public TwokToShow(RawTwok rawTwok, String username, String picture, boolean isFollowed) {
         super(rawTwok.getUid(), rawTwok.getPversion(), rawTwok.getTid(), rawTwok.getText(), rawTwok.getBgcol(), rawTwok.getFontcol(), rawTwok.getFontsize(), rawTwok.getFonttype(), rawTwok.getHalign(), rawTwok.getValign(), rawTwok.getLat(), rawTwok.getLon());
         this.username = username;
         this.picture = picture;
@@ -16,7 +16,7 @@ public class TwokToShow extends RawTwok {
         return username;
     }
 
-    public Bitmap getUserPicture() {
+    public String getUserPicture() {
         return picture;
     }
 }

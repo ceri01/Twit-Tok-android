@@ -40,7 +40,7 @@ public class WallViewHolder extends RecyclerView.ViewHolder {
 
     public void updateContent(@NonNull TwokToShow recivedTwokToShow, WallEventListener listener) {
         if (!Objects.isNull(recivedTwokToShow.getUserPicture())) {
-            userPicture.setImageBitmap(recivedTwokToShow.getUserPicture());
+            userPicture.setImageBitmap(Converters.fromBase64ToBitmap(recivedTwokToShow.getUserPicture()));
         }
         if (recivedTwokToShow.getIsFollowed()) {
             followUnfollow.setText(R.string.unfollow);
@@ -86,7 +86,7 @@ public class WallViewHolder extends RecyclerView.ViewHolder {
                         user = new User(
                                 recivedTwokToShow.getUid(),
                                 recivedTwokToShow.getUserName(),
-                                Converters.fromBitmapToBase64(recivedTwokToShow.getUserPicture()),
+                                recivedTwokToShow.getUserPicture(),
                                 recivedTwokToShow.getPversion(),
                                 recivedTwokToShow.getIsFollowed());
                     } else {

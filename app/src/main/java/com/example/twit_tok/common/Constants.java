@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 public class Constants {
-    public static int tidSequence = 13;
+    public static int tidSequence = -1;
     public static final String BASE_URL = "https://develop.ewlab.di.unimi.it/mc/twittok/";
     public static final Integer DEFAULT_VERTICAL_ALIGNAMENT = 1;
     public static final Integer DEFAULT_HORIZONTAL_ALIGNAMENT = 1;

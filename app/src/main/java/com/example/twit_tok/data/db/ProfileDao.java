@@ -14,7 +14,7 @@ public interface ProfileDao {
     ProfileRequest getProfile();
 
     @Query("UPDATE ProfileEntity SET picture=:picture WHERE uid=:uid")
-    ListenableFuture<Void> updateProfilePicture(Bitmap picture, int uid);
+    ListenableFuture<Void> updateProfilePicture(String picture, int uid);
 
     @Query("UPDATE ProfileEntity SET name=:name WHERE uid=:uid")
     ListenableFuture<Void> updateProfileName(String name, int uid);

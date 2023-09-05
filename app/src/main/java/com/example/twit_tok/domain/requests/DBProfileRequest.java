@@ -9,10 +9,10 @@ import java.util.Objects;
 public class DBProfileRequest {
     private final int uid;
     private final String name;
-    private final Bitmap picture;
+    private final String picture;
     private final int pversion;
 
-    public DBProfileRequest(int uid, String name, Bitmap picture, int pversion) {
+    public DBProfileRequest(int uid, String name, String picture, int pversion) {
         Objects.requireNonNull(name, "Name cannot be null");
         if (name.isBlank()) {
             this.name = "unnamed";
@@ -43,8 +43,8 @@ public class DBProfileRequest {
         return name;
     }
 
-    public Bitmap picture() {
-        return Bitmap.createBitmap(picture);
+    public String picture() {
+        return picture;
     }
 
     public int pversion() {

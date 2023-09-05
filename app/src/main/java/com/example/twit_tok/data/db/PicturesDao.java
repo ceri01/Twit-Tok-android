@@ -19,5 +19,5 @@ public interface PicturesDao {
     ListenableFuture<DBProfileRequest> getPictures(int uid);
 
     @Query("INSERT OR REPLACE INTO PictureEntity VALUES(:uid, :name, :picture, :pversion)")
-    ListenableFuture<Void> addUserPicture(int uid, String name, Bitmap picture, int pversion);
+    ListenableFuture<Void> addUserPicture(int uid, String name, String picture, int pversion);
 }

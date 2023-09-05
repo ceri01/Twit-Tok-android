@@ -58,7 +58,7 @@ public class UserWallViewModel extends ViewModel {
                     if (Objects.isNull(user.picture())) {
                         twok = new TwokToShow(rawTwok, user.name(), null, false);
                     } else {
-                        twok = new TwokToShow(rawTwok, user.name(), Converters.fromBase64ToBitmap(user.picture()), false);
+                        twok = new TwokToShow(rawTwok, user.name(), user.picture(), false);
                     }
                     buffer.insert(twok);
                     lastElementInserted.setValue(buffer.getlength());

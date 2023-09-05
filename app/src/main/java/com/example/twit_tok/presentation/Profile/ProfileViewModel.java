@@ -142,7 +142,7 @@ public class ProfileViewModel extends ViewModel {
                                                 }
                                             });
                                         } else {
-                                            addUser(Objects.requireNonNull(localUserData).uid(), localUserData.name(), Converters.fromBitmapToBase64(localUserData.picture()), localUserData.pversion());
+                                            addUser(Objects.requireNonNull(localUserData).uid(), localUserData.name(), localUserData.picture(), localUserData.pversion());
                                             fetchedFollowedAmount.postValue(users.getlength());
                                         }
                                     }
@@ -203,26 +203,23 @@ public class ProfileViewModel extends ViewModel {
 
     public void setProfilePicture(String picture) {
         String verifiedPicture;
-        Bitmap convertedPicture;
         if (PictureUtils.isValidPicture(picture)) {
-            convertedPicture = Converters.fromBase64ToBitmap(picture);
             verifiedPicture = picture;
 
         } else {
-            convertedPicture = null;
             verifiedPicture = null;
         }
 
         ListenableFuture<Sid> sid = TwokDatabase.getInstance(App.getInstance().getApplicationContext()).getSidDao().getSid();
         sid.addListener(() -> {
             try {
-                profileRepository.setProfilePictureLocally(sid.get(), convertedPicture, verifiedPicture, new Callback<UpdateProfilePictureRequest>() {
+                profileRepository.setProfilePictureLocally(sid.get(), verifiedPicture, new Callback<UpdateProfilePictureRequest>() {
                     @Override
                     public void onResponse(@NonNull Call<UpdateProfilePictureRequest> call, @NonNull Response<UpdateProfilePictureRequest> response) {
                         profileRepository.setProfilePicture(response.body(), new Callback<Void>() {
                             @Override
                             public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
-                                profilePictureChanged.setValue(convertedPicture);
+                                profilePictureChanged.setValue(Converters.fromBase64ToBitmap(verifiedPicture));
                             }
 
                             @Override

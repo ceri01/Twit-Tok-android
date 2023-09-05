@@ -33,5 +33,5 @@ public interface ProfileRepository {
 
     void setProfileNameLocally(Sid sid, String name, Callback<UpdateProfileNameRequest> callback);
 
-    void setProfilePictureLocally(Sid sid, Bitmap bitmapPicture, String stringPicture, Callback<UpdateProfilePictureRequest> callback);
+    void setProfilePictureLocally(Sid sid, String stringPicture, Callback<UpdateProfilePictureRequest> callback);
 }
