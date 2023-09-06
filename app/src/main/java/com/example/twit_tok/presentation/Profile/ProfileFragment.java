@@ -1,5 +1,7 @@
 package com.example.twit_tok.presentation.Profile;
 
+import static androidx.navigation.Navigation.findNavController;
+
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -175,5 +177,12 @@ public class ProfileFragment extends Fragment implements NoticeDialogTextListene
     @Override
     public void onUnfollowButtonPressed(int uid) {
         profileViewModel.unfollowUser(uid);
+    }
+
+    @Override
+    public void onUsernamePressed(int uid) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("uid", uid);
+        findNavController(this.requireView()).navigate(R.id.navigation_userwall, bundle);
     }
 }
