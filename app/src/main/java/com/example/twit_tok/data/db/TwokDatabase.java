@@ -42,44 +42,6 @@ public abstract class TwokDatabase extends RoomDatabase {
                     @Override
                     public void onCreate(@NonNull SupportSQLiteDatabase db) {
                         super.onCreate(db);
-/*                        Sid s = new Sid("G1pIozzaqzAXN4ILDZdP");
-                        Call<ProfileRequest> profile = TwokApiInstance.getTwokApi().getProfile(s);
-                        profile.enqueue(new retrofit2.Callback<>() {
-                            @Override
-                            public void onResponse(@NonNull Call<ProfileRequest> call, @NonNull Response<ProfileRequest> response) {
-                                if (!Objects.isNull(response.body())) {
-                                    ProfileRequest profileResponse = response.body();
-                                    String sid = "G1pIozzaqzAXN4ILDZdP";
-
-                                    String profileTrigger = "CREATE TRIGGER IF NOT EXISTS unique_profile " +
-                                            "BEFORE INSERT ON ProfileEntity FOR EACH ROW " +
-                                            "BEGIN " +
-                                            "SELECT RAISE(ABORT, \"User already exists\") " +
-                                            "FROM ProfileEntity " +
-                                            "WHERE uid != " + Objects.requireNonNull(profileResponse).uid() +
-                                            "; END;";
-
-                                    String sidTrigger = "CREATE TRIGGER IF NOT EXISTS unique_sid " +
-                                            "BEFORE INSERT ON SidEntity FOR EACH ROW " +
-                                            "BEGIN " +
-                                            "SELECT RAISE(ABORT, \"User already exists\") " +
-                                            "FROM SidEntity " +
-                                            "WHERE sid != '" + sid +
-                                            "'; END;";
-                                    String insertSid = "INSERT INTO SidEntity(sid, uid) VALUES('" + sid + "', " + profileResponse.uid() + " );"; // TODO sql injection
-                                    String insertProfile = "INSERT INTO ProfileEntity(uid, name, picture, pversion) VALUES(" + profileResponse.uid() + ", '" + profileResponse.name() + "', '" + profileResponse.picture() + "', " + profileResponse.pversion() + ");";
-                                    db.execSQL(profileTrigger);
-                                    db.execSQL(sidTrigger);
-                                    db.execSQL(insertSid);
-                                    db.execSQL(insertProfile);
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(@NonNull Call<ProfileRequest> call, @NonNull Throwable t) {
-                                t.printStackTrace();
-                            }
-                        });*/
                         Call<Sid> init = TwokApiInstance.getTwokApi().getSid();
                         init.enqueue(new retrofit2.Callback<>() {
                             @Override
@@ -107,7 +69,7 @@ public abstract class TwokDatabase extends RoomDatabase {
                                                     "FROM SidEntity " +
                                                     "WHERE sid != '" + sid +
                                                     "'; END;";
-                                            String insertSid = "INSERT INTO SidEntity(sid, uid) VALUES('" + sid + "', " + profileResponse.uid() + " );"; // TODO sql injection
+                                            String insertSid = "INSERT INTO SidEntity(sid, uid) VALUES('" + sid + "', " + profileResponse.uid() + " );";
                                             String insertProfile = "INSERT INTO ProfileEntity(uid, name, picture, pversion) VALUES(" + profileResponse.uid() + ", '" + profileResponse.name() + "', '" + profileResponse.picture() + "', " + profileResponse.pversion() + ");";
                                             db.execSQL(profileTrigger);
                                             db.execSQL(sidTrigger);
