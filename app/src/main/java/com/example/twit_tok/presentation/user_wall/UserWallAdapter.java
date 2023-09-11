@@ -12,7 +12,6 @@ import com.example.twit_tok.R;
 import com.example.twit_tok.domain.model.TwokToShow;
 import com.example.twit_tok.domain.model.TwokToShowBuffer;
 import com.example.twit_tok.presentation.UserWallEventListener;
-import com.example.twit_tok.presentation.wall.WallViewHolder;
 
 public class UserWallAdapter extends RecyclerView.Adapter<UserWallViewHolder> {
     private final LayoutInflater inflater;

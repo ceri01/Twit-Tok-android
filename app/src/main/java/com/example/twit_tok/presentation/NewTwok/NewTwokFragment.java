@@ -229,7 +229,7 @@ public class NewTwokFragment extends Fragment implements NoticeDialogTextListene
         offlineButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)requireActivity()).restart();
+                ((MainActivity) requireActivity()).restart();
             }
         });
 

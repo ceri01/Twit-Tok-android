@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.twit_tok.App;
 import com.example.twit_tok.common.Constants;
-import com.example.twit_tok.common.Converters;
 import com.example.twit_tok.common.NetUtils;
 import com.example.twit_tok.common.PictureUtils;
 import com.example.twit_tok.common.TwoksUtils;
@@ -32,7 +31,6 @@ import java.util.Objects;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import dagger.hilt.android.lifecycle.HiltViewModel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -153,7 +151,8 @@ public class WallViewModel extends ViewModel {
                                                         if (PictureUtils.isValidPicture(user.picture())) {
                                                             twokRepository.saveUserDataLocally(user);
                                                             twok[0] = new TwokToShow(rawTwok, user.name(), user.picture(), isFollowed);
-                                                        } else {twok[0] = new TwokToShow(rawTwok, user.name(), null, isFollowed);
+                                                        } else {
+                                                            twok[0] = new TwokToShow(rawTwok, user.name(), null, isFollowed);
                                                         }
                                                         buffer.insert(twok[0]);
                                                         lastElementInserted.setValue(buffer.getlength());

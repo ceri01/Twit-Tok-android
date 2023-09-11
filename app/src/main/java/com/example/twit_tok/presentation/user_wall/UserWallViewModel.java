@@ -6,22 +6,17 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.twit_tok.App;
 import com.example.twit_tok.common.Constants;
-import com.example.twit_tok.common.Converters;
 import com.example.twit_tok.common.NetUtils;
 import com.example.twit_tok.common.PictureUtils;
 import com.example.twit_tok.common.TwoksUtils;
-import com.example.twit_tok.data.api.TwokApiInstance;
 import com.example.twit_tok.data.db.TwokDatabase;
 import com.example.twit_tok.data.repository.TwokRepositoryImpl;
-import com.example.twit_tok.domain.model.IsFollowed;
 import com.example.twit_tok.domain.model.RawTwok;
 import com.example.twit_tok.domain.model.Sid;
 import com.example.twit_tok.domain.model.TwokToShow;
 import com.example.twit_tok.domain.model.TwokToShowBuffer;
 import com.example.twit_tok.domain.model.User;
-import com.example.twit_tok.domain.model.Users;
 import com.example.twit_tok.domain.requests.BasicDataRequest;
-import com.example.twit_tok.domain.requests.DBProfileRequest;
 import com.example.twit_tok.domain.requests.ProfileRequest;
 import com.google.common.util.concurrent.ListenableFuture;
 
@@ -30,7 +25,6 @@ import java.util.Objects;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import dagger.hilt.android.lifecycle.HiltViewModel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -98,7 +92,7 @@ public class UserWallViewModel extends ViewModel {
                     }
                 });
 
-            }   catch (Exception e) {
+            } catch (Exception e) {
 
             }
         }, App.getInstance().getMainExecutor());

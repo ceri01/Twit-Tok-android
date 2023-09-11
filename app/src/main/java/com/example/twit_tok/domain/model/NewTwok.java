@@ -4,11 +4,12 @@ import androidx.annotation.NonNull;
 
 import com.example.twit_tok.common.Colors;
 import com.example.twit_tok.common.Constants;
-import com.example.twit_tok.common.TwoksUtils;
 
 import javax.inject.Inject;
 
-/** @noinspection unused*/
+/**
+ * @noinspection unused
+ */
 public class NewTwok {
     private String text;
     private String bgcol;

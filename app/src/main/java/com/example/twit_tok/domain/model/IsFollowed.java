@@ -1,6 +1,8 @@
 package com.example.twit_tok.domain.model;
 
-/** @noinspection ClassCanBeRecord*/
+/**
+ * @noinspection ClassCanBeRecord
+ */
 public class IsFollowed {
     private final boolean followed;
 

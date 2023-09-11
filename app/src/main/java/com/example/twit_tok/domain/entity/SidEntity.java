@@ -9,7 +9,9 @@ import org.jetbrains.annotations.NotNull;
 
 @Entity(indices = @Index(value = {"uid"}, unique = true))
 public class SidEntity {
-    /** @noinspection NotNullFieldNotInitialized*/
+    /**
+     * @noinspection NotNullFieldNotInitialized
+     */
     @PrimaryKey
     public @NotNull String sid;
 

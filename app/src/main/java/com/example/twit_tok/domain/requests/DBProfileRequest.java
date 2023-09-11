@@ -1,7 +1,5 @@
 package com.example.twit_tok.domain.requests;
 
-import android.graphics.Bitmap;
-
 import androidx.annotation.NonNull;
 
 import java.util.Objects;

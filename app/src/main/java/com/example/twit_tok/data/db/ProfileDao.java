@@ -1,7 +1,5 @@
 package com.example.twit_tok.data.db;
 
-import android.graphics.Bitmap;
-
 import androidx.room.Dao;
 import androidx.room.Query;
 

@@ -1,7 +1,5 @@
 package com.example.twit_tok.common;
 
-import android.util.Log;
-
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

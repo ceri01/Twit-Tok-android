@@ -15,8 +15,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -26,7 +24,6 @@ import com.example.twit_tok.common.TwoksUtils;
 import com.example.twit_tok.databinding.FragmentWallBinding;
 import com.example.twit_tok.domain.model.User;
 import com.example.twit_tok.presentation.WallEventListener;
-import com.example.twit_tok.presentation.user_wall.UserWallFragment;
 import com.google.android.material.button.MaterialButton;
 
 import javax.inject.Inject;
@@ -87,7 +84,7 @@ public class WallFragment extends Fragment implements WallEventListener {
         offlineButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)requireActivity()).restart();
+                ((MainActivity) requireActivity()).restart();
             }
         });
 

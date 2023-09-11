@@ -1,10 +1,8 @@
 package com.example.twit_tok.presentation.Profile;
 
 import android.graphics.Bitmap;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -14,7 +12,6 @@ import com.example.twit_tok.common.NetUtils;
 import com.example.twit_tok.common.PictureUtils;
 import com.example.twit_tok.data.db.TwokDatabase;
 import com.example.twit_tok.data.repository.ProfileRepositoryImpl;
-import com.example.twit_tok.domain.model.Profile;
 import com.example.twit_tok.domain.model.Sid;
 import com.example.twit_tok.domain.model.User;
 import com.example.twit_tok.domain.model.Users;

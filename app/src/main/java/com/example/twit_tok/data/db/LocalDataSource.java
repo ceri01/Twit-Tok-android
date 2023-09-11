@@ -1,10 +1,6 @@
 package com.example.twit_tok.data.db;
 
-import android.graphics.Bitmap;
-import android.util.Log;
-
 import com.example.twit_tok.App;
-import com.example.twit_tok.common.Converters;
 import com.example.twit_tok.common.PictureUtils;
 import com.example.twit_tok.domain.model.Sid;
 import com.example.twit_tok.domain.model.User;

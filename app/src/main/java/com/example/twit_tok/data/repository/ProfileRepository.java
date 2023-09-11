@@ -1,7 +1,5 @@
 package com.example.twit_tok.data.repository;
 
-import android.graphics.Bitmap;
-
 import com.example.twit_tok.domain.model.Sid;
 import com.example.twit_tok.domain.model.User;
 import com.example.twit_tok.domain.requests.BasicDataRequest;

@@ -2,17 +2,12 @@ package com.example.twit_tok.domain.model;
 
 import androidx.annotation.NonNull;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.TreeMap;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 public class TwokToShowBuffer implements Iterable<TwokToShow> {
     private final Map<Integer, TwokToShow> recivedTwoks;

@@ -1,7 +1,6 @@
 package com.example.twit_tok.presentation.NewTwok;
 
 import android.location.Location;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
@@ -19,7 +18,6 @@ import com.example.twit_tok.domain.requests.AddTwokRequest;
 import com.example.twit_tok.presentation.NewTwokEventListener;
 import com.google.common.util.concurrent.ListenableFuture;
 
-import java.util.Locale;
 import java.util.Objects;
 
 import javax.inject.Inject;

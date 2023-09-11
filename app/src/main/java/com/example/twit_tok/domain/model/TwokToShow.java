@@ -1,7 +1,5 @@
 package com.example.twit_tok.domain.model;
 
-import android.graphics.Bitmap;
-
 public class TwokToShow extends RawTwok {
     private final String username;
     private final String picture;
